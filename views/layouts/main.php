@@ -58,6 +58,9 @@ AppAsset::register($this);
     } else {
         $navItems = [
             ['label' => 'User', 'url' => ['/user/index']],
+            ['label' => 'Venue', 'url' => ['/venue/index']],
+            ['label' => 'VenueType', 'url' => ['/venue-type/index']],
+            ['label' => 'Activity', 'url' => ['/activity/index']],
             [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],

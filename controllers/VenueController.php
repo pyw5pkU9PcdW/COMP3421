@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\User;
+use app\models\Venue;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * VenueController implements the CRUD actions for Venue model.
  */
-class UserController extends Controller
+class VenueController extends Controller
 {
     public function behaviors()
     {
@@ -27,13 +27,13 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Venue models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => User::find(),
+            'query' => Venue::find(),
         ]);
 
         return $this->render('index', [
@@ -42,31 +42,29 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Venue model.
      * @param integer $id
+     * @param integer $VenueType_id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($id, $VenueType_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id, $VenueType_id),
         ]);
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Venue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Venue();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->accessToken = md5(rand(0, 1000));
-            if($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id, 'VenueType_id' => $model->VenueType_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,17 +73,18 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Venue model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param integer $VenueType_id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $VenueType_id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, $VenueType_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'VenueType_id' => $model->VenueType_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,28 +93,30 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Venue model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
+     * @param integer $VenueType_id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $VenueType_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id, $VenueType_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Venue model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @param integer $VenueType_id
+     * @return Venue the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $VenueType_id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Venue::findOne(['id' => $id, 'VenueType_id' => $VenueType_id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
