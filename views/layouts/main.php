@@ -54,13 +54,22 @@ AppAsset::register($this);
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Login', 'url' => ['/site/login']]
+
         ];
     } else {
         $navItems = [
             ['label' => 'User', 'url' => ['/user/index']],
             ['label' => 'Venue', 'url' => ['/venue/index']],
-            ['label' => 'VenueType', 'url' => ['/venue-type/index']],
+            //['label' => 'VenueType', 'url' => ['/venue-type/index']],
             ['label' => 'Activity', 'url' => ['/activity/index']],
+            //['label' => 'ActivityType', 'url' => ['/activity-type/index']],
+            //['label' => 'Category', 'url' => ['/category/index']],
+            //['label' => 'Topic', 'url' => ['/topic/index']],
+            //['label' => 'Paper', 'url' => ['/paper/index']],
+            //['label' => 'Coupon', 'url' => ['/coupon/index']],
+            //['label' => 'Post', 'url' => ['/post/index']],
+            //['label' => 'Survey', 'url' => ['/survey/index']],
+            //['label' => 'Announcement', 'url' => ['/announcement/index']],
             [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],

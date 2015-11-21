@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Topic_id')->textInput() ?>
 
-    <?= $form->field($model, 'ActivityType_id')->textInput() ?>
+    <?= $form->field($model, 'ActivityType_id')->dropDownList(\app\models\ActivityType::getActivities()) ?>
 
     <?= $form->field($model, 'Administrator_id')->textInput() ?>
 
