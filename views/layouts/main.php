@@ -70,6 +70,14 @@ AppAsset::register($this);
             //['label' => 'Post', 'url' => ['/post/index']],
             //['label' => 'Survey', 'url' => ['/survey/index']],
             //['label' => 'Announcement', 'url' => ['/announcement/index']],
+            //['label' => 'Question', 'url' => ['/question/index']],
+            //['label' => 'Message', 'url' => ['/message/index']],
+            //['label' => 'Radio Button', 'url' => ['/radio-button/index']],
+            //['label' => 'Check Button', 'url' => ['/check-button/index']],
+            //['label' => 'Textbox', 'url' => ['/text-box/index']],
+            //['label' => 'Text Response', 'url' => ['/Text-Response/index']],
+            //['label' => 'Participant', 'url' => ['/participant/index']],
+
             [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                 'url' => ['/site/logout'],
