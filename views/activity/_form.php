@@ -31,11 +31,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'ActivityType_id')->dropDownList(\app\models\ActivityType::getActivities()) ?>
 
     <?= $form->field($model, 'Administrator_id')->textInput() ?>
-
-    <?= $form->field($model, 'Administrator_User_id')->textInput() ?>
-
-    <?= $form->field($model, 'Administrator_User_Participant_id')->textInput() ?>
-
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
