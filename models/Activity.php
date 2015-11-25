@@ -13,13 +13,11 @@ use Yii;
  * @property string $documentLink
  * @property string $personInCharge
  * @property string $lastModifyTime
- * @property integer $datetime
+ * @property string $datetime
  * @property integer $Venue_id
  * @property integer $Topic_id
  * @property integer $ActivityType_id
  * @property integer $Administrator_id
- * @property integer $Administrator_User_id
- * @property integer $Administrator_User_Participant_id
  *
  * @property Venue $venue
  * @property Topic $topic
@@ -43,9 +41,10 @@ class Activity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'personInCharge', 'lastModifyTime', 'datetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id', 'Administrator_User_id', 'Administrator_User_Participant_id'], 'required'],
-            [['datetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id', 'Administrator_User_id', 'Administrator_User_Participant_id'], 'integer'],
-            [['name', 'documentLink', 'personInCharge', 'lastModifyTime'], 'string', 'max' => 45],
+            [['name', 'description', 'personInCharge', 'lastModifyTime', 'datetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
+            [['lastModifyTime', 'datetime'], 'safe'],
+            [['Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
+            [['name', 'documentLink', 'personInCharge'], 'string', 'max' => 45],
             [['description'], 'string', 'max' => 256]
         ];
     }
@@ -63,12 +62,10 @@ class Activity extends \yii\db\ActiveRecord
             'personInCharge' => 'Person In Charge',
             'lastModifyTime' => 'Last Modify Time',
             'datetime' => 'Datetime',
-            'Venue_id' => 'Venue ID',
-            'Topic_id' => 'Topic ID',
-            'ActivityType_id' => 'Activity Type ID',
+            'Venue_id' => 'Venue',
+            'Topic_id' => 'Topic',
+            'ActivityType_id' => 'Activity Type',
             'Administrator_id' => 'Administrator ID',
-            'Administrator_User_id' => 'Administrator  User ID',
-            'Administrator_User_Participant_id' => 'Administrator  User  Participant ID',
         ];
     }
 
@@ -110,5 +107,10 @@ class Activity extends \yii\db\ActiveRecord
     public function getParticipantHasActivities()
     {
         return $this->hasMany(ParticipantHasActivity::className(), ['Activity_id' => 'id', 'Activity_Venue_id' => 'Venue_id', 'Activity_Topic_id' => 'Topic_id', 'Activity_ActivityType_id' => 'ActivityType_id']);
+    }
+
+    public function beforeValidate() {
+        $this->lastModifyTime = date("Y-m-d H:i:s");
+        $this->Administrator_id = Yii::$app->user->id;
     }
 }

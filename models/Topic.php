@@ -84,4 +84,17 @@ class Topic extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'Category_id']);
     }
+
+    /**
+     * @return array
+     */
+    public function getTopicOptions() {
+        $raw = Topic::find()->orderBy('Category_id')->all();
+        $arr = array();
+        foreach($raw as $row) {
+            $categpry = \app\models\Category::getCategoryById($row['Category_id']);
+            $arr[$row['id']] = $categpry.' - '.$row['name'];
+        }
+        return $arr;
+    }
 }

@@ -50,8 +50,7 @@ class ActivityType extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActivities()
-    {
+    public function getActivityTypeOptions() {
         $raw = ActivityType::find()->asArray()->all();
         $arr = array();
         foreach($raw as $row) {

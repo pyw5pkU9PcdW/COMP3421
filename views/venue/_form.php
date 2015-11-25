@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'floorPlan')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'VenueType_id')->dropDownList(\app\models\VenueType::getVenueType()) ?>
+    <?= $form->field($model, 'VenueType_id')->dropDownList(\app\models\VenueType::getVenueTypeOptions()) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

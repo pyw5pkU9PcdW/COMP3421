@@ -67,7 +67,6 @@ class ActivityController extends Controller
     public function actionCreate()
     {
         $model = new Activity();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id, 'Venue_id' => $model->Venue_id, 'Topic_id' => $model->Topic_id, 'ActivityType_id' => $model->ActivityType_id, 'Administrator_id' => $model->Administrator_id, 'Administrator_User_id' => $model->Administrator_User_id, 'Administrator_User_Participant_id' => $model->Administrator_User_Participant_id]);
         } else {

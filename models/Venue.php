@@ -69,4 +69,17 @@ class Venue extends \yii\db\ActiveRecord
     {
         return $this->hasOne(VenueType::className(), ['id' => 'VenueType_id']);
     }
+
+    /**
+     * @return array
+     */
+    public function getVenueOptions() {
+        $raw = Venue::find()->orderBy('VenueType_id')->all();
+        $arr = array();
+        foreach($raw as $row) {
+            $venueType = \app\models\VenueType::getVenueTypeById($row['VenueType_id']);
+            $arr[$row['id']] = $venueType.' - '.$row['name'];
+        }
+        return $arr;
+    }
 }

@@ -54,4 +54,21 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Topic::className(), ['Category_id' => 'id']);
     }
+
+    /**
+     * @return array
+     */
+    public function getCategoryOptions() {
+        $raw = Category::find()->asArray()->all();
+        $arr = array();
+        foreach($raw as $row) {
+            $arr[$row['id']] = $row['name'];
+        }
+        return $arr;
+    }
+
+    public function getCategoryById($id) {
+        $raw = Category::findOne($id);
+        return $raw['name'];
+    }
 }

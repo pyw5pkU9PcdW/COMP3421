@@ -20,18 +20,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'personInCharge')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'lastModifyTime')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'datetime')->textInput() ?>
 
-    <?= $form->field($model, 'Venue_id')->textInput() ?>
+    <?= $form->field($model, 'Venue_id')->dropDownList(\app\models\Venue::getVenueOptions(), array('prompt'=>'-- Select a Venue --')) ?>
 
-    <?= $form->field($model, 'Topic_id')->textInput() ?>
+    <?= $form->field($model, 'Topic_id')->dropDownList(\app\models\Topic::getTopicOptions(), array('prompt'=>'-- Select a Topic --')) ?>
 
-    <?= $form->field($model, 'ActivityType_id')->dropDownList(\app\models\ActivityType::getActivities()) ?>
+    <?= $form->field($model, 'ActivityType_id')->dropDownList(\app\models\ActivityType::getActivityTypeOptions(), array('prompt'=>'-- Select a Type --')) ?>
 
-    <?= $form->field($model, 'Administrator_id')->textInput() ?>
-    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
