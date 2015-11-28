@@ -9,7 +9,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'anson',
+            'cookieValidationKey' => 'comp3421',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -36,6 +36,9 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],
