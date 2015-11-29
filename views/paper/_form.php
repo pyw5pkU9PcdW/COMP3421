@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'abstract')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Topic_id')->textInput() ?>
+    <?= $form->field($model, 'Topic_id')->dropDownList(\app\models\Topic::getTopicOptions(), array('prompt'=>'-- Select a topic --')) ?>
 
     <?= $form->field($model, 'NormalPeople_id')->textInput() ?>
 

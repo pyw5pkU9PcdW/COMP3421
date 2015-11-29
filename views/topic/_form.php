@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'decription')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Category_id')->textInput() ?>
+    <?= $form->field($model, 'Category_id')->dropDownList(\app\models\Category::getCategoryOptions(), array('prompt'=>'-- Select a category --')) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
