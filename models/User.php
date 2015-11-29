@@ -36,9 +36,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'first_name', 'last_name', 'email'], 'required'],
+            [['username', 'first_name', 'last_name', 'email'], 'required'],
             [['username', 'first_name', 'last_name', 'email', 'authKey', 'accessToken'], 'string', 'max' => 45],
             [['password'], 'string', 'max' => 255],
+            [['password'], 'required', 'on' => 'create'],
             ['email', 'email'],
             [['username'], 'unique']
         ];

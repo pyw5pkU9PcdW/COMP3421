@@ -22,9 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'authKey')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'accessToken')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($role, 'name')->dropDownList(\app\models\AuthItem::getRootRoles(), array('prompt'=>'-- Select a User Type --')) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

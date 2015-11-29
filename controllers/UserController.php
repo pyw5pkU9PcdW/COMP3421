@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AuthItem;
 use Yii;
 use app\models\User;
 use yii\data\ActiveDataProvider;
@@ -35,8 +36,12 @@ class UserController extends Controller
     {
         if(Yii::$app->user->can('userIndex')) {   //The permission name
             //The actions...
+            $sql = 'SELECT
+                    id, username, first_name, last_name, email, item_name AS userType
+                    FROM 13027272d.auth_assignment, 13027272d.User
+                    WHERE 13027272d.auth_assignment.user_id = 13027272d.User.id';
             $dataProvider = new ActiveDataProvider([
-                'query' => User::find(),
+                'query' => User::find()
             ]);
 
             return $this->render('index', [
@@ -60,8 +65,12 @@ class UserController extends Controller
     {
         if(Yii::$app->user->can('userView')) {   //The permission name
             //The actions...
+            $model = $this->findModel($id);
+            $auth = Yii::$app->authManager;
+            $currentRole = $auth->getRolesByUser($model->getId());
+            $role['userType'] = key($currentRole);
             return $this->render('view', [
-                'model' => $this->findModel($id),
+                'model' => $model, 'role' => $role
             ]);
         } else {
             if(Yii::$app->user->isGuest) {
@@ -82,15 +91,21 @@ class UserController extends Controller
         if(Yii::$app->user->can('userCreate')) {   //The permission name
             //The actions...
             $model = new User();
+            $role = new AuthItem();
+            $model->scenario = 'create';
 
             if ($model->load(Yii::$app->request->post())) {
+                $role->load(Yii::$app->request->post());
                 $model->accessToken = md5(rand(0, 1000));
                 if($model->save()) {
+                    $auth = Yii::$app->authManager;
+                    $newRole = $auth->getRole($role->name);
+                    $auth->assign($newRole, $model->getId());
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
                 return $this->render('create', [
-                    'model' => $model,
+                    'model' => $model, 'role' => $role
                 ]);
             }
         } else {
@@ -113,12 +128,29 @@ class UserController extends Controller
         if(Yii::$app->user->can('userUpdate')) {   //The permission name
             //The actions...
             $model = $this->findModel($id);
+            $role = new AuthItem();
+            $auth = Yii::$app->authManager;
+            $currentRole = $auth->getRolesByUser($model->getId());
+            $role->name = key($currentRole);
+            $password = $model->password;
+            $model->password = '';
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post())) {
+                if($model->password == '') {
+                    $model->password = $password;
+                }
+                if($model->save()) {
+                    $role->load(Yii::$app->request->post());
+                    $newRole = $auth->getRole($role->name);
+                    if($newRole != $currentRole) {
+                        $auth->revokeAll($model->getId());
+                        $auth->assign($newRole, $model->getId());
+                    }
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             } else {
                 return $this->render('update', [
-                    'model' => $model,
+                    'model' => $model, 'role' => $role
                 ]);
             }
         } else {
@@ -140,7 +172,10 @@ class UserController extends Controller
     {
         if(Yii::$app->user->can('userDelete')) {   //The permission name
             //The actions...
-            $this->findModel($id)->delete();
+            $model = $this->findModel($id);
+            $auth = Yii::$app->authManager;
+            $auth->revokeAll($model->getId());
+            $model->delete();
             return $this->redirect(['index']);
         } else {
             if(Yii::$app->user->isGuest) {

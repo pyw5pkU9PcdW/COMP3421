@@ -6,6 +6,7 @@ class RbacController extends \yii\web\Controller
 {
     public function actionInit() {
         $auth = \Yii::$app->authManager;
+        die(var_dump($auth->getRoles()));
 
         /*$index = $auth->createPermission('userIndex');
         $index->description = 'Index of the User Controller';

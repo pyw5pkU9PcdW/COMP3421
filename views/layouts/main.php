@@ -58,7 +58,7 @@ AppAsset::register($this);
         ];
     } else {
         $navItems = [
-            ['label' => 'User', 'url' => ['/user/index']],
+            ['label' => 'User', 'url' => ['/user/index'], 'visible' => Yii::$app->user->can('userIndex')],
             ['label' => 'Venue', 'url' => ['/venue/index']],
             //['label' => 'VenueType', 'url' => ['/venue-type/index']],
             ['label' => 'Activity', 'url' => ['/activity/index']],
