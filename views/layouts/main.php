@@ -30,7 +30,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <div id="wrapper">
-        <?php if(false) { ?>
+        <?php if(true) { ?>
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
