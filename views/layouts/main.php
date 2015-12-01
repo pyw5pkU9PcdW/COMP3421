@@ -19,12 +19,49 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?> | The CONF</title>
-    <?php $this->head() ?>
+    <?php $this->head(); ?>
+    <link href="css/side_nav.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <div id="wrapper">
+        <?php if(false) { ?>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <?php } ?>
+    </div>
     <?php
     NavBar::begin([
         'brandLabel' => 'CONF',
@@ -107,6 +144,13 @@ AppAsset::register($this);
         <p class="pull-right"><?php //Yii::powered() ?></p>
     </div>
 </footer>
+
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
 
 <?php $this->endBody() ?>
 </body>
