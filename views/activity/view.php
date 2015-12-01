@@ -16,9 +16,11 @@ $this->title = $model->name;
                 <div class="col-sm-8">
                     <h1><?= Html::encode($this->title) ?></h1>
                     <p><?= $model->description ?></p>
+                    <?php $imgLink = '@web/../resources/activities/activity_'.$model->id.'.jpg'; ?>
+                    <p class="text-center"><?= Html::img($imgLink, ['class'=>'activity-detail-img']);?></p>
                 </div>
                 <div class="col-sm-4 activity-detail-technical" style="background-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($model->ActivityType_id) ?>">
-                    <?= Html::a('Join Now', ['join', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('Add to your Schedule', ['join', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                     <h3>Date and Time</h3>
                     <?= date("M d D", strtotime($model->startDatetime)) ?><br>
                     <?= date("g:i A", strtotime($model->startDatetime)) ?> - <?= date("g:i A", strtotime($model->endDatetime)) ?>
