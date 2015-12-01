@@ -13,6 +13,16 @@ use Yii;
  * @property string $first_name
  * @property string $last_name
  * @property string $email
+ * @property string $address
+ * @property string $city
+ * @property string $country
+ * @property string $department
+ * @property string $organization
+ * @property integer $mobile_number
+ * @property integer $fax_number
+ * @property integer $rewardPoint
+ * @property integer $payment_status
+ * @property string $remark
  * @property string $authKey
  * @property string $accessToken
  *
@@ -36,11 +46,16 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'first_name', 'last_name', 'email'], 'required'],
+            [['username', 'password', 'title', 'first_name', 'last_name', 'email', 'address', 'city', 'country', 'department', 'organization', 'mobile_number', 'rewardPoint', 'payment_status'], 'required'],
+            [['mobile_number', 'fax_number', 'rewardPoint', 'payment_status'], 'integer'],
             [['username', 'first_name', 'last_name', 'email', 'authKey', 'accessToken'], 'string', 'max' => 45],
             [['password'], 'string', 'max' => 255],
             [['password'], 'required', 'on' => 'create'],
             ['email', 'email'],
+            [['title'], 'string', 'max' => 10],
+            [['address'], 'string', 'max' => 100],
+            [['city', 'country', 'department'], 'string', 'max' => 50],
+            [['organization', 'remark'], 'string', 'max' => 200],
             [['username'], 'unique']
         ];
     }
@@ -54,9 +69,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'id' => 'ID',
             'username' => 'Username',
             'password' => 'Password',
+            'title' => 'Title',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'email' => 'Email',
+            'address' => 'Address',
+            'city' => 'City',
+            'country' => 'Country',
+            'department' => 'Department',
+            'organization' => 'Organization',
+            'mobile_number' => 'Mobile Number',
+            'fax_number' => 'Fax Number',
+            'rewardPoint' => 'Reward Point',
+            'payment_status' => 'Payment Status',
+            'remark' => 'Remark',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
         ];
@@ -137,5 +163,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         } else {
             return false;
         }
+    }
+
+    public function getUserFullNameById($id) {
+        $raw = User::findOne($id);
+        return Title::getTitleById($raw['title']).' '.$raw['first_name'].' '.$raw['last_name'];
     }
 }

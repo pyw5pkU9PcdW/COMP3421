@@ -11,7 +11,7 @@ use Yii;
  * @property string $name
  * @property string $description
  * @property string $documentLink
- * @property string $personInCharge
+ * @property integer $personInCharge
  * @property string $lastModifyTime
  * @property string $startDatetime
  * @property string $endDatetime
@@ -44,9 +44,10 @@ class Activity extends \yii\db\ActiveRecord
         return [
             [['name', 'description', 'personInCharge', 'lastModifyTime', 'startDatetime', 'endDatetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
             [['lastModifyTime', 'startDatetime', 'endDatetime'], 'safe'],
-            [['Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
-            [['name', 'documentLink', 'personInCharge'], 'string', 'max' => 45],
-            [['description'], 'string', 'max' => 256]
+            [['Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id', 'personInCharge'], 'integer'],
+            [['name'], 'string', 'max' => 100],
+            [['description'], 'string', 'max' => 1000],
+            [['documentLink'], 'string', 'max' => 45]
         ];
     }
 

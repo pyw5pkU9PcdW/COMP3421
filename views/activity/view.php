@@ -9,16 +9,23 @@ use yii\widgets\DetailView;
 
 $this->title = $model->name;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
 <div class="activity-view">
     <?php if(!Yii::$app->user->can('activityEdit')) { ?>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-9 col-sm-offset-1">
-
+                <div class="col-sm-8">
+                    <h1><?= Html::encode($this->title) ?></h1>
+                    <p><?= $model->description ?></p>
                 </div>
-                <div class="col-sm-2" style="height: 100%; background-color: #0097cf">
-                    bye
+                <div class="col-sm-4 activity-detail-technical" style="background-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($model->ActivityType_id) ?>">
+                    <?= Html::a('Join Now', ['join', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                    <h3>Date and Time</h3>
+                    <?= date("M d D", strtotime($model->startDatetime)) ?><br>
+                    <?= date("g:i A", strtotime($model->startDatetime)) ?> - <?= date("g:i A", strtotime($model->endDatetime)) ?>
+                    <h3>Venue</h3>
+                    <?= \app\models\Venue::getVenueNameById($model->Venue_id) ?>
+                    <h3>Person in Charge</h3>
+                    <?= \app\models\User::getUserFullNameById($model->personInCharge) ?>
                 </div>
             </div>
         </div>
