@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use dosamigos\datetimepicker\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Activity */
@@ -20,7 +21,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'personInCharge')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'datetime')->widget(DateTimePicker::className(), [
+    <?= $form->field($model, 'startDatetime')->widget(DateTimePicker::className(), [
         'language' => 'en',
         //'size' => 'ms',
         'template' => '{input}',
@@ -37,7 +38,7 @@ use yii\bootstrap\ActiveForm;
         ]
     ]);?>
 
-    <?= $form->field($model, 'duration')->textInput() ?>
+    <?= $form->field($model, 'endDatetime')->textInput() ?>
 
     <?= $form->field($model, 'Venue_id')->dropDownList(\app\models\Venue::getVenueOptions(), array('prompt'=>'-- Select a Venue --')) ?>
 
