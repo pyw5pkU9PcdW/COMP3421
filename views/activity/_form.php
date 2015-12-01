@@ -28,17 +28,26 @@ use dosamigos\datetimepicker\DateTimePicker;
         'pickButtonIcon' => 'glyphicon glyphicon-time',
         'inline' => false,
         'clientOptions' => [
-            //'startView' => 1,
-            //'minView' => 0,
-            //'maxView' => 1,
+            'startDate'=> date("Y-m-d"),
             'autoclose' => true,
-            'linkFormat' => 'yyyy-mm-dd hh:ii:ss', // if inline = true
-            // 'format' => 'HH:ii P', // if inline = false
-            //'todayBtn' => true
+            'linkFormat' => 'yyyy-mm-dd hh:ii:ss' // if inline = true
+
         ]
     ]);?>
 
-    <?= $form->field($model, 'endDatetime')->textInput() ?>
+    <?= $form->field($model, 'endDatetime')->widget(DateTimePicker::className(), [
+        'language' => 'en',
+        //'size' => 'ms',
+        'template' => '{input}',
+        'pickButtonIcon' => 'glyphicon glyphicon-time',
+        'inline' => false,
+        'clientOptions' => [
+            'startDate'=> date("Y-m-d"),
+            'endDate'=> date("2017-01-01"),
+            'autoclose' => true,
+            'linkFormat' => 'yyyy-mm-dd hh:ii:ss'// if inline = true
+        ]
+    ]);?>
 
     <?= $form->field($model, 'Venue_id')->dropDownList(\app\models\Venue::getVenueOptions(), array('prompt'=>'-- Select a Venue --')) ?>
 
