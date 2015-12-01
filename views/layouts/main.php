@@ -20,7 +20,9 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?> | The CONF</title>
     <?php $this->head(); ?>
+    <link href="css/custom_global.css" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
+    <link href="css/activity_schedule.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>

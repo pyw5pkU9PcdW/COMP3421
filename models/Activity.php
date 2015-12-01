@@ -14,6 +14,7 @@ use Yii;
  * @property string $personInCharge
  * @property string $lastModifyTime
  * @property string $datetime
+ * @property integer $duration
  * @property integer $Venue_id
  * @property integer $Topic_id
  * @property integer $ActivityType_id
@@ -43,7 +44,7 @@ class Activity extends \yii\db\ActiveRecord
         return [
             [['name', 'description', 'personInCharge', 'lastModifyTime', 'datetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
             [['lastModifyTime', 'datetime'], 'safe'],
-            [['Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
+            [['duration', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
             [['name', 'documentLink', 'personInCharge'], 'string', 'max' => 45],
             [['description'], 'string', 'max' => 256]
         ];
@@ -62,6 +63,7 @@ class Activity extends \yii\db\ActiveRecord
             'personInCharge' => 'Person In Charge',
             'lastModifyTime' => 'Last Modify Time',
             'datetime' => 'Datetime',
+            'duration' => 'Duration',
             'Venue_id' => 'Venue',
             'Topic_id' => 'Topic',
             'ActivityType_id' => 'Activity Type',
@@ -112,5 +114,9 @@ class Activity extends \yii\db\ActiveRecord
     public function beforeValidate() {
         $this->lastModifyTime = date("Y-m-d H:i:s");
         $this->Administrator_id = Yii::$app->user->id;
+    }
+
+    public function getAllActivities() {
+        return Activity::find()->orderBy('datetime')->asArray()->all();
     }
 }

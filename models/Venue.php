@@ -82,4 +82,9 @@ class Venue extends \yii\db\ActiveRecord
         }
         return $arr;
     }
+
+    public function getVenueNameById($id) {
+        $raw = Venue::findOne($id);
+        return $raw['name'];
+    }
 }

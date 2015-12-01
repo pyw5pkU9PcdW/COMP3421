@@ -14,34 +14,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id, 'Venue_id' => $model->Venue_id, 'Topic_id' => $model->Topic_id, 'ActivityType_id' => $model->ActivityType_id, 'Administrator_id' => $model->Administrator_id, 'Administrator_User_id' => $model->Administrator_User_id, 'Administrator_User_Participant_id' => $model->Administrator_User_Participant_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'Venue_id' => $model->Venue_id, 'Topic_id' => $model->Topic_id, 'ActivityType_id' => $model->ActivityType_id, 'Administrator_id' => $model->Administrator_id, 'Administrator_User_id' => $model->Administrator_User_id, 'Administrator_User_Participant_id' => $model->Administrator_User_Participant_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+    <?php if(!Yii::$app->user->can('activityEdit')) { ?>
+
+    <?php } else { ?>
+        <p>
+            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'id',
+                'name',
+                'description',
+                'documentLink',
+                'personInCharge',
+                'lastModifyTime',
+                'datetime:datetime',
+                'Venue_id',
+                'Topic_id',
             ],
         ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'description',
-            'documentLink',
-            'personInCharge',
-            'lastModifyTime',
-            'datetime:datetime',
-            'Venue_id',
-            'Topic_id',
-            'ActivityType_id',
-            'Administrator_id',
-            'Administrator_User_id',
-            'Administrator_User_Participant_id',
-        ],
-    ]) ?>
+    <?php } ?>
 
 </div>

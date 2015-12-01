@@ -1,0 +1,32 @@
+.activity-schedule{
+    color: black;
+}
+.activity-schedule:focus, .activity-schedule:hover{
+    color: black;
+}
+.activity-schedule table{
+    margin-bottom: 0;
+}
+.activity-schedule table:focus, .activity-schedule table:hover{
+    background-color: rgb(240, 240, 240);
+}
+.activity-schedule-date{
+    min-width: 10%;
+    width: 10%;
+}
+.activity-schedule-date .date{
+    font-size: 18px;
+}
+.activity-schedule-detail{
+    border-left: 3px solid;
+}
+.activity-schedule-detail .title{
+    font-size: 24px;
+}
+.activity-schedule-detail .type{
+}
+.activity-schedule-venue{
+    font-size: 16px;
+    min-width: 10%;
+    width: 10%;
+}

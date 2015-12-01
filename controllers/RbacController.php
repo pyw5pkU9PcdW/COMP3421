@@ -6,7 +6,7 @@ class RbacController extends \yii\web\Controller
 {
     public function actionInit() {
         $auth = \Yii::$app->authManager;
-        die(var_dump($auth->getRoles()));
+        //die(var_dump($auth->getRoles()));
 
         /*$index = $auth->createPermission('userIndex');
         $index->description = 'Index of the User Controller';
@@ -14,23 +14,32 @@ class RbacController extends \yii\web\Controller
 
         $create = $auth->createPermission('userCreate');
         $create->description = 'Index of the User Controller';
-        $auth->add($create);
+        $auth->add($create);*/
 
-        $update = $auth->createPermission('userUpdate');
-        $update->description = 'Index of the User Controller';
+        /*$update = $auth->createPermission('activityUpdate');
+        $update->description = 'Update a activity';
         $auth->add($update);
 
-        $delete = $auth->createPermission('userDelete');
-        $delete->description = 'Index of the User Controller';
+        $delete = $auth->createPermission('activityDelete');
+        $delete->description = 'Delete a activity';
         $auth->add($delete);
 
-        $view = $auth->createPermission('userView');
+        $edit = $auth->createPermission('activityEdit');
+        $edit->description = 'Do create, update and delete activities';
+        $auth->add($edit);*/
+
+        $update = $auth->getPermission('activityUpdate');
+        $delete = $auth->getPermission('activityDelete');
+        $edit = $auth->getPermission('activityEdit');
+        $create = $auth->getPermission('activityCreate');
+
+        /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
-        $auth->add($view);
+        $auth->add($view);*/
 
         // add "admin" role and give this role the "updatePost" permission
         // as well as the permissions of the "author" role
-        $speaker = $auth->createRole('Speaker');
+        /*$speaker = $auth->createRole('Speaker');
         $auth->add($speaker);
         $student = $auth->createRole('Student');
         $auth->add($student);
@@ -39,15 +48,14 @@ class RbacController extends \yii\web\Controller
         $regular = $auth->createRole('Regular');
         $auth->add($regular);
         $sponsor = $auth->createRole('Sponsor');
-        $auth->add($sponsor);
+        $auth->add($sponsor);*/
 
 
         $admin = $auth->getRole('Admin');
-        $auth->addChild($admin, $index);
-        $auth->addChild($admin, $create);
-        $auth->addChild($admin, $update);
-        $auth->addChild($admin, $delete);
-        $auth->addChild($admin, $view);*/
+        $auth->addChild($admin, $edit);
+        $auth->addChild($edit, $create);
+        $auth->addChild($edit, $update);
+        $auth->addChild($edit, $delete);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.

@@ -13,31 +13,50 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Activity', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if(Yii::$app->user->can('activityCreate')) { ?>
+        <p>
+            <?= Html::a('Create Activity', ['create'], ['class' => 'btn btn-success']); ?>
+        </p>
+    <?php } ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?php if(!Yii::$app->user->can('activityEdit')) { ?>
+            <?php foreach($schedule as $row) { ?>
+                    <a href="?r=activity/view&id=<?= $row['id'] ?>" class="activity-schedule">
+                        <table class="table">
+                            <tr>
+                                <td class="activity-schedule-date">
+                                    <span class="date"><?= date("M d D", strtotime($row['datetime'])) ?></span><br>
+                                    <span class="time"><?= date("g:i A", strtotime($row['datetime'])) ?></span>
+                                </td>
+                                <td class="activity-schedule-detail" style="border-left-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($row['ActivityType_id']) ?>">
+                                    <span class="title"><?= $row['name'] ?></span><br>
+                                    <span class="type"><?= \app\models\ActivityType::getActivityTypeNameById($row['ActivityType_id']) ?></span>
+                                </td>
+                                <td class="activity-schedule-venue"><?= \app\models\Venue::getVenueNameById($row['Venue_id']) ?></td>
+                            </tr>
+                        </table>
+                    </a>
+            <?php } ?>
+    <?php } else { ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'description',
-            'documentLink',
-            'personInCharge',
-            // 'lastModifyTime',
-            // 'datetime:datetime',
-            // 'Venue_id',
-            // 'Topic_id',
-            // 'ActivityType_id',
-            // 'Administrator_id',
-            // 'Administrator_User_id',
-            // 'Administrator_User_Participant_id',
+                'name',
+                'description',
+                // 'lastModifyTime',
+                // 'datetime:datetime',
+                'Venue_id',
+                // 'Topic_id',
+                'ActivityType_id',
+                // 'Administrator_id',
+                // 'Administrator_User_id',
+                // 'Administrator_User_Participant_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                ['class' => 'yii\grid\ActionColumn', 'visible'=>Yii::$app->user->can('activityEdit')],
+            ],
+        ]); ?>
+    <?php } ?>
 
 </div>

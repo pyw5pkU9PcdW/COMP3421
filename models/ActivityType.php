@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $activityName
  * @property string $description
+ * @property string $color
  *
  * @property Activity[] $activities
  */
@@ -30,7 +31,7 @@ class ActivityType extends \yii\db\ActiveRecord
     {
         return [
             [['activityName', 'description'], 'required'],
-            [['activityName'], 'string', 'max' => 45],
+            [['activityName', 'color'], 'string', 'max' => 45],
             [['description'], 'string', 'max' => 256]
         ];
     }
@@ -44,6 +45,7 @@ class ActivityType extends \yii\db\ActiveRecord
             'id' => 'ID',
             'activityName' => 'Activity Name',
             'description' => 'Description',
+            'color' => 'Color',
         ];
     }
 
@@ -57,5 +59,20 @@ class ActivityType extends \yii\db\ActiveRecord
             $arr[$row['id']] = $row['activityName'];
         }
         return $arr;
+    }
+
+    public function getActivities()
+    {
+        return $this->hasMany(Activity::className(), ['ActivityType_id' => 'id']);
+    }
+
+    public function getActivityTypeNameById($id) {
+        $raw = ActivityType::findOne($id);
+        return $raw['activityName'];
+    }
+
+    public function getActivityTypeThemeColorById($id) {
+        $raw = ActivityType::findOne($id);
+        return $raw['color'];
     }
 }
