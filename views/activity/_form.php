@@ -31,7 +31,7 @@ use yii\bootstrap\ActiveForm;
             //'minView' => 0,
             //'maxView' => 1,
             'autoclose' => true,
-            'linkFormat' => 'HH:ii P', // if inline = true
+            'linkFormat' => 'yyyy-mm-dd hh:ii:ss', // if inline = true
             // 'format' => 'HH:ii P', // if inline = false
             //'todayBtn' => true
         ]
