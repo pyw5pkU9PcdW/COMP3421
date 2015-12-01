@@ -28,7 +28,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <div id="wrapper">
-        <?php if(false) { ?>
+        <?php if(true) { ?>
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -38,25 +38,41 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <input class="rounded" type="text" name="username" placeholder="Username">
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <input class="rounded" type="text" name="password" placeholder="Password">
+                </li>
+
+                <li>
+                    <a href="#" class="btn_login">LOGIN</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="#" class="btn_registration">Registration</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="index.php">Home</a>
                 </li>
                 <li>
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="#">Join the Conference</a>
+                </li>
+                <ol>
+                <li>
+                    <a href="#">Travel in HK</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="#">Come to Conference</a>
+                </li>
+                <li>
+                    <a href="#">Venue Information</a>
+                </li>
+                </ol>
+
+                <li>
+                    <a href="#">Contact Us</a>
                 </li>
             </ul>
         </div>

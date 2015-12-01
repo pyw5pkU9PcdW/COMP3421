@@ -21,10 +21,10 @@
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    right: 250px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-right: -250px;
     overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
@@ -122,4 +122,49 @@
         position: relative;
         margin-right: 0;
     }
+}
+
+input.rounded {
+    border: 1px solid #ccc;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -moz-box-shadow: 2px 2px 3px #666;
+    -webkit-box-shadow: 2px 2px 3px #666;
+    box-shadow: 2px 2px 3px #666;
+    font-size: 16px;
+    padding: 3px 6px;
+    outline: 0;
+    -webkit-appearance: none;
+    margin-bottom: 10px;
+}
+
+.btn_login {
+    position: relative;
+    width: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fffbd0;
+    margin: 0 auto;
+    padding-top: 2px;
+    padding-left: 2px;
+    border: 3px solid #ffdd00;
+    border-radius: 20px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.17512156);
+    margin-bottom: 25px;
+}
+
+.btn_registration {
+    position: relative;
+    width: 140px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #cce5ff;
+    margin: 0 auto;
+    padding-top: 2px;
+    padding-left: 2px;
+    border: 3px solid #dcf3ff;
+    //border-radius: 20px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.17512156);
+    margin-bottom: 10px;
 }
