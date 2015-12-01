@@ -30,7 +30,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <div id="wrapper">
-        <?php if(true) { ?>
+        <?php if(false) { ?>
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -147,7 +147,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fluid" style="margin-top: 70px">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

@@ -1,3 +1,5 @@
 budy, html{
     font-weight: 300;
+    height: 100%;
+    min-height: 100%;
 }

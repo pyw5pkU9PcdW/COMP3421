@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <table class="table">
                             <tr>
                                 <td class="activity-schedule-date">
-                                    <span class="date"><?= date("M d D", strtotime($row['datetime'])) ?></span><br>
-                                    <span class="time"><?= date("g:i A", strtotime($row['datetime'])) ?></span>
+                                    <span class="date"><?= date("M d D", strtotime($row['startDatetime'])) ?></span><br>
+                                    <span class="time"><?= date("g:i A", strtotime($row['startDatetime'])) ?></span>
                                 </td>
                                 <td class="activity-schedule-detail" style="border-left-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($row['ActivityType_id']) ?>">
                                     <span class="title"><?= $row['name'] ?></span><br>

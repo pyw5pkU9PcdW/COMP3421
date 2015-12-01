@@ -13,8 +13,8 @@ use Yii;
  * @property string $documentLink
  * @property string $personInCharge
  * @property string $lastModifyTime
- * @property string $datetime
- * @property integer $duration
+ * @property string $startDatetime
+ * @property string $endDatetime
  * @property integer $Venue_id
  * @property integer $Topic_id
  * @property integer $ActivityType_id
@@ -42,9 +42,9 @@ class Activity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'personInCharge', 'lastModifyTime', 'datetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
-            [['lastModifyTime', 'datetime'], 'safe'],
-            [['duration', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
+            [['name', 'description', 'personInCharge', 'lastModifyTime', 'startDatetime', 'endDatetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
+            [['lastModifyTime', 'startDatetime', 'endDatetime'], 'safe'],
+            [['Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
             [['name', 'documentLink', 'personInCharge'], 'string', 'max' => 45],
             [['description'], 'string', 'max' => 256]
         ];
@@ -62,8 +62,8 @@ class Activity extends \yii\db\ActiveRecord
             'documentLink' => 'Document Link',
             'personInCharge' => 'Person In Charge',
             'lastModifyTime' => 'Last Modify Time',
-            'datetime' => 'Datetime',
-            'duration' => 'Duration',
+            'startDatetime' => 'Start Datetime',
+            'endDatetime' => 'End Datetime',
             'Venue_id' => 'Venue',
             'Topic_id' => 'Topic',
             'ActivityType_id' => 'Activity Type',
@@ -117,6 +117,6 @@ class Activity extends \yii\db\ActiveRecord
     }
 
     public function getAllActivities() {
-        return Activity::find()->orderBy('datetime')->asArray()->all();
+        return Activity::find()->orderBy('startDatetime')->asArray()->all();
     }
 }
