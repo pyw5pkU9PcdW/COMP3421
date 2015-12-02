@@ -4,126 +4,119 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Travel';
+$this->title = 'Nearby Attractions';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    #attractions {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #attractions td, #attractions th {
+        font-size: 1em;
+        border: 1px solid #98bf21;
+        padding: 3px 7px 2px 7px;
+    }
+
+    #attractions th {
+        font-size: 1.1em;
+        text-align: left;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        background-color: #A7C942;
+        color: #ffffff;
+    }
+
+    #attractions tr.alt td {
+        color: #000000;
+        background-color: #EAF2D3;
+    }
+</style>
+
 <h1><?= Html::encode($this->title) ?></h1>
-
-    <table>
-        <tr>
-
+<div class="site-travel">
+    <table id = "attractions">
             <td>
-                <a  href="/en/Macau-Science-Center-2-22-89.html"><img alt="Macau Science Center" title="Macau Science Center" width="250" height="147" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Avenue_of_the_Stars_%E6%98%9F%E5%85%89%E5%A4%A7%E9%81%93_(5284212082).jpg" border="0" /></a>
+                <a  href="#"><img alt="The Hong Kong Polytechnic University" title="The Hong Kong Polytechnic University" width="250" height="147" src="/comp3421/web/../resources/travel/travel_1.jpg" border="0" /></a>
             </td>
             <td>
-                <a  href="/en/Macau-Science-Center-2-22-89.html">Macau Science Center</a>
-                The Macau Science Center - designed by world-renowned Chinese-American architect I.M. Pei - is instantly recognisable by its silvery, cone-shaped exterior. Of the fourteen gallerie...
+                <a  href="#">The Hong Kong Polytechnic University</a>
                 <br>
-                <a href="/en/Macau-Science-Center-2-22-89.html" class="more_link sponsored_txt" style="width:auto;">More ></a>
-            </td>
-        </tr>
-        <tr>
-
-            <td>
-                <a  href="/en/Jardim-Municipal-da-Montanha-Russa-2-22-275.html"><img alt="Jardim Municipal da Montanha Russa" title="Jardim Municipal da Montanha Russa" width="250" height="147" src="/Publish/thingstodo/201410/cache_250_147_ed762868c34fc515e4c215b3915b7ab7_20141013131039_a6dfbTFNQX.jpg" border="0" /></a>
-            </td>
-            <td>
-                <a  href="/en/Jardim-Municipal-da-Montanha-Russa-2-22-275.html">Jardim Municipal da Montanha Russa</a>
-                After the completion of renovation project in 1986, the park has opened to the public since then.&nbsp;
-                Unlike many of the tourist hot spots locating in the midst of hustle and bu...
+                PolyU's main campus has over 20 buildings, many of which are inter-connected. Apart from those named after donors, the buildings are identified in English letters (from block A to Z, without blocks K, O and I). In addition to classrooms, laboratories and other academic facilities, the university provides student hostels, a multi-purpose auditorium, sports, recreational and catering facilities, as well as a bookstore and banks.
                 <br>
-                <a href="/en/Jardim-Municipal-da-Montanha-Russa-2-22-275.html" class="more_link" style="width:auto;">More ></a>
+                <a href="#" class="more_link" style="width:auto;">More ></a>
             </td>
         </tr>
 
         <tr>
             <td>
-                <a  href="/en/Macau-Fisherman's-Wharf-2-22-159.html"><img alt="Macau Fisherman's Wharf" title="Macau Fisherman's Wharf" width="250" height="147" src="/Publish/thingstodo/201304/cache_250_147_6ab08d12b35026c42428b29ddbce152e_20130409170428_2468fTWFjY.jpg" border="0" /></a>
+                <a  href="#"><img alt="Hong Kong Science Museum" title="Hong Kong Science Museum" width="250" height="147" src="/comp3421/web/../resources/travel/travel_2.jpg" border="0" /></a>
             </td>
             <td>
-                <a  href="/en/Macau-Fisherman's-Wharf-2-22-159.html">Macau Fisherman's Wharf</a>
-                Macau Fisherman's Wharf is a 111,500m&sup2; park and the first-ever cultural, themed and creative attraction in the tourism industry of Macau. It is centrally located in the outer ...</div>
+                <a  href="#">Hong Kong Science Museum</a>
                 <br>
-                <a href="/en/Macau-Fisherman's-Wharf-2-22-159.html" class="more_link" style="width:auto;">More ></a>
+                The science-themed museum hand-on, with over 500 interactive exhibits ranging over a variety of topics such as robotics and virtual reality. Through presenting quality exhibitions and fun science programmes in an enjoyable environment, the Museum serves to popularize science to the public and support science education in schools.
+                <br>
+                <a href="#" class="more_link" style="width:auto;">More ></a>
             </td>
         </tr>
 
         <tr>
             <td>
-                <a  href="/en/The-Mandarin's-House-2-14-158.html"><img alt="The Mandarin's House" title="The Mandarin's House" width="250" height="147" src="/Publish/thingstodo/201304/cache_250_147_14b54b4b0361df4feea87c7dc812ff03_20130409170414_a4d3eJUU5J.jpg" border="0" /></a>
+                <a  href="#"><img alt="Hong Kong Space Museum" title="Hong Kong Space Museum" width="250" height="147" src="/comp3421/web/../resources/travel/travel_3.jpg" border="0" /></a>
             </td>
             <td>
-                <a  href="/en/The-Mandarin's-House-2-14-158.html">The Mandarin's House</a>
-                The Mandarin's House built around 1869 was the ancestral home of Zheng Guanying. The construction of the house was initiated by Zheng Wenrui, the father of Zheng Guanying, and the ...</div>
+                <a  href="#">Hong Kong Space Museum</a>
                 <br>
-                <a href="/en/The-Mandarin's-House-2-14-158.html" class="more_link" style="width:auto;">More ></a>
+                It is a museum of astronomy and space science in Tsim Sha Tsui. The museum has two wings: east wing and west wing. The former consists of the nucleus of the museum's planetarium, which has an egg-shaped dome structure. Beneath it are the Stanley Ho Space Theatre, the Hall of Space Science, workshops and offices. The west wing houses the Hall of Astronomy, the Lecture Hall, a gift shop and offices.
+                <br>
+                <a href="#" class="more_link" style="width:auto;">More ></a>
             </td>
         </tr>
         <tr>
             <td>
-                <a  href="/en/Macau-Giant-Panda-Pavilion-2-22-7.html"><img alt="Macau Giant Panda Pavilion" title="Macau Giant Panda Pavilion" width="250" height="147" src="/Publish/thingstodo/201208/cache_250_147_5c7fb602106218e4f3188223654c91b7_20120808170836_5dc60TWFjY.jpg" border="0" /></a>
+                <a  href="#"><img alt="Avenue of Stars" title="Avenue of Stars" width="250" height="147" src="/comp3421/web/../resources/travel/travel_4.jpg" border="0" /></a>
             </td>
             <td>
-                <a  href="/en/Macau-Giant-Panda-Pavilion-2-22-7.html">Macau Giant Panda Pavilion</a>
-                Macau Giant Panda Pavilion
-                &nbsp;
-                Miles from the glitter and gold of Macau&rsquo;s resorts, nestled against a hill in Coloane, you&rsquo;ll find the real treasures of Macau. The ...</div>
+                <a  href="#">Avenue of Stars</a>
                 <br>
-                <a href="/en/Macau-Giant-Panda-Pavilion-2-22-7.html" class="more_link" style="width:auto;">More ></a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <a  href="/en/Nam-Van-Lake-Cybernetic-Fountain-2-22-167.html"><img alt="Nam Van Lake Cybernetic Fountain" title="Nam Van Lake Cybernetic Fountain" width="250" height="147" src="/Publish/thingstodo/201304/cache_250_147_b89f16047049c6250ff0543b8ee529ea_20130416110414_561d2JUU1J.jpg" border="0" /></a>
-            </td>
-            <td>
-                <a  href="/en/Nam-Van-Lake-Cybernetic-Fountain-2-22-167.html">Nam Van Lake Cybernetic Fountain</a>
-                Spectacular shows of cascading water and light can be seen on Nam Van Lake opposite the Headquarters of the Government of Macau SAR. The fountain, constructed by a Portuguese- Span...</div>
+                Entering from Salisbury Garden, a 4.5-metre-tall replica of the statuette given to winners at the Hong Kong Film Awards greets visitors. Along the 440-metre promenade, the story of Hong Kong's one hundred years of cinematic history is told through inscriptions printed on nine red pillars. Set into the promenade are plaques honouring the celebrities.
                 <br>
-                <a href="/en/Nam-Van-Lake-Cybernetic-Fountain-2-22-167.html" class="more_link" style="width:auto;">More ></a>
+                <a href="#" class="more_link" style="width:auto;">More ></a>
             </td>
         </tr>
 
         <tr>
             <td>
-                <a  href="/en/Ruins-of-St.-Paul’s-2-14-6.html"><img alt="Ruins of St. Paul’s" title="Ruins of St. Paul’s" width="250" height="147" src="/Publish/thingstodo/201208/cache_250_147_18915ed01acbb6784ea0cde5e2d2ee76_20120808170841_d45f1UnVpb.jpg" border="0" /></a>
+                <a  href="#"><img alt="iSQUARE" title="iSQUARE" width="250" height="147" src="/comp3421/web/../resources/travel/travel_5.jpg" border="0" /></a>
             </td>
             <td>
-                <a  href="/en/Ruins-of-St.-Paul’s-2-14-6.html">Ruins of St. Paul’s</a>
-                Arguably Macau&rsquo;s most famous landmark, the Ruins of St. Paul&rsquo;s was officially listed in 2005 as part of the UNESCO World Heritage site, the Historic Centre of Macau. Or...</div>
+                <a  href="#">iSQUARE</a>
                 <br>
-                <a href="/en/Ruins-of-St.-Paul’s-2-14-6.html" class="more_link" style="width:auto;">More ></a>
+                iSQUARE is the first one-stop shopping and entertainment complex linked to Tsim Sha Tsui MTR station. There are Watches & Jewelry, Fashion & Accessories, Beauty & Health, Lifestyle & Entertainment, and Supermarket & Department Store located at the shopping podium. Besides, there is the cinema box — a highlight not to be missed, which houses a total of 5 grand cineplexes, including IMAX Digital Theatre. What’s more, iSQUARE also features multi-national fine-dining restaurants at its iconic tower, bringing customers not only an unparalleled dining experience, but also a mesmerizing view of the Victoria Harbour!
+                <br>
+                <a href="#" class="more_link" style="width:auto;">More ></a>
             </td>
         </tr>
 
         <tr>
             <td>
-                <a  href="/en/Kwun-Ya-Kai-Taipa-2-22-149.html"><img alt="Kwun Ya Kai - Taipa" title="Kwun Ya Kai - Taipa" width="250" height="147" src="/Publish/thingstodo/201303/cache_250_147_334c4d26afb9ad5fc5ceef52f86cbdfc_20130311170339_0a6cbS3d1b.jpg" border="0" /></a>
+                <a  href="#"><img alt="Harbour Cityn" title="Harbour City" width="250" height="147" src="/comp3421/web/../resources/travel/travel_6.jpg" border="0" /></a>
             </td>
             <td>
-                <a  href="/en/Kwun-Ya-Kai-Taipa-2-22-149.html">Kwun Ya Kai - Taipa</a>
-                &nbsp;Taipa is famous for an array of traditional desserts and snacks, including wife cakes, meat pastries, chicken biscuits and fermented red bean curd biscuits. In the old town o...</div>
+                <a  href="#">Harbour City</a>
                 <br>
-                <a href="/en/Kwun-Ya-Kai-Taipa-2-22-149.html" class="more_link" style="width:auto;">More ></a>
+                Harbour City is a one-stop shopping paradise with over 450 shops, 50 food & beverage outlets, two cinemas, three hotels, 10 office buildings, two serviced apartments and a luxurious private club all under one roof. With the “Star” Ferry pier, its home to cruise liner berths, maritime history and fabulous harbour view – all at its doorstep. It is easy to see where the mall drew the inspiration for its name.
+                <br>
+                <a href="#" class="more_link" style="width:auto;">More ></a>
             </td>
         </tr>
 
 </table>
-
-<div class="site-travel">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h4>Avenue of Stars</h4>
-        </div>
-        <div class="panel-body">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Avenue_of_the_Stars_%E6%98%9F%E5%85%89%E5%A4%A7%E9%81%93_(5284212082).jpg"/>
-        </div>
     </div>
-    <p>
-        This is the Travel page. You may modify the following file to customize its content:
-    </p>
+
 
     <code><?= __FILE__ ?></code>
 </div>
