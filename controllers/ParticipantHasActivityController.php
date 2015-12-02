@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Activity;
 use Yii;
 use app\models\ParticipantHasActivity;
 use yii\data\ActiveDataProvider;

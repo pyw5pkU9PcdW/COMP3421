@@ -74,4 +74,12 @@ class Activity extends \yii\db\ActiveRecord
     public function getAllActivities() {
         return Activity::find()->orderBy('startDatetime')->asArray()->all();
     }
+
+    public function getJoinActivity() {
+        $sql = 'SELECT * FROM 13027272d.Participant_has_Activity, 13027272d.Activity
+                WHERE Participant_id = '.Yii::$app->user->id.'
+                AND 13027272d.Participant_has_Activity.Activity_id = 13027272d.Activity.id';
+        $raw = Activity::findBySql($sql)->asArray()->all();
+        return $raw;
+    }
 }

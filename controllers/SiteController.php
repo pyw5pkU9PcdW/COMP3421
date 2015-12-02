@@ -50,9 +50,12 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actionIndex() {
+        if(Yii::$app->user->isGuest) {
+            return $this->render('index');
+        } else {
+
+        }
     }
 
     public function actionLogin()
@@ -97,9 +100,12 @@ class SiteController extends Controller
         }
     }
 
+    public function actionTravel() {
+        return $this->render('travel');
+    }
+
     public function actionAbout()
     {
         return $this->render('about');
     }
-
 }
