@@ -21,7 +21,7 @@ $this->title = $model->name;
                 </div>
                 <div class="col-sm-4 activity-detail-technical" style="background-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($model->ActivityType_id) ?>">
                     <?php if(!Yii::$app->user->isGuest) { ?>
-                        <?= Html::a('Add to your Schedule', ['join', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                        <?= Html::a('Add to your Schedule', ['/participant-has-activity/join', 'activityId' => $model->id], ['class' => 'btn btn-default']) ?>
                     <?php } ?>
                     <h3>Date and Time</h3>
                     <?= date("M d D", strtotime($model->startDatetime)) ?><br>

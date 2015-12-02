@@ -8,30 +8,25 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        /*$index = $auth->createPermission('userIndex');
-        $index->description = 'Index of the User Controller';
-        $auth->add($index);
+        //$index = $auth->createPermission('userIndex');
+        //$index->description = 'Index of the User Controller';
+        //$auth->add($index);
 
-        $create = $auth->createPermission('userCreate');
-        $create->description = 'Index of the User Controller';
-        $auth->add($create);*/
+        $create = $auth->createPermission('participantHasActivityCreate');
+        $create->description = 'User Join an Activity';
+        $auth->add($create);
 
-        /*$update = $auth->createPermission('activityUpdate');
-        $update->description = 'Update a activity';
-        $auth->add($update);
+        //$update = $auth->createPermission('ParticipantHasActivityUpdate');
+        //$update->description = 'Update a activity';
+        //$auth->add($update);
 
-        $delete = $auth->createPermission('activityDelete');
-        $delete->description = 'Delete a activity';
+        $delete = $auth->createPermission('participantHasActivityDelete');
+        $delete->description = 'User Quit an Activity';
         $auth->add($delete);
 
-        $edit = $auth->createPermission('activityEdit');
-        $edit->description = 'Do create, update and delete activities';
-        $auth->add($edit);*/
-
-        $update = $auth->getPermission('activityUpdate');
-        $delete = $auth->getPermission('activityDelete');
-        $edit = $auth->getPermission('activityEdit');
-        $create = $auth->getPermission('activityCreate');
+        $edit = $auth->createPermission('participantHasActivityEdit');
+        $edit->description = 'Do join and quit activities';
+        $auth->add($edit);
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
@@ -51,10 +46,10 @@ class RbacController extends \yii\web\Controller
         $auth->add($sponsor);*/
 
 
-        $admin = $auth->getRole('Admin');
-        $auth->addChild($admin, $edit);
+        $user = $auth->getRole('Participant');
+        $auth->addChild($user, $edit);
         $auth->addChild($edit, $create);
-        $auth->addChild($edit, $update);
+        //$auth->addChild($edit, $update);
         $auth->addChild($edit, $delete);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()

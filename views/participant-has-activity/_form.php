@@ -16,12 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Activity_id')->textInput() ?>
 
-    <?= $form->field($model, 'Activity_Venue_id')->textInput() ?>
-
-    <?= $form->field($model, 'Activity_Topic_id')->textInput() ?>
-
-    <?= $form->field($model, 'Activity_ActivityType_id')->textInput() ?>
-
     <?= $form->field($model, 'attendance')->textInput() ?>
 
     <div class="form-group">
