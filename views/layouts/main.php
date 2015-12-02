@@ -116,7 +116,7 @@ AppAsset::register($this);
             ['label' => 'User', 'url' => ['/user/index'], 'visible' => Yii::$app->user->can('userIndex')],
             ['label' => 'Venue', 'url' => ['/venue/index']],
             //['label' => 'VenueType', 'url' => ['/venue-type/index']],
-            ['label' => 'Activity', 'url' => ['/activity/index']],
+            ['label' => 'Schedule', 'url' => ['/activity/index']],
             //['label' => 'ActivityType', 'url' => ['/activity-type/index']],
             //['label' => 'Category', 'url' => ['/category/index']],
             //['label' => 'Topic', 'url' => ['/topic/index']],
