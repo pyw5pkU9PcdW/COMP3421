@@ -52,4 +52,9 @@ class Post extends \yii\db\ActiveRecord
             'Topic_id' => 'Topic ID',
         ];
     }
+
+    public function beforeValidate() {
+        $this->datetime = date("Y-m-d H:i:s");
+        $this->Participant_id = Yii::$app->user->id;
+    }
 }
