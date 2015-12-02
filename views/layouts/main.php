@@ -119,6 +119,7 @@ AppAsset::register($this);
             ['label' => 'Venue', 'url' => ['/venue/index']],
             //['label' => 'VenueType', 'url' => ['/venue-type/index']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
+            ['label' => 'Forum', 'url' => ['/post/index']],
             //['label' => 'ActivityType', 'url' => ['/activity-type/index']],
             //['label' => 'Category', 'url' => ['/category/index']],
             //['label' => 'Topic', 'url' => ['/topic/index']],

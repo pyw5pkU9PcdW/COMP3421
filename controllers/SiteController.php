@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Activity;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -54,7 +55,10 @@ class SiteController extends Controller
         if(Yii::$app->user->isGuest) {
             return $this->render('index');
         } else {
-            return $this->render('index');
+            $mySchedule = Activity::getJoinActivity();
+            return $this->render('myindex', [
+                'schedule' => $mySchedule
+            ]);
         }
     }
 

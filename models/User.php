@@ -169,4 +169,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $raw = User::findOne($id);
         return Title::getTitleById($raw['title']).' '.$raw['first_name'].' '.$raw['last_name'];
     }
+
+    public function getUserFirstNameById($id) {
+        $raw = User::findOne($id);
+        return $raw['first_name'];
+    }
 }
