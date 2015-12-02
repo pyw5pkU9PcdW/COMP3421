@@ -112,4 +112,34 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionTravel_1()
+    {
+        return $this->render('travel_1');
+    }
+
+    public function actionTravel_2()
+    {
+        return $this->render('travel_2');
+    }
+
+    public function actionTravel_3()
+    {
+        return $this->render('travel_3');
+    }
+
+    public function actionTravel_4()
+    {
+        return $this->render('travel_4');
+    }
+
+    public function actionTravel_5()
+    {
+        return $this->render('travel_5');
+    }
+
+    public function actionTravel_6()
+    {
+        return $this->render('travel_6');
+    }
 }
