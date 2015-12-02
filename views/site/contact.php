@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else: ?>
 
         <p>
-            For general inquiries, please contact Conference Manager Lyydia Kilpi (lima2016@eiti.org), or fill in the following form to contact us..
+            For general inquiries, please contact Conference Manager Lydia Kilpi (lima2016@eiti.org), or fill in the following form to contact us.
             For media inquiries, please contact Digital and media relations manager Anders Kråkenes (akrakenes@eiti.org), or fill in the following form to contact us.
             Thank you.
         </p>
