@@ -63,10 +63,12 @@ class PostController extends Controller
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post())) {
-            die(var_dump($model->attributes));
+            //$model->validate();
+            //die(var_dump($model->validators));
             if($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
+            //die(var_dump($model->getErrors()));
         } else {
             return $this->render('create', [
                 'model' => $model,
