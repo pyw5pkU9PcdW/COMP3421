@@ -107,12 +107,9 @@ AppAsset::register($this);
         $navItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-<<<<<<< HEAD
             ['label' => 'Travel', 'url' => ['/site/travel']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-=======
             ['label' => 'Schedule', 'url' => ['/activity/index']],
->>>>>>> 3dac060a8881c1a43c28924d09768107d3fbdd2a
             ['label' => 'Login', 'url' => ['/site/login']]
 
         ];

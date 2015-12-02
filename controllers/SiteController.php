@@ -54,7 +54,7 @@ class SiteController extends Controller
         if(Yii::$app->user->isGuest) {
             return $this->render('index');
         } else {
-
+            return $this->render('index');
         }
     }
 
