@@ -135,9 +135,9 @@ class ActivityController extends Controller
      * @return Activity the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if ($model = Activity::find($id)->one()) {
+    protected function findModel($id) {
+        if ($model = Activity::find()->where(['id'=>$id])->all()[0]) {
+        //if ($model = Activity::find($id)->one()) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

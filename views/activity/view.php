@@ -20,7 +20,9 @@ $this->title = $model->name;
                     <p class="text-center"><?= Html::img($imgLink, ['class'=>'activity-detail-img']);?></p>
                 </div>
                 <div class="col-sm-4 activity-detail-technical" style="background-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($model->ActivityType_id) ?>">
-                    <?= Html::a('Add to your Schedule', ['join', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                    <?php if(!Yii::$app->user->isGuest) { ?>
+                        <?= Html::a('Add to your Schedule', ['join', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                    <?php } ?>
                     <h3>Date and Time</h3>
                     <?= date("M d D", strtotime($model->startDatetime)) ?><br>
                     <?= date("g:i A", strtotime($model->startDatetime)) ?> - <?= date("g:i A", strtotime($model->endDatetime)) ?>
