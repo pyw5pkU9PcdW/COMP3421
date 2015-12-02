@@ -56,26 +56,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1><?= Html::encode($this->title) ?></h1>
 <div class="site-travel">
-    <table width = 100%>
-
-
-        <tr>
-            <td>
-                <a  href="#"><img alt="Hong Kong Science Museum" title="Hong Kong Science Museum" width="250" height="147" src="/comp3421/web/../resources/travel/travel_2.jpg" border="0" /></a>
-            </td>
-            <td>
-                <a  href="#">Hong Kong Science Museum</a>
-                <br>
-                The science-themed museum hand-on, with over 500 interactive exhibits ranging over a variety of topics such as robotics and virtual reality. Through presenting quality exhibitions and fun science programmes in an enjoyable environment, the Museum serves to popularize science to the public and support science education in schools.
-
-            </td>
-        </tr>
-
-
-</table>
+    <img alt="Hong Kong Science Museum" title="Hong Kong Science Museum" width="250" height="147" src="/comp3421/web/../resources/travel/travel_2.jpg" border="0" />
+    <div class="row">
+        <div class="col-sm-3" style="background-color:lavender;">
+            <p>How to get there?</p>
+            <p>1. TST station Exit D</p>
+        </div>
+        <div class="col-sm-9" style="background-color:lavenderblush;">
+            <div id="googleMap" style="width:100%;height:380px;"></div>
+        </div>
     </div>
-
-<div id="googleMap" style="width:100%;height:380px;"></div>
-
+</div>
     <code><?= __FILE__ ?></code>
 </div>
