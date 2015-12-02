@@ -57,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 The Mandarin's House built around 1869 was the ancestral home of Zheng Guanying. The construction of the house was initiated by Zheng Wenrui, the father of Zheng Guanying, and the ...</div>
                 <br>
                 <a href="/en/The-Mandarin's-House-2-14-158.html" class="more_link" style="width:auto;">More ></a>
+            </td>
         </tr>
         <tr>
             <td>
