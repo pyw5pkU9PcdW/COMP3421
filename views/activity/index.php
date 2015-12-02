@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -38,11 +39,14 @@ $this->title = 'Conference Schedule';
                     </a>
             <?php } ?>
     <?php } else { ?>
+
+
+        <?php echo $this->render('_search',['model' => $searchModel]); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
                 'name',
                 'description',
                 // 'lastModifyTime',
@@ -57,6 +61,6 @@ $this->title = 'Conference Schedule';
                 ['class' => 'yii\grid\ActionColumn', 'visible'=>Yii::$app->user->can('activityEdit')],
             ],
         ]); ?>
-    <?php } ?>
+        <?php } ?>
 
 </div>

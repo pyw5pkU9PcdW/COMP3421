@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ActivitySearch;
 use Yii;
 use app\models\Activity;
 use yii\data\ActiveDataProvider;
@@ -33,14 +34,19 @@ class ActivityController extends Controller
      */
     public function actionIndex()
     {
+        $searchModel = new ActivitySearch();
         $schedule = Activity::getAllActivities();
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $searchModel->id = 1;
+
+        /*$dataProvider = new ActiveDataProvider([
             'query' => Activity::find(),
-        ]);
+        ]);*/
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider, 'schedule' => $schedule
+            'dataProvider' => $dataProvider, 'schedule' => $schedule, 'searchModel' => $searchModel,
         ]);
 
     }
