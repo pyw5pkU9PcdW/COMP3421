@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 PolyU's main campus has over 20 buildings, many of which are inter-connected. Apart from those named after donors, the buildings are identified in English letters (from block A to Z, without blocks K, O and I). In addition to classrooms, laboratories and other academic facilities, the university provides student hostels, a multi-purpose auditorium, sports, recreational and catering facilities, as well as a bookstore and banks.
                 <br>
-                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_1" class="more_link" style="width:auto;">More ></a>
+                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_1" class="more_link" style="width:auto;">Directions and map ></a>
             </td>
         </tr>
 
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 The science-themed museum hand-on, with over 500 interactive exhibits ranging over a variety of topics such as robotics and virtual reality. Through presenting quality exhibitions and fun science programmes in an enjoyable environment, the Museum serves to popularize science to the public and support science education in schools.
                 <br>
-                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_2" class="more_link" style="width:auto;">More ></a>
+                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_2" class="more_link" style="width:auto;">Directions and map ></a>
             </td>
         </tr>
 
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 It is a museum of astronomy and space science in Tsim Sha Tsui. The museum has two wings: east wing and west wing. The former consists of the nucleus of the museum's planetarium, which has an egg-shaped dome structure. Beneath it are the Stanley Ho Space Theatre, the Hall of Space Science, workshops and offices. The west wing houses the Hall of Astronomy, the Lecture Hall, a gift shop and offices.
                 <br>
-                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_3" class="more_link" style="width:auto;">More ></a>
+                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_3" class="more_link" style="width:auto;">Directions and map ></a>
             </td>
         </tr>
         <tr>
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 Entering from Salisbury Garden, a 4.5-metre-tall replica of the statuette given to winners at the Hong Kong Film Awards greets visitors. Along the 440-metre promenade, the story of Hong Kong's one hundred years of cinematic history is told through inscriptions printed on nine red pillars. Set into the promenade are plaques honouring the celebrities.
                 <br>
-                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_4" class="more_link" style="width:auto;">More ></a>
+                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_4" class="more_link" style="width:auto;">Directions and map ></a>
             </td>
         </tr>
 
@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 iSQUARE is the first one-stop shopping and entertainment complex linked to Tsim Sha Tsui MTR station. There are Watches & Jewelry, Fashion & Accessories, Beauty & Health, Lifestyle & Entertainment, and Supermarket & Department Store located at the shopping podium. Besides, there is the cinema box — a highlight not to be missed, which houses a total of 5 grand cineplexes, including IMAX Digital Theatre. What’s more, iSQUARE also features multi-national fine-dining restaurants at its iconic tower, bringing customers not only an unparalleled dining experience, but also a mesmerizing view of the Victoria Harbour!
                 <br>
-                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_5" class="more_link" style="width:auto;">More ></a>
+                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_5" class="more_link" style="width:auto;">Directions and map ></a>
             </td>
         </tr>
 
@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 Harbour City is a one-stop shopping paradise with over 450 shops, 50 food & beverage outlets, two cinemas, three hotels, 10 office buildings, two serviced apartments and a luxurious private club all under one roof. With the “Star” Ferry pier, its home to cruise liner berths, maritime history and fabulous harbour view – all at its doorstep. It is easy to see where the mall drew the inspiration for its name.
                 <br>
-                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_6" class="more_link" style="width:auto;">More ></a>
+                <a href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_6" class="more_link" style="width:auto;">Directions and map ></a>
             </td>
         </tr>
 
