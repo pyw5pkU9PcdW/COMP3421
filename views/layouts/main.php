@@ -31,55 +31,6 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-        <?php if(false) { ?>
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <input class="rounded" type="text" name="username" placeholder="Username">
-                </li>
-                <li>
-                    <input class="rounded" type="text" name="password" placeholder="Password">
-                </li>
-
-                <li>
-                    <a href="#" class="btn_login">LOGIN</a>
-                </li>
-                <li>
-                    <a href="#" class="btn_registration">Registration</a>
-                </li>
-                <li>
-                    <a href="index.php">Home</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Join the Conference</a>
-                </li>
-                <ol>
-                <li>
-                    <a href="#">Travel in HK</a>
-                </li>
-                <li>
-                    <a href="#">Come to Conference</a>
-                </li>
-                <li>
-                    <a href="#">Venue Information</a>
-                </li>
-                </ol>
-
-                <li>
-                    <a href="#">Contact Us</a>
-                </li>
-            </ul>
-        </div>
-        <?php } ?>
     <?php
     NavBar::begin([
         'brandLabel' => 'Vincent Smart Conference 2016',
