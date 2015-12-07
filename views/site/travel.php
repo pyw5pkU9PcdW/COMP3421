@@ -15,7 +15,7 @@ $attraction= [
     ['name' => 'Harbour City', 'content' => 'Harbour City is a one-stop shopping paradise with over 450 shops, 50 food & beverage outlets, two cinemas, three hotels, 10 office buildings, two serviced apartments and a luxurious private club all under one roof. With the “Star” Ferry pier, its home to cruise liner berths, maritime history and fabulous harbour view – all at its doorstep. It is easy to see where the mall drew the inspiration for its name.'],
 
 ];
-$output_pdf = "";
+$output_pdf="";
 ?>
 
 <style>
@@ -32,32 +32,40 @@ $output_pdf = "";
 
 <h1><?= Html::encode($this->title) ?></h1>
 <div class="site-travel">
+    <h2>Heading</h2>
     <table width = 100%>
 
-        <?
+        <?$output_pdf.= '<table width = 100%>';
+
             $num = 1;
             foreach($attraction as $row){
                 $path = "http://localhost/comp3421/web/index.php?r=site%2Ftravel_{$num}";
-                $src = "/comp3421/web/../resources/travel/travel_{$num}.jpg"
-                ?>
+                $src = "/comp3421/web/../resources/travel/travel_{$num}.jpg" ?>
                 <tr>
                     <td>
                         <a  href="<?= $path ?>"><img alt="<?= $row['name'] ?>" title="<?= $row['name'] ?>" width="250" height="147" src="<?= $src ?>" border="0" /></a>
                     </td>
-                    <td class = "green">
-                        <a  href="<?= $path ?>"><?= $row['name'] ?></a>
-                        <br>
-                        <?= $row['content'] ?>
-                        <br>
-                        <a href="<?= $path ?>" class="more_link" style="width:auto;">Directions and map ></a>
-                    </td>
+                    <? if($num%2 == 1){?>
+                         <td class = "green">
+                    <? }else{ ?>
+                         <td>
+                    <? } ?>
+                            <a  href="<?= $path ?>"><?= $row['name'] ?></a>
+                            <br>
+                            <?= $row['content'] ?>
+                            <br>
+                            <a href="<?= $path ?>" class="more_link" style="width:auto;">Directions and map ></a>
+                        </td>
                 </tr>
         <?
-                //echo '<tr>';
-                //echo 'Country Name: '.$row['country_name'].'</br>';
-                //echo 'State Name: '.$row['state_name'].'</br>';
-                //echo 'City Name: '.$row['city_name'].'</br>';
-                //echo '</br>';
+                $output_pdf.= '<tr><td>';
+                $output_pdf.= '<a  href="'.$path.'"><img alt="'.$row['name'].'" title="'.$row['name'].'" width="250" height="147" src="'.$src.'" border="0" /></a>';
+                $output_pdf.= '</td>';
+                $output_pdf.= '<td class = "green">';
+                $output_pdf.= '<a  href="<?= $path ?>"><?= $row[\'name\'] ?></a>';
+                $output_pdf.= '<br>"'.$row['content'].'"<br>';
+                $output_pdf.= '</td></tr>';
+
                 $num++;
             }
         ?>
@@ -140,8 +148,8 @@ $output_pdf = "";
             </td>
         </tr>
         -->
-
-</table>
+        <? $output_pdf.= "</table>";?>
+    </table>
     </div>
 
 
