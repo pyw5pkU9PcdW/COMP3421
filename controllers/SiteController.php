@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Activity;
+use app\models\Post;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -56,8 +57,9 @@ class SiteController extends Controller
             return $this->render('index');
         } else {
             $mySchedule = Activity::getJoinActivity();
+            $newPost = new Post();
             return $this->render('myindex', [
-                'schedule' => $mySchedule
+                'schedule' => $mySchedule, 'newPost' => $newPost
             ]);
         }
     }

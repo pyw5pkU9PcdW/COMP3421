@@ -1,4 +1,6 @@
 <?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 /**
  * Created by PhpStorm.
  * User: Ansonmouse
@@ -35,6 +37,16 @@ $this->title = \app\models\User::getUserFirstNameById(Yii::$app->user->id);
         </div>
         <div class="col-md-6">
             <h1>Forum</h1>
+            <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($newPost, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($newPost, 'content')->textarea(['maxlength' => true]) ?>
+            <?= $form->field($newPost, 'Topic_id')->dropDownList(\app\models\Topic::getTopicOptions(), array('prompt'=>'-- Select a Topic --')) ?>
+
+            <div class="form-group">
+                <?= Html::submitButton($newPost->isNewRecord ? 'Create' : 'Update', ['class' => $newPost->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>
