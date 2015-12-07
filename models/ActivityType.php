@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "ActivityType".
  *
  * @property integer $id
- * @property string $activityName
+ * @property string $ActivityType_name
  * @property string $description
  * @property string $color
  *
@@ -30,8 +30,8 @@ class ActivityType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['activityName', 'description'], 'required'],
-            [['activityName', 'color'], 'string', 'max' => 45],
+            [['ActivityType_name', 'description'], 'required'],
+            [['ActivityType_name', 'color'], 'string', 'max' => 45],
             [['description'], 'string', 'max' => 256]
         ];
     }
@@ -43,7 +43,7 @@ class ActivityType extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'activityName' => 'Activity Name',
+            'ActivityType_name' => 'Activity Name',
             'description' => 'Description',
             'color' => 'Color',
         ];
@@ -56,7 +56,7 @@ class ActivityType extends \yii\db\ActiveRecord
         $raw = ActivityType::find()->asArray()->all();
         $arr = array();
         foreach($raw as $row) {
-            $arr[$row['id']] = $row['activityName'];
+            $arr[$row['id']] = $row['ActivityType_name'];
         }
         return $arr;
     }
@@ -68,7 +68,7 @@ class ActivityType extends \yii\db\ActiveRecord
 
     public function getActivityTypeNameById($id) {
         $raw = ActivityType::findOne($id);
-        return $raw['activityName'];
+        return $raw['ActivityType_name'];
     }
 
     public function getActivityTypeThemeColorById($id) {

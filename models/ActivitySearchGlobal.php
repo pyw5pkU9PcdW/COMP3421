@@ -10,7 +10,7 @@ use app\models\Activity;
 /**
  * ActivitySearch represents the model behind the search form about `app\models\Activity`.
  */
-class ActivitySearch extends Activity
+class ActivitySearchGlobal extends Activity
 {
 
     public $globalSearch;
@@ -46,47 +46,17 @@ class ActivitySearch extends Activity
     {
         $query = Activity::find();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            return $dataProvider;
+            return $query->asArray()->all();
         }
 
-<<<<<<< Updated upstream
         $query->joinWith('venue');
         $query->joinWith('topic');
         $query->joinWith('activityType');
-=======
-        $query->andFilterWhere([
-            //'id' => $this ->id,
-            //'Venue_id' => $this -> Venue_id,
-            //'ActivityType_id' => $this -> ActivityType_id
->>>>>>> Stashed changes
-
-        /*$query->andFilterWhere([
-            'id' => $this->id,
-            'personInCharge' => $this->personInCharge,
-            'lastModifyTime' => $this->lastModifyTime,
-            'startDatetime' => $this->startDatetime,
-            'endDatetime' => $this->endDatetime,
-            //'Venue_id' => $this->Venue_id,
-            //'Topic_id' => $this->Topic_id,
-            //'ActivityType_id' => $this->ActivityType_id,
-            'Administrator_id' => $this->Administrator_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'Activity_name', $this->Activity_name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'documentLink', $this->documentLink])
-            ->andFilterWhere(['like', 'venue.name', $this->Venue_id])
-            ->andFilterWhere(['like', 'topic.name', $this->Topic_id])
-            ->andFilterWhere(['like', 'activityType.ActivityType_name', $this->ActivityType_id]);*/
 
         $query->orFilterWhere(['like', 'Activity_name', $this->globalSearch])
             ->orFilterWhere(['like', 'startDatetime', $this->globalSearch])
@@ -95,6 +65,23 @@ class ActivitySearch extends Activity
             ->orFilterWhere(['like', 'topic.name', $this->globalSearch])
             ->orFilterWhere(['like', 'activityType.ActivityType_name', $this->globalSearch]);
 
-        return $dataProvider;
+        $raw = $query->asArray()->all();
+
+        $returnArr = [];
+
+        foreach($raw as $row) {
+            $detail = substr($row['description'], 0, 200).'...';
+            $arrayRow =
+                [
+                    'type'=>'activity',
+                    'id'=>$row['id'],
+                    'title'=>$row['Activity_name'],
+                    'detail'=>$detail,
+                ];
+            array_push($returnArr, $arrayRow);
+        }
+
+
+        return $returnArr;
     }
 }

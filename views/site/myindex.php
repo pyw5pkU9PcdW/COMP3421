@@ -23,7 +23,7 @@ $this->title = \app\models\User::getUserFirstNameById(Yii::$app->user->id);
                                     <span class="time"><?= date("g:i A", strtotime($row['startDatetime'])) ?></span>
                                 </td>
                                 <td class="activity-schedule-detail activity-schedule-detail-sm" style="border-left-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($row['ActivityType_id']) ?>">
-                                    <span class="title"><?= $row['name'] ?></span><br>
+                                    <span class="title"><?= $row['Activity_name'] ?></span><br>
                                     <span class="type"><?= \app\models\ActivityType::getActivityTypeNameById($row['ActivityType_id']) ?></span>
                                 </td>
                                 <td class="activity-schedule-venue"><?= \app\models\Venue::getVenueNameById($row['Venue_id']) ?></td>

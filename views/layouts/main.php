@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\bootstrap\ActiveForm;
 
 AppAsset::register($this);
 ?>
@@ -39,6 +40,20 @@ AppAsset::register($this);
             'class' => 'navbar-default navbar-fixed-top navbar_custom',
         ],
     ]);
+
+    $searchForm = ActiveForm::begin();
+
+    ActiveForm::end();
+
+    echo '<div class="container"><div class="row"><form class="navbar-form navbar-left" role="search">
+            <div class="input-group">
+                <input type="text" id="search-field" class="form-control" placeholder="Search..." id="search" name="search">
+                <span class="input-group-btn">
+                    <button type="submit" id="search-btn" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </span>
+            </div>
+           </form></div></div>';
+
     /*
     $navItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
@@ -135,6 +150,13 @@ AppAsset::register($this);
         $(".navbar_custom .navbar-collapse.collapse").toggleClass("navbar-custom-toggle");
         if($(this).hasClass('light-btn')) {
             $("#navbar-custom-toggle-btn span").toggleClass('light');
+        }
+    });
+
+    $("#search-btn").click(function(e) {
+        e.preventDefault();
+        if($("#search-field").val().length > 0) {
+            window.location.href = "?r=search/index&search="+$("#search-field").val();
         }
     });
 </script>

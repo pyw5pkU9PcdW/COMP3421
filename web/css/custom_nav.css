@@ -79,4 +79,7 @@
     .navbar_custom .navbar-brand{
         margin-left: -15px;
     }
+    .navbar_custom .navbar-brand{
+        font-size: 18px;
+    }
 }

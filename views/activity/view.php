@@ -7,14 +7,14 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Activity */
 
 
-$this->title = $model->name;
+$this->title = $model->Activity_name;
 ?>
-<script>
-    $("#navbar-custom-toggle-btn span").addClass("light");
-    $("#navbar-custom-toggle-btn").addClass("light-btn");
-</script>
 <div class="activity-view">
     <?php if(!Yii::$app->user->can('activityEdit')) { ?>
+        <script>
+            $("#navbar-custom-toggle-btn span").addClass("light");
+            $("#navbar-custom-toggle-btn").addClass("light-btn");
+        </script>
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
@@ -62,7 +62,7 @@ $this->title = $model->name;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'name',
+                    'Activity_name',
                     'description',
                     'documentLink',
                     'personInCharge',

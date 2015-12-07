@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "Activity".
  *
  * @property integer $id
- * @property string $name
+ * @property string $Activity_name
  * @property string $description
  * @property string $documentLink
  * @property integer $personInCharge
@@ -36,10 +36,10 @@ class Activity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'documentLink', 'personInCharge', 'lastModifyTime', 'startDatetime', 'endDatetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
+            [['Activity_name', 'description', 'documentLink', 'personInCharge', 'lastModifyTime', 'startDatetime', 'endDatetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
             [['personInCharge', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
-            [['name', 'description', 'lastModifyTime', 'startDatetime', 'endDatetime'], 'safe'],
-            [['name'], 'string', 'max' => 100],
+            [['Activity_name', 'description', 'lastModifyTime', 'startDatetime', 'endDatetime'], 'safe'],
+            [['Activity_name'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 1000],
             [['documentLink'], 'string', 'max' => 45]
         ];
@@ -52,7 +52,7 @@ class Activity extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'Activity_name' => 'Name',
             'description' => 'Description',
             'documentLink' => 'Document Link',
             'personInCharge' => 'Person In Charge',

@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -31,7 +30,7 @@ $this->title = 'Conference Schedule';
                                     <span class="time"><?= date("g:i A", strtotime($row['startDatetime'])) ?></span>
                                 </td>
                                 <td class="activity-schedule-detail" style="border-left-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($row['ActivityType_id']) ?>">
-                                    <span class="title"><?= $row['name'] ?></span><br>
+                                    <span class="title"><?= $row['Activity_name'] ?></span><br>
                                     <span class="type"><?= \app\models\ActivityType::getActivityTypeNameById($row['ActivityType_id']) ?></span>
                                 </td>
                                 <td class="activity-schedule-venue"><?= \app\models\Venue::getVenueNameById($row['Venue_id']) ?></td>
@@ -42,13 +41,14 @@ $this->title = 'Conference Schedule';
     <?php } else { ?>
 
 
-        <?php //echo $this->render('_search',['model' => $searchModel]); ?>
+        <?php echo $this->render('_search',['model' => $searchModel]); ?>
+        <?php Pjax::begin(); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'name',
+                'Activity_name',
                 // 'lastModifyTime',
                 // 'datetime:datetime',
                 //'Venue_id',
@@ -64,7 +64,7 @@ $this->title = 'Conference Schedule';
                 //'ActivityType_id',
                 [
                     'attribute' => 'ActivityType_id',
-                    'value' => 'activityType.activityName'
+                    'value' => 'activityType.ActivityType_name'
                 ],
                 // 'Administrator_id',
                 // 'Administrator_User_id',
@@ -73,6 +73,7 @@ $this->title = 'Conference Schedule';
                 ['class' => 'yii\grid\ActionColumn', 'visible'=>Yii::$app->user->can('activityEdit')],
             ],
         ]); ?>
+        <?php Pjax::end(); ?>
         <?php } ?>
 
 </div>

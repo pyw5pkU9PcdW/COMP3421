@@ -37,8 +37,6 @@ class ActivityController extends Controller
 
         $searchModel = new ActivitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-
         /*$dataProvider = new ActiveDataProvider([
             'query' => Activity::find(),
         ]);*/
