@@ -60,6 +60,7 @@ AppAsset::register($this);
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Travel', 'url' => ['/site/travel']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'PDF', 'url' => ['/site/samplepdf']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
             ['label' => 'Login', 'url' => ['/site/login']]
 

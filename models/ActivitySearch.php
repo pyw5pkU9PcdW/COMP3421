@@ -55,9 +55,16 @@ class ActivitySearch extends Activity
             return $dataProvider;
         }
 
+<<<<<<< Updated upstream
         $query->joinWith('venue');
         $query->joinWith('topic');
         $query->joinWith('activityType');
+=======
+        $query->andFilterWhere([
+            //'id' => $this ->id,
+            //'Venue_id' => $this -> Venue_id,
+            //'ActivityType_id' => $this -> ActivityType_id
+>>>>>>> Stashed changes
 
         $query->andFilterWhere([
             'id' => $this->id,

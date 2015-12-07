@@ -984,5 +984,102 @@
             "bower-asset-main": "dist/typeahead.bundle.js"
         },
         "installation-source": "dist"
+    },
+    {
+        "name": "mpdf/mpdf",
+        "version": "v6.0.0",
+        "version_normalized": "6.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mpdf/mpdf.git",
+            "reference": "a15743d030ce3b5b7be36c6e83f76589b27c3f2c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mpdf/mpdf/zipball/a15743d030ce3b5b7be36c6e83f76589b27c3f2c",
+            "reference": "a15743d030ce3b5b7be36c6e83f76589b27c3f2c",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=4.3.10"
+        },
+        "time": "2015-03-01 10:27:49",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "mpdf.php",
+                "classes"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-1.0+"
+        ],
+        "authors": [
+            {
+                "name": "Ian Back"
+            }
+        ],
+        "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
+        "homepage": "http://www.mpdf1.com/mpdf/index.php",
+        "keywords": [
+            "pdf",
+            "php",
+            "utf-8"
+        ]
+    },
+    {
+        "name": "robregonm/yii2-pdf",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/robregonm/yii2-pdf.git",
+            "reference": "4ef2951e8eab220cfb6500ac630a845adeaa3036"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/robregonm/yii2-pdf/zipball/4ef2951e8eab220cfb6500ac630a845adeaa3036",
+            "reference": "4ef2951e8eab220cfb6500ac630a845adeaa3036",
+            "shasum": ""
+        },
+        "require": {
+            "mpdf/mpdf": ">=5.7.0",
+            "php": ">=5.4.0",
+            "yiisoft/yii2": "*",
+            "yiisoft/yii2-composer": "*"
+        },
+        "time": "2015-03-04 10:55:42",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "robregonm\\pdf\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "robregonm",
+                "email": "robregonm@gmail.com",
+                "homepage": "http://obregon.co",
+                "role": "Author"
+            }
+        ],
+        "description": "Yii 2 PDF Response Formatter",
+        "keywords": [
+            "documents",
+            "formatter",
+            "pdf",
+            "reports",
+            "response",
+            "yii",
+            "yii2"
+        ]
     }
 ]

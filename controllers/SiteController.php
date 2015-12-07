@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\web\ForbiddenHttpException;
+use mPDF;
 
 class SiteController extends Controller
 {
@@ -108,6 +109,16 @@ class SiteController extends Controller
 
     public function actionTravel() {
         return $this->render('travel');
+    }
+
+    public function actionSamplepdf() {
+        $mpdf = new mPDF;
+        $mpdf->WriteHTML('
+            <td>
+                <a  href="http://localhost/comp3421/web/index.php?r=site%2Ftravel_1"><img alt="The Hong Kong Polytechnic University" title="The Hong Kong Polytechnic University" width="250" height="147" src="/comp3421/web/../resources/travel/travel_1.jpg" border="0" /></a>
+            </td>');
+        $mpdf->Output();
+        exit;
     }
 
     public function actionAbout()
