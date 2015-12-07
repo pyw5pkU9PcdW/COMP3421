@@ -91,6 +91,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getActivities()
+    {
+        return $this->hasMany(Activity::className(), ['personInCharge' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAdministrator()
     {
         return $this->hasOne(Administrator::className(), ['id' => 'id']);

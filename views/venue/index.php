@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\VenueSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Venues';
@@ -12,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="venue-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Venue', ['create'], ['class' => 'btn btn-success']) ?>
@@ -19,15 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
             'location',
             'map',
             'floorPlan',
-            // 'VenueType_id',
+            [
+                'attribute' => 'VenueType_id',
+                'value' => 'venueType.name'
+            ],
+            //'VenueType_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

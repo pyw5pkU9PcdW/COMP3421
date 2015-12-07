@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Venue;
-use yii\data\ActiveDataProvider;
+use app\models\VenueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,11 +32,11 @@ class VenueController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Venue::find(),
-        ]);
+        $searchModel = new VenueSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

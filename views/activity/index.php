@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -41,19 +42,30 @@ $this->title = 'Conference Schedule';
     <?php } else { ?>
 
 
-        <?php echo $this->render('_search',['model' => $searchModel]); ?>
+        <?php //echo $this->render('_search',['model' => $searchModel]); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'name',
-                'description',
                 // 'lastModifyTime',
                 // 'datetime:datetime',
-                'Venue_id',
+                //'Venue_id',
+                [
+                    'attribute' => 'Venue_id',
+                    'value' => 'venue.name'
+                ],
                 // 'Topic_id',
-                'ActivityType_id',
+                [
+                    'attribute' => 'Topic_id',
+                    'value' => 'topic.name'
+                ],
+                //'ActivityType_id',
+                [
+                    'attribute' => 'ActivityType_id',
+                    'value' => 'activityType.activityName'
+                ],
                 // 'Administrator_id',
                 // 'Administrator_User_id',
                 // 'Administrator_User_Participant_id',

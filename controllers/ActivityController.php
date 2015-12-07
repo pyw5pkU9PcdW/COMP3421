@@ -2,10 +2,9 @@
 
 namespace app\controllers;
 
-use app\models\ActivitySearch;
 use Yii;
 use app\models\Activity;
-use yii\data\ActiveDataProvider;
+use app\models\ActivitySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,12 +33,11 @@ class ActivityController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ActivitySearch();
         $schedule = Activity::getAllActivities();
 
+        $searchModel = new ActivitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $searchModel->id = 1;
 
         /*$dataProvider = new ActiveDataProvider([
             'query' => Activity::find(),
@@ -71,13 +69,16 @@ class ActivityController extends Controller
     public function actionCreate() {
         if(Yii::$app->user->can('activityCreate')) {
             $model = new Activity();
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'Venue_id' => $model->Venue_id, 'Topic_id' => $model->Topic_id, 'ActivityType_id' => $model->ActivityType_id, 'Administrator_id' => $model->Administrator_id, 'Administrator_User_id' => $model->Administrator_User_id, 'Administrator_User_Participant_id' => $model->Administrator_User_Participant_id]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->lastModifyTime = date("Y-m-d H:i:s");
+                $model->Administrator_id = Yii::$app->user->id;
+                if($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         } else {
             if(Yii::$app->user->isGuest) {
                 Yii::$app->user->loginRequired();
@@ -97,13 +98,16 @@ class ActivityController extends Controller
         if(Yii::$app->user->can('activityUpdate')) {
             $model = $this->findModel($id);
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->lastModifyTime = date("Y-m-d H:i:s");
+                $model->Administrator_id = Yii::$app->user->id;
+                if($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         } else {
             if(Yii::$app->user->isGuest) {
                 Yii::$app->user->loginRequired();
@@ -142,8 +146,8 @@ class ActivityController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if ($model = Activity::find()->where(['id'=>$id])->all()[0]) {
-        //if ($model = Activity::find($id)->one()) {
+        //if ($model = Activity::find()->where(['id'=>$id])->all()[0]) {
+        if ($model = Activity::find($id)->one()) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -38,7 +38,7 @@ class Activity extends \yii\db\ActiveRecord
         return [
             [['name', 'description', 'documentLink', 'personInCharge', 'lastModifyTime', 'startDatetime', 'endDatetime', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'required'],
             [['personInCharge', 'Venue_id', 'Topic_id', 'ActivityType_id', 'Administrator_id'], 'integer'],
-            [['lastModifyTime', 'startDatetime', 'endDatetime'], 'safe'],
+            [['name', 'description', 'lastModifyTime', 'startDatetime', 'endDatetime'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 1000],
             [['documentLink'], 'string', 'max' => 45]
@@ -66,9 +66,20 @@ class Activity extends \yii\db\ActiveRecord
         ];
     }
 
-    public function beforeValidate() {
-        $this->lastModifyTime = date("Y-m-d H:i:s");
-        $this->Administrator_id = Yii::$app->user->id;
+    public function getVenue() {
+        return $this->hasOne(Venue::className(), ['id' => 'Venue_id']);
+    }
+
+    public function getTopic() {
+        return $this->hasOne(Topic::className(), ['id' => 'Topic_id']);
+    }
+
+    public function getActivityType() {
+        return $this->hasOne(ActivityType::className(), ['id' => 'ActivityType_id']);
+    }
+
+    public function getPersonInCharge() {
+        return $this->hasOne(User::className(), ['id' => 'personInCharge']);
     }
 
     public function getAllActivities() {
