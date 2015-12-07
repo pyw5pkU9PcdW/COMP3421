@@ -9,6 +9,10 @@ use yii\widgets\DetailView;
 
 $this->title = $model->name;
 ?>
+<script>
+    $("#navbar-custom-toggle-btn span").addClass("light");
+    $("#navbar-custom-toggle-btn").addClass("light-btn");
+</script>
 <div class="activity-view">
     <?php if(!Yii::$app->user->can('activityEdit')) { ?>
         <div class="container">

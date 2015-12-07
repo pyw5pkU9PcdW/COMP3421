@@ -18,18 +18,19 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?> | The CONF</title>
+    <title><?= Html::encode($this->title) ?> | VSC 2016</title>
     <?php $this->head(); ?>
     <link href="css/custom_global.css" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
     <link href="css/activity_schedule.css" rel="stylesheet">
+    <link href="css/custom_nav.css" rel="stylesheet">
+    <link href="css/custom_nav_toggle_btn.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <div id="wrapper">
         <?php if(false) { ?>
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -79,13 +80,12 @@ AppAsset::register($this);
             </ul>
         </div>
         <?php } ?>
-    </div>
     <?php
     NavBar::begin([
-        'brandLabel' => 'CONF',
+        'brandLabel' => 'Vincent Smart Conference 2016',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-default navbar-fixed-top navbar_custom',
         ],
     ]);
     /*
@@ -116,7 +116,13 @@ AppAsset::register($this);
     } else {
         $navItems = [
             ['label' => 'User', 'url' => ['/user/index'], 'visible' => Yii::$app->user->can('userIndex')],
-            ['label' => 'Venue', 'url' => ['/venue/index']],
+            [
+                'label' => 'Venue',
+                'items' => [
+                    ['label' => 'Venue', 'url' => ['/venue/index']],
+                    ['label' => 'Venue Type', 'url' => ['/venue-type/index']],
+                ],
+            ],
             //['label' => 'VenueType', 'url' => ['/venue-type/index']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
             ['label' => 'Forum', 'url' => ['/post/index']],
@@ -144,12 +150,16 @@ AppAsset::register($this);
         ];
     }
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav'],
         'items' => $navItems,
     ]);
     NavBar::end();
     ?>
-
+    <div id="navbar-custom-toggle-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
     <div class="container-fluid" style="margin-top: 70px">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -160,16 +170,20 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; LU Cheuk Ting, KWAN Leung Yu, KONG Yu Ching, CHENG Hoi Yan  <?= date('Y') ?> • All rights reserved</p>
+        <p class="pull-left">&copy; <strong>LU</strong> Cheuk Ting, <strong>KWAN</strong> Leung Yu, <strong>KONG</strong> Yu Ching, <strong>CHENG</strong> Hoi Yan  <?= date('Y') ?> • All rights reserved</p>
 
         <p class="pull-right"><?php //Yii::powered() ?></p>
     </div>
 </footer>
 
 <script>
-    $("#menu-toggle").click(function(e) {
+    $("#navbar-custom-toggle-btn").click(function(e) {
         e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+        $(this).toggleClass('toggle');
+        $(".navbar_custom .navbar-collapse.collapse").toggleClass("navbar-custom-toggle");
+        if($(this).hasClass('light-btn')) {
+            $("#navbar-custom-toggle-btn span").toggleClass('light');
+        }
     });
 </script>
 

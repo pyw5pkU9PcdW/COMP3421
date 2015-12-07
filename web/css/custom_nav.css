@@ -1,0 +1,82 @@
+.navbar_custom{
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+.navbar_custom > .container{
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+.navbar_custom .navbar-header{
+    float: none;
+}
+.navbar_custom .navbar-brand{
+    margin-left: 15px;
+    margin-top: 5px;
+    position: fixed;
+    left: 15px;
+    z-index: 1000;
+    color: rgb(67,67,69);
+    font-size: 24px;
+}
+.navbar_custom .navbar-nav{
+    float: none;
+}
+.navbar_custom .navbar-nav > li{
+    float: none;
+    text-align: center;
+}
+.navbar_custom .navbar-nav .open .dropdown-menu, .navbar_custom .navbar-nav .dropdown-menu{
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+}
+.navbar_custom .dropdown-menu{
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    color: #777;
+    border-radius: 0;
+}
+.navbar_custom .dropdown-menu > li > a{
+    color: #777;
+}
+.navbar_custom .navbar-toggle{
+    display: none;
+    position: fixed;
+    right:15px;
+    z-index: 1000;
+}
+.navbar_custom .navbar-collapse.collapse{
+    background-color: rgba(247,248,249,0.9);
+    display: table;
+    position: fixed;
+    right: 0;
+    width: 25%;
+    height: 100% !important;
+    max-height: 100%;
+    padding-top: 70px;
+    margin-right: -25%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.navbar_custom .navbar-collapse.collapse.navbar-custom-toggle{
+    margin-right: 0;
+}
+.navbar_custom .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus{
+    background-color: #e7e7e7;
+    color: #555;
+}
+@media (max-width: 767px) {
+    .navbar_custom .navbar-collapse.collapse{
+        width: 100%;
+        margin-right: -100%;
+    }
+    .navbar_custom .navbar-brand{
+        margin-left: -15px;
+    }
+}
