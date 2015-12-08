@@ -3,7 +3,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 $this->title = $input;
 ?>
-<div class="activity-index container">
+<link href="css/search.css" rel="stylesheet">
+<div class="search-index container">
     <h1>Search for "<?= $input ?>"</h1>
     <h3><?= count($result) ?> results in total</h3>
     <?php foreach($result as $row) { ?>
@@ -13,7 +14,7 @@ $this->title = $input;
                     <td><h3><?= $row['title'] ?></h3></td>
                 </tr>
                 <tr>
-                    <td><?= $row['detail'] ?></td>
+                    <td><div class="detail"><?= $row['detail'] ?></div></td>
                 </tr>
             </table>
         </a>

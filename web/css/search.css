@@ -1,0 +1,9 @@
+.search-index a .detail{
+    color: rgb(67,67,69);
+}
+.search-index .table > tbody > tr > td{
+    border: none;
+}
+.search-index .table{
+    border-bottom: 1px solid #ddd;
+}
