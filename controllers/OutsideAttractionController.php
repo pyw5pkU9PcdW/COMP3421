@@ -32,12 +32,14 @@ class OutsideAttractionController extends Controller
      */
     public function actionIndex()
     {
+        $allAttractions = OutsideAttraction::getAllOutsideAttractions();
         $searchModel = new OutsideAttractionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'allAttractions' => $allAttractions,
         ]);
     }
 

@@ -73,7 +73,7 @@ AppAsset::register($this);
         $navItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Travel', 'url' => ['/site/travel']],
+            ['label' => 'Outside Attraction', 'url' => ['/outside-attraction/index']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'PDF', 'url' => ['/site/samplepdf']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
@@ -92,6 +92,7 @@ AppAsset::register($this);
             ],
             //['label' => 'VenueType', 'url' => ['/venue-type/index']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
+            ['label' => 'Outside Attraction', 'url' => ['/outside-attraction/index']],
             ['label' => 'Forum', 'url' => ['/post/index']],
             //['label' => 'ActivityType', 'url' => ['/activity-type/index']],
             //['label' => 'Category', 'url' => ['/category/index']],

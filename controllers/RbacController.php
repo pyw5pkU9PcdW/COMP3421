@@ -8,24 +8,24 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        //$index = $auth->createPermission('userIndex');
-        //$index->description = 'Index of the User Controller';
-        //$auth->add($index);
+        $index = $auth->createPermission('outsideAttractionIndex');
+        $index->description = 'Index of the Outside Attraction';
+        $auth->add($index);
 
-        $create = $auth->createPermission('participantHasActivityCreate');
-        $create->description = 'User Join an Activity';
+        $create = $auth->createPermission('outsideAttractionCreate');
+        $create->description = 'Create an Outside Attraction';
         $auth->add($create);
 
-        //$update = $auth->createPermission('ParticipantHasActivityUpdate');
-        //$update->description = 'Update a activity';
-        //$auth->add($update);
+        $update = $auth->createPermission('outsideAttractionUpdate');
+        $update->description = 'Update an Outside Attraction';
+        $auth->add($update);
 
-        $delete = $auth->createPermission('participantHasActivityDelete');
-        $delete->description = 'User Quit an Activity';
+        $delete = $auth->createPermission('outsideAttractionDelete');
+        $delete->description = 'Remove an Outside Attraction';
         $auth->add($delete);
 
-        $edit = $auth->createPermission('participantHasActivityEdit');
-        $edit->description = 'Do join and quit activities';
+        $edit = $auth->createPermission('outsideAttractionEdit');
+        $edit->description = 'Update and Delete an Outside Attraction';
         $auth->add($edit);
 
         /*$view = $auth->createPermission('activityView');
@@ -46,10 +46,10 @@ class RbacController extends \yii\web\Controller
         $auth->add($sponsor);*/
 
 
-        $user = $auth->getRole('Participant');
+        $user = $auth->getRole('Admin');
         $auth->addChild($user, $edit);
         $auth->addChild($edit, $create);
-        //$auth->addChild($edit, $update);
+        $auth->addChild($edit, $update);
         $auth->addChild($edit, $delete);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()

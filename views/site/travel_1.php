@@ -21,36 +21,27 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 
 
-<script
-    src="http://maps.googleapis.com/maps/api/js">
-</script>
-
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>
     var myCenter=new google.maps.LatLng(22.304500, 114.179711);
 
-    function initialize()
-    {
+    function initialize() {
         var mapProp = {
             center:myCenter,
             zoom:17,
             mapTypeId:google.maps.MapTypeId.ROADMAP
         };
-
         var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
         var marker=new google.maps.Marker({
             position:myCenter,
         });
-
         marker.setMap(map);
-
         var infowindow = new google.maps.InfoWindow({
             content:"The Hong Kong Polytechnic University"
         });
-
         infowindow.open(map,marker);
     }
-
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 

@@ -51,4 +51,8 @@ class OutsideAttraction extends \yii\db\ActiveRecord
             'Outside_Attraction_image_file' => 'Outside  Attraction Image File',
         ];
     }
+
+    public function getAllOutsideAttractions() {
+        return OutsideAttraction::find()->asArray()->all();
+    }
 }
