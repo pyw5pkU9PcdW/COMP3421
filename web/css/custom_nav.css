@@ -82,4 +82,10 @@
     .navbar_custom .navbar-brand{
         font-size: 18px;
     }
+    .light-background-sm{
+        background-color: rgba(247,248,249,0.8);
+    }
+}
+@media (min-width: 768px) {
+
 }

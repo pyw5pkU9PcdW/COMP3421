@@ -12,6 +12,7 @@ class SearchController extends \yii\web\Controller
 {
     public function actionIndex($search) {
         if($search != null && $search != '') {
+            $search = htmlspecialchars($search, ENT_HTML5);
             $activitySearchModel = new ActivitySearchGlobal();
             $activitySearchModel->globalSearch = $search;
             $activitySearchModelDataProvider = $activitySearchModel->search(Yii::$app->request->queryParams);
