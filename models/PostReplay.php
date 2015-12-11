@@ -49,4 +49,8 @@ class PostReplay extends \yii\db\ActiveRecord
             'datetime' => 'Datetime',
         ];
     }
+
+    public function getAllRepliesByPostId($id) {
+        return PostReplay::find()->where(['Post_id' => $id])->orderBy('datetime')->asArray()->all();
+    }
 }

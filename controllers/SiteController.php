@@ -59,8 +59,16 @@ class SiteController extends Controller
         } else {
             $mySchedule = Activity::getJoinActivity();
             $newPost = new Post();
+            $sentPost = false;
+            if ($newPost->load(Yii::$app->request->post())) {
+                $newPost->datetime = date("Y-m-d H:i:s");
+                $newPost->Participant_id = Yii::$app->user->id;
+                if($newPost->save()) {
+                    $sentPost = true;
+                }
+            }
             return $this->render('myindex', [
-                'schedule' => $mySchedule, 'newPost' => $newPost
+                'schedule' => $mySchedule, 'newPost' => $newPost, 'sentPost' => $sentPost
             ]);
         }
     }

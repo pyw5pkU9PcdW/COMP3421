@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Alert;
 /**
  * Created by PhpStorm.
  * User: Ansonmouse
@@ -8,6 +9,14 @@ use yii\bootstrap\ActiveForm;
  * Time: 6:31 PM
  */
 $this->title = \app\models\User::getUserFirstNameById(Yii::$app->user->id);
+if($sentPost) {
+    echo Alert::widget([
+        'options' => [
+            'class' => 'alert-success fade in',
+        ],
+        'body' => '<strong>Posted!</strong> Your new post has been posted.',
+    ]);
+}
 ?>
 <div class="site-myindex container-fluid">
     <div class="row">
@@ -15,14 +24,14 @@ $this->title = \app\models\User::getUserFirstNameById(Yii::$app->user->id);
             <h1>Your Schedule</h1>
             <?php if(count($schedule) > 0) { ?>
                 <?php foreach($schedule as $row) { ?>
-                    <a href="?r=activity/view&id=<?= $row['id'] ?>" class="activity-schedule">
+                    <a href="?r=activity/view&id=<?= $row['id'] ?>" class="activity-schedule activity-schedule-index">
                         <table class="table">
                             <tr>
-                                <td class="activity-schedule-date activity-schedule-date-sm">
+                                <td class="activity-schedule-date">
                                     <span class="date"><?= date("M d D", strtotime($row['startDatetime'])) ?></span><br>
                                     <span class="time"><?= date("g:i A", strtotime($row['startDatetime'])) ?></span>
                                 </td>
-                                <td class="activity-schedule-detail activity-schedule-detail-sm" style="border-left-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($row['ActivityType_id']) ?>">
+                                <td class="activity-schedule-detail" style="border-left-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($row['ActivityType_id']) ?>">
                                     <span class="title"><?= $row['Activity_name'] ?></span><br>
                                     <span class="type"><?= \app\models\ActivityType::getActivityTypeNameById($row['ActivityType_id']) ?></span>
                                 </td>
@@ -43,7 +52,7 @@ $this->title = \app\models\User::getUserFirstNameById(Yii::$app->user->id);
             <?= $form->field($newPost, 'Topic_id')->dropDownList(\app\models\Topic::getTopicOptions(), array('prompt'=>'-- Select a Topic --')) ?>
 
             <div class="form-group">
-                <?= Html::submitButton($newPost->isNewRecord ? 'Create' : 'Update', ['class' => $newPost->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

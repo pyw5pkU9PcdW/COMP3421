@@ -1,0 +1,12 @@
+.reply-container{
+    background-color: rgba(247,0,249,0.8);
+    position: fixed;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.reply-container .reply-field{
+    width: 90%;
+}

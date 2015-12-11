@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Post;
+use app\models\PostReplay;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -48,8 +49,19 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+        $newReply = new PostReplay();
+        $newReply->Post_id = $id;
+        $replied = false;
+        if ($newReply->load(Yii::$app->request->post())) {
+            $newReply->datetime = date("Y-m-d H:i:s");
+            $newReply->Participant_id = Yii::$app->user->id;
+            if($newReply->save()) {
+                $replied = true;
+                $newReply = new PostReplay();
+            }
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id), 'newReply' => $newReply, 'replied' => $replied, 'allReplies' => PostReplay::getAllRepliesByPostId($id)
         ]);
     }
 
@@ -63,8 +75,8 @@ class PostController extends Controller
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post())) {
-            //$model->validate();
-            //die(var_dump($model->validators));
+            $model->datetime = date("Y-m-d H:i:s");
+            $model->Participant_id = Yii::$app->user->id;
             if($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -87,7 +99,6 @@ class PostController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->validate();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -17,12 +17,16 @@
     min-width: 10%;
     width: 10%;
 }
-.activity-schedule-date-sm{
-    min-width: 20%;
-    width: 20%;
+.activity-schedule-index .activity-schedule-date{
+    min-width: 100px !important;
+    width: 20% !important;
+    max-width: 120px;
 }
 .activity-schedule-date .date{
     font-size: 18px;
+}
+.activity-schedule-index .activity-schedule-date .date{
+    font-size: 16px !important;
 }
 .activity-schedule-detail{
     border-left: 3px solid;
@@ -30,15 +34,21 @@
 .activity-schedule-detail .title{
     font-size: 24px;
 }
-.activity-schedule-detail-sm .title{
-    font-size: 20px;
+.activity-schedule-index .activity-schedule-detail .title{
+    font-size: 20px !important;
 }
-.activity-schedule-detail .type{
+.activity-schedule-index .activity-schedule-detail .title{
+    font-size: 20px;
 }
 .activity-schedule-venue{
     font-size: 16px;
     min-width: 10%;
     width: 10%;
+}
+.activity-schedule-index .activity-schedule-venue{
+    min-width: 16% !important;
+    width: 16% !important;
+    max-width: 200px;
 }
 .activity-detail-technical{
     color: rgb(247,248,249);
