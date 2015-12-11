@@ -123,11 +123,11 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-    <div id="navbar-custom-toggle-btn">
+    <div id="navbar-custom-btn-base"><div id="navbar-custom-toggle-btn">
         <span></span>
         <span></span>
         <span></span>
-    </div>
+    </div></div>
     <div class="container-fluid" style="margin-top: 70px">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -145,11 +145,11 @@ AppAsset::register($this);
 </footer>
 
 <script>
-    $("#navbar-custom-toggle-btn").click(function(e) {
+    $("#navbar-custom-btn-base").click(function(e) {
         e.preventDefault();
-        $(this).toggleClass('toggle');
+        $('#navbar-custom-toggle-btn').toggleClass('toggle');
         $(".navbar_custom .navbar-collapse.collapse").toggleClass("navbar-custom-toggle");
-        if($(this).hasClass('light-btn')) {
+        if($('#navbar-custom-toggle-btn').hasClass('light-btn')) {
             $("#navbar-custom-toggle-btn span").toggleClass('light');
         }
     });
@@ -158,6 +158,18 @@ AppAsset::register($this);
         e.preventDefault();
         if($("#search-field").val().length > 0) {
             window.location.href = "?r=search/index&search="+$("#search-field").val();
+        }
+    });
+
+    $(window).on('scroll', function() {
+        if($(window).scrollTop() > 0) {
+            $('#navbar-custom-btn-base').addClass( "navbar-custom-btn-base-background");
+            $('#w0').addClass( "navbar-background-light");
+            $('.navbar-brand').addClass( "navbar-custom-btn-base-background");
+        } else {
+            $('#navbar-custom-btn-base').removeClass("navbar-custom-btn-base-background");
+            $('#w0').removeClass( "navbar-background-light");
+            $('.navbar-brand').removeClass( "navbar-custom-btn-base-background");
         }
     });
 </script>

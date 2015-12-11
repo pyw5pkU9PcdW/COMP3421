@@ -1,7 +1,10 @@
+#navbar-custom-btn-base{
+  z-index: 2000;
+  cursor: pointer;
+}
 #navbar-custom-toggle-btn {
   width: 40px;
-  height: 40px;
-  position: relative;
+  height: 29px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -10,11 +13,7 @@
   -moz-transition: .5s ease-in-out;
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
-  cursor: pointer;
-  position: fixed;
-  top:15px;
-  right: 15px;
-  z-index: 2000;
+  margin: 10px;
 }
 
 #navbar-custom-toggle-btn span{
@@ -67,8 +66,8 @@
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
-  top: 0px;
-  left: 8px;
+  top: -2px;
+  left: 6px;
 }
 
 #navbar-custom-toggle-btn.toggle span:nth-child(2) {
@@ -81,11 +80,30 @@
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  top: 29px;
-  left: 8px;
+  top: 27px;
+  left: 6px;
 }
 @media (max-width: 767px) {
   #navbar-custom-toggle-btn .light{
     background: rgb(67,67,69);
+  }
+  #navbar-custom-btn-base{
+    position: fixed;
+    top: 0px;
+    right: 5px;
+  }
+}
+@media (min-width: 768px) {
+  #navbar-custom-btn-base{
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+  }
+  .navbar-custom-btn-base-background{
+    background-color: rgba(247,248,249,0.8);
   }
 }

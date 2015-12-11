@@ -1,3 +1,9 @@
+#w0{
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+}
 .navbar_custom{
     border: none;
     padding: 0;
@@ -12,13 +18,15 @@
     float: none;
 }
 .navbar_custom .navbar-brand{
-    margin-left: 15px;
-    margin-top: 5px;
     position: fixed;
     left: 15px;
     z-index: 1000;
     color: rgb(67,67,69);
     font-size: 24px;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
 }
 .navbar_custom .navbar-nav{
     float: none;
@@ -82,10 +90,16 @@
     .navbar_custom .navbar-brand{
         font-size: 18px;
     }
-    .light-background-sm{
-        background-color: rgba(247,248,249,0.8);
+    .navbar-background-light{
+        background-color: rgba(247,248,249,0.8) !important;
     }
 }
 @media (min-width: 768px) {
-
+    .navbar_custom  .navbar-button-background-light{
+        background-color: rgba(247,248,249,0.8);
+    }
+    .navbar_custom .navbar-brand{
+        margin-top: 5px;
+        margin-right: 5px;
+    }
 }
