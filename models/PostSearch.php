@@ -18,8 +18,8 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'Participant_id', 'Topic_id'], 'integer'],
-            [['title', 'content', 'datetime'], 'safe'],
+            [['id'], 'integer'],
+            [['title', 'content', 'datetime', 'Topic_id', 'Participant_id'], 'safe'],
         ];
     }
 
@@ -55,15 +55,18 @@ class PostSearch extends Post
             return $dataProvider;
         }
 
+        $query->joinWith('topic');
+        $query->joinWith('user');
+
         $query->andFilterWhere([
             'id' => $this->id,
             'datetime' => $this->datetime,
-            'Participant_id' => $this->Participant_id,
-            'Topic_id' => $this->Topic_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+            ->andFilterWhere(['like', 'content', $this->content])
+            ->andFilterWhere(['like', 'topic.name', $this->Topic_id])
+            ->andFilterWhere(['like', 'user.first_name', $this->Topic_id]);
 
         return $dataProvider;
     }

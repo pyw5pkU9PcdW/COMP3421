@@ -19,16 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <table class="table">
-        <tr>
-            <th>Topic</th>
-            <th>Category</th>
-            <th>User</th>
-            <th>Replies</th>
-            <th>Activity</th>
-        </tr>
-    </table>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -39,15 +29,51 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 'value'=>function($data) {return Html::a($data->title, ['post/view', 'id'=>$data->id]);}
             ],
-            'content',
+            [
+                'attribute'=>'Topic_id',
+                'value'=>'topic.name'
+            ],
             [
                 'attribute'=>'datetime',
                 'label'=>'Activity',
                 'format'=>'text',
-                'value'=>function($date) {return date_diff(date_create($date->datetime), date_create());}
+                'value'=>function($date) {
+                    $lastReply = \app\models\PostReplay::getLatestReplyDatetimeByPostId($date->id);
+                    if(count($lastReply) > 0 && strtotime($lastReply[0]['datetime']) - strtotime($date->datetime) > 0) {
+                        $diff = strtotime('now') - strtotime($lastReply[0]['datetime']);
+                    } else {
+                        $diff = strtotime('now') - strtotime($date->datetime);
+                    }
+                    if($diff < 60) {
+                        return $diff.' secs ago';
+                    } else {
+                        if($diff < 3600) {
+                            return intval($diff/60).' mins ago';
+                        } else {
+                            if($diff < 86400) {
+                                return intval($diff/3600).' hours ago';
+                            } else {
+                                return intval($diff/86400).' days ago';
+                            }
+                        }
+                    }
+                }
             ],
-            'Participant_id',
-            // 'Topic_id',
+            [
+                'attribute'=>'Participant_id',
+                'label'=>'Users',
+                'format'=>'text',
+                'value'=>function($data) {
+                    $appReplies = \app\models\PostReplay::getAllRepliesPeopleByPostId($data->id);
+                    $returnString = \app\models\User::getUserFirstNameById($data->Participant_id);
+                    foreach($appReplies as $row) {
+                        if($row["Participant_id"] != $data->Participant_id) {
+                            $returnString .= ', '.\app\models\User::getUserFirstNameById($row["Participant_id"]);
+                        }
+                    }
+                    return $returnString;
+                }
+            ],
         ],
     ]); ?>
 

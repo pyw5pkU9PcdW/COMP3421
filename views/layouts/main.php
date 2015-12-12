@@ -22,6 +22,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?> | VSC 2016</title>
     <?php $this->head(); ?>
     <link href="css/custom_global.css" rel="stylesheet">
+    <link href="css/custom_form.css" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
     <link href="css/activity_schedule.css" rel="stylesheet">
     <link href="css/custom_nav.css" rel="stylesheet">
@@ -41,13 +42,9 @@ AppAsset::register($this);
         ],
     ]);
 
-    $searchForm = ActiveForm::begin();
-
-    ActiveForm::end();
-
-    echo '<div class="container"><div class="row"><form class="navbar-form navbar-left" role="search">
-            <div class="input-group">
-                <input type="text" id="search-field" class="form-control" placeholder="Search..." id="search" name="search">
+    echo '<div class="container"><div class="row"><form class="navbar-form custom-form" role="search">
+            <div class="input-group" style="margin-left: auto; margin-right: auto; width: 30%">
+                <input type="text" id="search-field" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
                     <button type="submit" id="search-btn" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </span>
@@ -121,13 +118,13 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => $navItems,
     ]);
+    echo '<div id="navbar-custom-btn-base"><div id="navbar-custom-toggle-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div></div>';
     NavBar::end();
     ?>
-    <div id="navbar-custom-btn-base"><div id="navbar-custom-toggle-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div></div>
     <div class="container-fluid" style="margin-top: 70px">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

@@ -46,10 +46,14 @@ if($sentPost) {
         </div>
         <div class="col-md-6">
             <h1>Forum</h1>
-            <?php $form = ActiveForm::begin(); ?>
-            <?= $form->field($newPost, 'title')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($newPost, 'content')->textarea(['maxlength' => true]) ?>
-            <?= $form->field($newPost, 'Topic_id')->dropDownList(\app\models\Topic::getTopicOptions(), array('prompt'=>'-- Select a Topic --')) ?>
+            <?php $form = ActiveForm::begin([
+                'options'=>[
+                    'class'=>['custom-form'],
+                ]
+            ]); ?>
+            <?= $form->field($newPost, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Title...'])->label(false) ?>
+            <?= $form->field($newPost, 'content')->textarea(['maxlength' => true, 'placeholder' => 'Content...'])->label(false) ?>
+            <?= $form->field($newPost, 'Topic_id')->dropDownList(\app\models\Topic::getTopicOptions(), array('prompt'=>'-- Select a Topic --'))->label(false) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>

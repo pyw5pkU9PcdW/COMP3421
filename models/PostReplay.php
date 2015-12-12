@@ -53,4 +53,12 @@ class PostReplay extends \yii\db\ActiveRecord
     public function getAllRepliesByPostId($id) {
         return PostReplay::find()->where(['Post_id' => $id])->orderBy('datetime')->asArray()->all();
     }
+
+    public function getAllRepliesPeopleByPostId($id) {
+        return PostReplay::find()->where(['Post_id' => $id])->select('Participant_id')->distinct()->asArray()->all();
+    }
+
+    public function getLatestReplyDatetimeByPostId($id) {
+        return PostReplay::find()->where(['Post_id' => $id])->select('datetime')->orderBy(['datetime' => SORT_DESC])->limit(1)->asArray()->all();
+    }
 }

@@ -52,4 +52,12 @@ class Post extends \yii\db\ActiveRecord
             'Topic_id' => 'Topic ID',
         ];
     }
+
+    public function getTopic() {
+        return $this->hasOne(Topic::className(), ['id' => 'Topic_id']);
+    }
+
+    public function getUser() {
+        return $this->hasOne(User::className(), ['id' => 'Participant_id']);
+    }
 }
