@@ -58,7 +58,7 @@
     z-index: 1000;
 }
 .navbar_custom .navbar-collapse.collapse{
-    background-color: rgba(247,248,249,0.9);
+    background-color: rgba(252,253,253,0.9);
     display: table;
     position: fixed;
     right: 0;
