@@ -38,6 +38,8 @@ $this->title = $model->Activity_name;
                     <?= \app\models\Venue::getVenueNameById($model->Venue_id) ?>
                     <h3>Person in Charge</h3>
                     <?= \app\models\User::getUserFullNameById($model->personInCharge) ?>
+                    <br><br>
+                    <?= Html::a('Get PDF', ['/activity/samplepdf', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 </div>
             </div>
         </div>

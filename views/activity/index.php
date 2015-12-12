@@ -34,6 +34,7 @@ $this->title = 'Conference Schedule';
                                     <span class="type"><?= \app\models\ActivityType::getActivityTypeNameById($row['ActivityType_id']) ?></span>
                                 </td>
                                 <td class="activity-schedule-venue"><?= \app\models\Venue::getVenueNameById($row['Venue_id']) ?></td>
+
                             </tr>
                         </table>
                     </a>

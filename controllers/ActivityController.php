@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
+use yii\helpers\Html;
+use mPDF;
 
 /**
  * ActivityController implements the CRUD actions for Activity model.
@@ -58,6 +60,42 @@ class ActivityController extends Controller
             'model' => $this->findModel($id)
         ]);
     }
+
+    public function actionSamplepdf($id) {
+        $model = $this->findModel($id);
+        $imgLink = "../resources/activities/activity_".$id.".jpg";
+        $date = date("M d D", strtotime($model->startDatetime));
+        $startTime = date("g:i A", strtotime($model->startDatetime));
+        $endTime = date("g:i A", strtotime($model->endDatetime));
+        $content = '
+        <div class="container text-center">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h1>'.$model->Activity_name.'</h1>
+        <p>'.$model->description.'</p>
+        <p class="text-center"><img src="'.$imgLink.'" class="activity-detail-img"></p>
+        </div>
+        <div class="col-sm-4 activity-detail-technical" style="background-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($model->ActivityType_id) ?>">
+            <h3>Date and Time</h3>
+            '.$date.'<br>
+            '.$startTime.' - '.$endTime.'
+            <h3>Venue</h3>
+            '.\app\models\Venue::getVenueNameById($model->Venue_id).'
+            <h3>Person in Charge</h3>
+            '.\app\models\User::getUserFullNameById($model->personInCharge).'
+
+        </div>
+        </div>
+        </div>
+        ';
+
+        $mpdf = new mPDF;
+        $mpdf->WriteHTML($content);
+        $mpdf->Output();
+
+        exit;
+    }
+
 
     /**
      * Creates a new Activity model.

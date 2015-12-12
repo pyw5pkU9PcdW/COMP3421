@@ -29,6 +29,7 @@ $this->title = $model->Outside_Attraction_name;
             <div class="col-sm-6">
                 <h1><?= $model->Outside_Attraction_name ?></h1>
                 <p class="outside-attraction-description"><?= $model->Outside_Attraction_description ?></p>
+                <?= Html::a('Get PDF', ['/outside-attraction/samplepdf', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
                 <?php $imgLink = '@web/../resources/travel/'.$model->Outside_Attraction_image_file; ?>
                 <p class="text-center"><?= Html::img($imgLink, ['class'=>'outside-attraction-img']);?></p>
             </div>

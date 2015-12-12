@@ -8,6 +8,8 @@ use app\models\OutsideAttractionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
+use mPDF;
 
 /**
  * OutsideAttractionController implements the CRUD actions for OutsideAttraction model.
@@ -53,6 +55,30 @@ class OutsideAttractionController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionSamplepdf($id) {
+        $model = $this->findModel($id);
+        $imgLink = "../resources/travel/".$model->Outside_Attraction_image_file;
+        $content = '
+            <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>'.$model->Outside_Attraction_name.'</h1>
+            <p class="outside-attraction-description">'.$model->Outside_Attraction_description.'</p>
+            <p class="text-center"><img src="'.$imgLink.'" class="outside-attraction-img"></p>
+            </div>
+            <div class="col-sm-12 outside-attraction-map">
+                <div id="googleMap"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2853.914174775117!2d114.17814436925319!3d22.304711666689073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x5aeb1a34766d7fa0!2z6aaZ5riv55CG5bel5aSn5a24!5e0!3m2!1szh-TW!2shk!4v1449911038682" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+            </div>
+            </div>
+            </div>
+        ';
+        $mpdf = new mPDF;
+        $mpdf->WriteHTML($content);
+        $mpdf->Output();
+
+        exit;
     }
 
     /**
