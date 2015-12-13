@@ -47,10 +47,10 @@ class SurveyController extends Controller
      * @param integer $Administrator_id
      * @return mixed
      */
-    public function actionView($id, $Administrator_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id, $Administrator_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -62,9 +62,11 @@ class SurveyController extends Controller
     public function actionCreate()
     {
         $model = new Survey();
+        $model->id = Survey::getNewPostId();
+        $model->Administrator_id = Yii::$app->user->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -79,12 +81,12 @@ class SurveyController extends Controller
      * @param integer $Administrator_id
      * @return mixed
      */
-    public function actionUpdate($id, $Administrator_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id, $Administrator_id);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -99,9 +101,9 @@ class SurveyController extends Controller
      * @param integer $Administrator_id
      * @return mixed
      */
-    public function actionDelete($id, $Administrator_id)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $Administrator_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -114,9 +116,9 @@ class SurveyController extends Controller
      * @return Survey the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $Administrator_id)
+    protected function findModel($id)
     {
-        if (($model = Survey::findOne(['id' => $id, 'Administrator_id' => $Administrator_id])) !== null) {
+        if (($model = Survey::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

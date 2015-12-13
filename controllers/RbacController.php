@@ -8,24 +8,24 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('outsideAttractionIndex');
-        $index->description = 'Index of the Outside Attraction';
+        $index = $auth->createPermission('surveyIndex');
+        $index->description = 'Index of the Survey';
         $auth->add($index);
 
-        $create = $auth->createPermission('outsideAttractionCreate');
-        $create->description = 'Create an Outside Attraction';
+        $create = $auth->createPermission('surveyCreate');
+        $create->description = 'Create a Survey';
         $auth->add($create);
 
-        $update = $auth->createPermission('outsideAttractionUpdate');
-        $update->description = 'Update an Outside Attraction';
+        $update = $auth->createPermission('surveyUpdate');
+        $update->description = 'Update a Survey';
         $auth->add($update);
 
-        $delete = $auth->createPermission('outsideAttractionDelete');
-        $delete->description = 'Remove an Outside Attraction';
+        $delete = $auth->createPermission('surveyDelete');
+        $delete->description = 'Remove a Survey';
         $auth->add($delete);
 
-        $edit = $auth->createPermission('outsideAttractionEdit');
-        $edit->description = 'Update and Delete an Outside Attraction';
+        $edit = $auth->createPermission('surveyEdit');
+        $edit->description = 'Update and Delete a Survey';
         $auth->add($edit);
 
         /*$view = $auth->createPermission('activityView');
@@ -51,6 +51,9 @@ class RbacController extends \yii\web\Controller
         $auth->addChild($edit, $create);
         $auth->addChild($edit, $update);
         $auth->addChild($edit, $delete);
+
+        $user = $auth->getRole('Participant');
+        $auth->addChild($user, $index);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.

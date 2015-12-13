@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * QuestionController implements the CRUD actions for Question model.
@@ -52,6 +53,22 @@ class QuestionController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id, $Survey_id),
         ]);
+    }
+
+    public function actionInsert() {
+        if(Yii::$app->user->can('surveyCreate')) {
+            $data = Yii::$app->request->post();
+            $model = new Question();
+            $model->content = $data['content'];
+            $model->order = $data['order'];
+            $model->Survey_id = $data['surveyId'];
+            if($model->save()) {
+                return $model->getPrimaryKey();
+            }
+            return -1;
+        } else {
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+        }
     }
 
     /**

@@ -53,6 +53,10 @@ class TextBoxController extends Controller
         ]);
     }
 
+    public function actionInsert() {
+
+    }
+
     /**
      * Creates a new TextBox model.
      * If creation is successful, the browser will be redirected to the 'view' page.

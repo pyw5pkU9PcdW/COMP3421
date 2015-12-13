@@ -81,4 +81,13 @@ class Survey extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Participant::className(), ['id' => 'Participant_id'])->viaTable('Survey_has_Participant', ['Survey_id' => 'id']);
     }
+
+    public function getNewPostId() {
+        $currentId = Survey::find()->orderBy(['id'=>SORT_DESC])->limit(1)->asArray()->all();
+        if(count($currentId) > 0) {
+            return $currentId[0]['id'] + 1;
+        } else {
+            return 1;
+        }
+    }
 }

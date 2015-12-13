@@ -7,8 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Forum';
 ?>
 <div class="post-index container">
 

@@ -39,7 +39,7 @@ $this->title = $model->Activity_name;
                     <h3>Person in Charge</h3>
                     <?= \app\models\User::getUserFullNameById($model->personInCharge) ?>
                     <br><br>
-                    <?= Html::a('Get PDF', ['/activity/samplepdf', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+                    <?= Html::a('Get PDF <span class="glyphicon glyphicon-download-alt"></span>', ['/activity/samplepdf', 'id' => $model->id], ['class' => 'btn btn-default', 'target' => '_blank']) ?>
                 </div>
             </div>
         </div>

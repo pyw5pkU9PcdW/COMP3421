@@ -50,6 +50,14 @@ class PostReplay extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getUser() {
+        return $this->hasOne(User::className(), ['id' => 'Participant_id']);
+    }
+
+    public function getPost() {
+        return $this->hasOne(Post::className(), ['id' => 'Post_id']);
+    }
+
     public function getAllRepliesByPostId($id) {
         return PostReplay::find()->where(['Post_id' => $id])->orderBy('datetime')->asArray()->all();
     }

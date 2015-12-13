@@ -12,6 +12,9 @@ use app\models\PostReplay;
  */
 class PostReplaySearchGlobal extends PostReplay
 {
+
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +22,7 @@ class PostReplaySearchGlobal extends PostReplay
     {
         return [
             [['id', 'Post_id', 'Participant_id'], 'integer'],
-            [['content', 'datetime'], 'safe'],
+            [['globalSearch', 'content', 'datetime'], 'safe'],
         ];
     }
 
@@ -43,27 +46,34 @@ class PostReplaySearchGlobal extends PostReplay
     {
         $query = PostReplay::find();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            return $dataProvider;
+            return $query->asArray()->all();
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'Post_id' => $this->Post_id,
-            'Participant_id' => $this->Participant_id,
-            'datetime' => $this->datetime,
-        ]);
+        $query->orFilterWhere(['like', 'content', $this->globalSearch])
+            ->orFilterWhere(['like', 'datetime', $this->globalSearch]);
 
-        $query->andFilterWhere(['like', 'content', $this->content]);
+        $raw = $query->asArray()->all();
 
-        return $dataProvider;
+        $returnArr = [];
+
+        foreach($raw as $row) {
+            $detail = substr($row['content'], 0, 200).'...';
+            $arrayRow =
+                [
+                    'type'=>'post',
+                    'id'=>$row['Post_id'],
+                    'title'=>'Reply - '.Post::getPostTileByPostId($row['Post_id']),
+                    'detail'=>$detail,
+                ];
+            array_push($returnArr, $arrayRow);
+        }
+
+
+        return $returnArr;
     }
 }

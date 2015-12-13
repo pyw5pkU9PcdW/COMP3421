@@ -6,6 +6,7 @@ use Yii;
 use app\models\ActivitySearchGlobal;
 use app\models\OutsideAttractionSearchGlobal;
 use app\models\PostSearchGlobal;
+use app\models\PostReplaySearchGlobal;
 use yii\web\ForbiddenHttpException;
 use yii\helpers\BaseArrayHelper;
 
@@ -29,6 +30,12 @@ class SearchController extends \yii\web\Controller
             $postDataProvider = $postSearchModel->search(Yii::$app->request->queryParams);
 
             $dataProvider = BaseArrayHelper::merge($dataProvider, $postDataProvider);
+
+            $postReplySearchModel = new PostReplaySearchGlobal();
+            $postReplySearchModel->globalSearch = $search;
+            $postReplyDataProvider = $postReplySearchModel->search(Yii::$app->request->queryParams);
+
+            $dataProvider = BaseArrayHelper::merge($dataProvider, $postReplyDataProvider);
 
             return $this->render('index', [
                 'input' => $search,

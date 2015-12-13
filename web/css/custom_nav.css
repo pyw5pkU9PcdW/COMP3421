@@ -74,6 +74,11 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     pointer-events: auto;
+    font-size: 18px;
+    font-weight: 400;
+}
+.navbar_custom .navbar-collapse.collapse a{
+    color: rgb(67,67,69);
 }
 .navbar_custom .navbar-collapse.collapse.navbar-custom-toggle{
     margin-right: 0;
@@ -96,6 +101,9 @@
     .navbar-background-light{
         background-color: rgba(247,248,249,0.8) !important;
     }
+    .navbar_custom .navbar-collapse.collapse {
+        background-color: rgba(252, 253, 253, 0.95);
+    }
 }
 @media (min-width: 768px) {
     .navbar_custom  .navbar-button-background-light{
@@ -104,5 +112,15 @@
     .navbar_custom .navbar-brand{
         margin-top: 5px;
         margin-right: 5px;
+    }
+    .navbar_custom .navbar-collapse.collapse{
+        box-shadow: -2px 1px 2px #dddddd;
+        -webkit-box-shadow: -2px 1px 2px #dddddd;
+    }
+    .navbar_custom .navbar-collapse.collapse li{
+        text-align: left;
+    }
+    .navbar_custom .navbar-collapse.collapse li a{
+        padding-left: 20px;
     }
 }

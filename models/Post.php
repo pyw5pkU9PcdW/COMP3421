@@ -60,4 +60,9 @@ class Post extends \yii\db\ActiveRecord
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'Participant_id']);
     }
+
+    public function getPostTileByPostId($id) {
+        $raw = Post::findOne($id);
+        return $raw['title'];
+    }
 }

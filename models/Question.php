@@ -10,9 +10,9 @@ use Yii;
  * @property integer $id
  * @property string $content
  * @property integer $Survey_id
+ * @property integer $order
  *
  * @property CheckButton[] $checkButtons
- * @property Survey $survey
  * @property RadioButton[] $radioButtons
  * @property TextBox $textBox
  */
@@ -32,9 +32,9 @@ class Question extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'content', 'Survey_id'], 'required'],
-            [['id', 'Survey_id'], 'integer'],
-            [['content'], 'string', 'max' => 45]
+            [['content', 'Survey_id'], 'required'],
+            [['Survey_id', 'order'], 'integer'],
+            [['content'], 'string', 'max' => 500]
         ];
     }
 
@@ -47,6 +47,7 @@ class Question extends \yii\db\ActiveRecord
             'id' => 'ID',
             'content' => 'Content',
             'Survey_id' => 'Survey ID',
+            'order' => 'Order',
         ];
     }
 
@@ -61,17 +62,17 @@ class Question extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSurvey()
+    public function getRadioButtons()
     {
-        return $this->hasOne(Survey::className(), ['id' => 'Survey_id']);
+        return $this->hasMany(RadioButton::className(), ['Question_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRadioButtons()
+    public function getSurvey()
     {
-        return $this->hasMany(RadioButton::className(), ['Question_id' => 'id']);
+        return $this->hasOne(Survey::className(), ['id' => 'Survey_id']);
     }
 
     /**

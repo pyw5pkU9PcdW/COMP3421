@@ -71,8 +71,6 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Outside Attraction', 'url' => ['/outside-attraction/index']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'PDF', 'url' => ['/site/samplepdf']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
             ['label' => 'Login', 'url' => ['/site/login']]
 
@@ -91,6 +89,7 @@ AppAsset::register($this);
             ['label' => 'Schedule', 'url' => ['/activity/index']],
             ['label' => 'Outside Attraction', 'url' => ['/outside-attraction/index']],
             ['label' => 'Forum', 'url' => ['/post/index']],
+            ['label' => 'Feedback', 'url' => ['/survey/index']],
             //['label' => 'ActivityType', 'url' => ['/activity-type/index']],
             //['label' => 'Category', 'url' => ['/category/index']],
             //['label' => 'Topic', 'url' => ['/topic/index']],
