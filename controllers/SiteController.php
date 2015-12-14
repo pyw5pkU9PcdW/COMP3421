@@ -191,4 +191,9 @@ class SiteController extends Controller
     {
         return $this->render('travel_6');
     }
+
+    public function actionSpeaker()
+    {
+        return $this->render('speaker');
+    }
 }
