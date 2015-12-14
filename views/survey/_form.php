@@ -10,14 +10,14 @@ use yii\helpers\Url;
 ?>
 
 <div class="survey-form">
-
+    <link href="css/survey_form.css" rel="stylesheet">
     <?php $form = ActiveForm::begin(['id'=>$model->formName()]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <div id="questions-group">
-        <ul>
-        </ul>
+        <ol id="questions-group-ol">
+        </ol>
     </div>
 
     <p>
@@ -60,14 +60,14 @@ use yii\helpers\Url;
 
     function questionConstructor(id, questionTitle, addInfo, questionType) {
         var content =
-            '<li id="survey-question-'+id+'" type="'+questionType+'"><div class="form-group field-survey-question required">' +
+            '<li id="survey-question-'+id+'" type="'+questionType+'" class="survey-question"><div class="form-group required">' +
             '<label class="control-label" for="survey-question-title">'+questionTitle+'</label>' +
             '<input type="text" id="survey-question-input-'+id+'" class="form-control" onblur="validateEmpty(this)" name="Survey[title]" maxlength="500" placeholder="Question '+id+'...">' +
             '<div class="help-block"></div>' +
             addInfo +
             '<button id="survey-question-remove-btn-'+id+'" class="btn btn-default new-question-remove" onclick="removeQuestion('+id+')">Remove <span class="glyphicon glyphicon-trash"></span></button>' +
             '</div></li>';
-        $('#questions-group > ul').append(content);
+        $('#questions-group > ol').append(content);
     }
 
     function optionBasedQuestionConstructor(id) {
@@ -139,6 +139,42 @@ use yii\helpers\Url;
             document.getElementById('survey-question-input-'+i).setAttribute('id', 'survey-question-input-'+(i-1));
             document.getElementById('survey-question-remove-btn-'+i).setAttribute('onclick', 'removeQuestion('+(i-1)+')');
             document.getElementById('survey-question-remove-btn-'+i).setAttribute('id', 'survey-question-remove-btn-'+(i-1));
+        }
+    }
+
+    $( '#questions-group-ol' ).sortable({
+        containment: 'parent',
+        tolerance: 'pointer',
+        opacity: 0.8,
+        stop: function() {
+            resetOrderNumber();
+        }
+    });
+
+    function resetOrderNumber() {
+        var size = $('#questions-group-ol li').size();
+        for(var i = 1; i <= size; i++) {
+            var element = document.getElementById('questions-group-ol').children[i-1];
+            var currentId = element.id.split('-');
+            currentId = currentId[currentId.length-1];
+            element.id = 'survey-question-'+i;
+            document.getElementById('survey-question-input-'+currentId).setAttribute('placeholder', 'Question '+i+'...');
+            document.getElementById('survey-question-input-'+currentId).setAttribute('id', 'survey-question-input-'+i);
+            document.getElementById('survey-question-remove-btn-'+currentId).setAttribute('onclick', 'removeQuestion('+i+')');
+            document.getElementById('survey-question-remove-btn-'+currentId).setAttribute('id', 'survey-question-remove-btn-'+i);
+            var type = element.getAttribute('type');
+            if(type == 1 || type == 2) {
+                var size = $('#question-options-container-'+currentId+' li').size();
+                for (var j = 1; j <= size; j++) {
+                    document.getElementById('question-option-'+currentId+'-'+j).id = 'question-option-'+i+'-'+j;
+                    document.getElementById('question-option-input-'+currentId+'-'+j).setAttribute('id', 'question-option-input-'+i+'-'+j);
+                    if(j > 1) {
+                        document.getElementById('question-option-remove-btn-'+currentId+'-'+j).setAttribute('onclick', 'removeOption('+i+','+j+')');
+                        document.getElementById('question-option-remove-btn-'+currentId+'-'+j).setAttribute('id', 'question-option-remove-btn-'+i+'-'+j);
+                    }
+                }
+                document.getElementById('question-options-container-'+currentId).id = 'question-options-container-'+i;
+            }
         }
     }
 
