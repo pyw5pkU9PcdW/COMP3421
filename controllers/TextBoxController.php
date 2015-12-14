@@ -54,7 +54,17 @@ class TextBoxController extends Controller
     }
 
     public function actionInsert() {
-
+        if(Yii::$app->user->can('surveyCreate')) {
+            $data = Yii::$app->request->post();
+            $model = new TextBox();
+            $model->id = $data['id'];
+            if($model->save()) {
+                return 0;
+            }
+            return -1;
+        } else {
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+        }
     }
 
     /**

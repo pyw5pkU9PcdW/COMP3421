@@ -10,7 +10,7 @@ $this->title = 'Create Survey';
 $this->params['breadcrumbs'][] = ['label' => 'Surveys', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="survey-create">
+<div class="survey-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
