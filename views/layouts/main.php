@@ -10,7 +10,22 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\ActiveForm;
 
+
+//set it to writable location, a place for temp generated PNG files
+$PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
+
+//html PNG location prefix
+$PNG_WEB_DIR = '../views/layouts/temp/';
+
+include "qrlib.php";
+
+if (!file_exists($PNG_TEMP_DIR))
+    mkdir($PNG_TEMP_DIR);
+
 AppAsset::register($this);
+
+$filename = $PNG_TEMP_DIR.'test.png';
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -31,6 +46,7 @@ AppAsset::register($this);
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
+<?php //echo '<img src="'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';?>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -123,6 +139,23 @@ AppAsset::register($this);
             <span></span>
             <span></span>
           </div></div>';
+
+    //processing qr code data
+    $errorCorrectionLevel = 'L';
+    $matrixPointSize = 4;
+
+    if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
+        $errorCorrectionLevel = $_REQUEST['level'];
+
+    if (isset($_REQUEST['size']))
+        $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
+
+    if (!(Yii::$app->user->isGuest)) {
+        // user data
+        QRcode::png( Yii::$app->user->identity->getId(), $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+        echo '<img src="'.$PNG_WEB_DIR.basename($filename).'">';
+    }
+
     NavBar::end();
     ?>
     <div class="container-fluid" style="margin-top: 70px">
