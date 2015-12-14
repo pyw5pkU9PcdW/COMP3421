@@ -7,8 +7,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Survey */
 
 $this->title = 'Create Survey';
-$this->params['breadcrumbs'][] = ['label' => 'Surveys', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="survey-create container">
 

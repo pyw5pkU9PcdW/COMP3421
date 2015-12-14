@@ -35,32 +35,47 @@ use yii\helpers\Url;
 
 </div>
 <script>
+    var emptyMessage = '<h2 class="text-center" id="empty-message">The feedback form is empty</h2>';
+    $('#questions-group').append(emptyMessage);
+
     var questionNumbers = 0;
     $('#new-text-field-btn').click(function() {
-        questionNumbers++;
-        questionConstructor(questionNumbers, 'Text Based Question', '', 0);
+        $('#empty-message').remove();
+        questionConstructor(generateUniqueId(), 'Text Based Question', '', 0);
+        resetOrderNumber2();
     });
 
     $('#new-check-box-question-btn').click(function() {
-        questionNumbers++;
-        questionConstructor(questionNumbers, 'Check Box Question', optionBasedQuestionConstructor(questionNumbers), 1);
+        $('#empty-message').remove();
+        var uid = generateUniqueId();
+        questionConstructor(uid, 'Check Box Question', optionBasedQuestionConstructor(uid), 1);
+        resetOrderNumber2()
     });
 
     $('#new-radio-question-btn').click(function() {
-        questionNumbers++;
-        questionConstructor(questionNumbers, 'Radio Button Question', optionBasedQuestionConstructor(questionNumbers), 2);
+        $('#empty-message').remove();
+        var uid = generateUniqueId();
+        questionConstructor(uid, 'Radio Button Question', optionBasedQuestionConstructor(uid), 2);
+        resetOrderNumber2()
     });
 
     function removeQuestion(removeNum) {
         $('#survey-question-'+removeNum).remove();
-        moveUpOptionsQuestionNumber(removeNum);
-        moveUpQuestionNumber(removeNum);
-        questionNumbers--;
+        //moveUpOptionsQuestionNumber(removeNum);
+        //moveUpQuestionNumber(removeNum);
+        resetOrderNumber2();
+        if($('#questions-group-ol > li').size() == 0) {
+            $('#questions-group').append(emptyMessage);
+        }
+    }
+
+    function generateUniqueId() {
+        return Math.floor((1 + Math.random()) * Date.now()).toString();
     }
 
     function questionConstructor(id, questionTitle, addInfo, questionType) {
         var content =
-            '<li id="survey-question-'+id+'" type="'+questionType+'" class="survey-question"><div class="form-group required">' +
+            '<li id="survey-question-'+id+'" type="'+questionType+'" uid="'+id+'" class="survey-question"><div class="form-group required">' +
             '<label class="control-label" for="survey-question-title">'+questionTitle+'</label>' +
             '<input type="text" id="survey-question-input-'+id+'" class="form-control" onblur="validateEmpty(this)" name="Survey[title]" maxlength="500" placeholder="Question '+id+'...">' +
             '<div class="help-block"></div>' +
@@ -147,19 +162,30 @@ use yii\helpers\Url;
         tolerance: 'pointer',
         opacity: 0.8,
         stop: function() {
-            resetOrderNumber();
+            resetOrderNumber2();
         }
     });
+
+    function resetOrderNumber2() {
+        var size = $('#questions-group-ol > li').size();
+        for(var i = 1; i <= size; i++) {
+            var uid = document.getElementById('questions-group-ol').children[i-1].getAttribute('uid');
+            document.getElementById('survey-question-input-'+uid).setAttribute('placeholder', 'Question '+i+'...');
+        }
+    }
 
     function resetOrderNumber() {
         var size = $('#questions-group-ol li').size();
         for(var i = 1; i <= size; i++) {
             var element = document.getElementById('questions-group-ol').children[i-1];
             var currentId = element.id.split('-');
-            currentId = currentId[currentId.length-1];
+            currentId = parseInt(currentId[currentId.length-1]);
             element.id = 'survey-question-'+i;
-            document.getElementById('survey-question-input-'+currentId).setAttribute('placeholder', 'Question '+i+'...');
-            document.getElementById('survey-question-input-'+currentId).setAttribute('id', 'survey-question-input-'+i);
+            //alert(document.getElementById('survey-question-input-'+currentId).getAttribute('placeholder'));
+            //document.getElementById('survey-question-input-'+currentId).setAttribute('placeholder', 'Question '+i+'...');
+            document.getElementById('survey-question-input-'+currentId).removeAttribute('placeholder');
+            //alert(document.getElementById('survey-question-input-'+currentId).getAttribute('placeholder'));
+            document.getElementById('survey-question-input-'+currentId).id = 'survey-question-input-'+i;
             document.getElementById('survey-question-remove-btn-'+currentId).setAttribute('onclick', 'removeQuestion('+i+')');
             document.getElementById('survey-question-remove-btn-'+currentId).setAttribute('id', 'survey-question-remove-btn-'+i);
             var type = element.getAttribute('type');
@@ -308,15 +334,20 @@ $js = <<< JS
     $('form#{$model->formName()}').on('beforeSubmit', function(e) {
         var \$form = $(this);
         var passValidation = true;
-        for(var i = 1; i <= questionNumbers; i++) {
-            if(!validateEmpty(document.getElementById('survey-question-input-'+i))) {
+        var surveySize = $('#questions-group-ol > li').size();
+        if(surveySize == 0) {
+            return false;
+        }
+        for(var i = 1; i <= surveySize; i++) {
+            var uid = document.getElementById('questions-group-ol').children[i-1].getAttribute('uid');
+            if(!validateEmpty(document.getElementById('survey-question-input-'+uid))) {
                 passValidation = false;
             }
-            var questionType = $('#survey-question-'+i).attr('type');
+            var questionType = $('#survey-question-'+uid).attr('type');
             if(questionType == 1 || questionType == 2) {
-                var size = $('#question-options-container-'+i+' li').size();
+                var size = $('#question-options-container-'+uid+' li').size();
                 for (var j = 1; j <= size; j++) {
-                    if(!validateEmpty(document.getElementById('question-option-input-'+i+'-'+j))) {
+                    if(!validateEmpty(document.getElementById('question-option-input-'+uid+'-'+j))) {
                         alert('find label empty');
                         passValidation = false;
                     }
@@ -326,11 +357,12 @@ $js = <<< JS
         if(!passValidation) {
             return false;
         }
-        for(var i = 1; i <= questionNumbers; i++) {
-            var content = $('#survey-question-input-'+i).val();
+        for(var i = 1; i <= surveySize; i++) {
+            var uid = document.getElementById('questions-group-ol').children[i-1].getAttribute('uid');
+            var content = $('#survey-question-input-'+uid).val();
             var id = insertQuestion(content, i)
             if(id != false) {
-                var questionType = $('#survey-question-'+i).attr('type');
+                var questionType = $('#survey-question-'+uid).attr('type');
                 if(questionType == 0) {
                     if(!insertTextBoxProperty(id)) {
                         //alert('Question '+i+' cannot be inserted');
@@ -338,18 +370,18 @@ $js = <<< JS
                     }
                 }
                 if(questionType == 1) {
-                    var size = $('#question-options-container-'+i+' li').size();
+                    var size = $('#question-options-container-'+uid+' li').size();
                     for (var j = 1; j <= size; j++) {
-                        if(!insertCheckBox(id, $('#question-option-input-'+i+'-'+j).val())) {
+                        if(!insertCheckBox(id, $('#question-option-input-'+uid+'-'+j).val())) {
                             //alert('Question '+i+' cannot be inserted');
                             return false;
                         }
                     }
                 }
                 if(questionType == 2) {
-                    var size = $('#question-options-container-'+i+' li').size();
+                    var size = $('#question-options-container-'+uid+' li').size();
                     for (var j = 1; j <= size; j++) {
-                        if(!insertRadioButton(id, $('#question-option-input-'+i+'-'+j).val())) {
+                        if(!insertRadioButton(id, $('#question-option-input-'+uid+'-'+j).val())) {
                             //alert('Question '+i+' cannot be inserted');
                             return false;
                         }
