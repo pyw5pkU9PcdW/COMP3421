@@ -10,9 +10,8 @@ use Yii;
  * @property integer $Participant_id
  * @property integer $Activity_id
  * @property integer $attendance
- *
- * @property ActivityOld $activity
- * @property Participant $participant
+ * @property string $register_datetime
+ * @property string $attend_datetime
  */
 class ParticipantHasActivity extends \yii\db\ActiveRecord
 {
@@ -31,7 +30,8 @@ class ParticipantHasActivity extends \yii\db\ActiveRecord
     {
         return [
             [['Participant_id', 'Activity_id'], 'required'],
-            [['Participant_id', 'Activity_id', 'attendance'], 'integer']
+            [['Participant_id', 'Activity_id', 'attendance'], 'integer'],
+            [['register_datetime', 'attend_datetime'], 'safe']
         ];
     }
 
@@ -44,6 +44,8 @@ class ParticipantHasActivity extends \yii\db\ActiveRecord
             'Participant_id' => 'Participant ID',
             'Activity_id' => 'Activity ID',
             'attendance' => 'Attendance',
+            'register_datetime' => 'Register Datetime',
+            'attend_datetime' => 'Attend Datetime',
         ];
     }
 

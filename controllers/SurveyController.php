@@ -58,8 +58,18 @@ class SurveyController extends Controller
      */
     public function actionView($id)
     {
-        if(Yii::$app->user->can('surveyDo') && !SurveyHasParticipant::checkParticipantHasDone($id)) {   //The permission name
-            $model = $this->findModel($id);
+        $validate = false;
+        $model = $this->findModel($id);
+
+        if(Yii::$app->user->can('surveyDo') && !SurveyHasParticipant::checkParticipantHasDone($id) && $model->is_enable == 1) {
+            $validate = true;
+        }
+
+        if(Yii::$app->user->can('surveyEdit')) {
+            $validate = true;
+        }
+
+        if($validate) {   //The permission name
             $questionModels = [];
             $questions = Question::getAllQuestionBySurveyId($model->id);
             foreach($questions as $row) {
@@ -114,6 +124,7 @@ class SurveyController extends Controller
                 $participant = new SurveyHasParticipant();
                 $participant->Participant_id = Yii::$app->user->id;
                 $participant->Survey_id = $model->id;
+                $participant->datetime = date("Y-m-d H:i:s");
                 $participant->save();
                 die();
             } else {
@@ -141,6 +152,7 @@ class SurveyController extends Controller
         $model = new Survey();
         $model->id = Survey::getNewPostId();
         $model->Administrator_id = Yii::$app->user->id;
+        $model->is_enable = 0;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -149,6 +161,20 @@ class SurveyController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionEnable($id) {
+        $model = $this->findModel($id);
+        $model->is_enable = 1;
+        $model->save();
+        return Yii::$app->runAction('survey/view', ['id'=>$id]);
+    }
+
+    public function actionDisable($id) {
+        $model = $this->findModel($id);
+        $model->is_enable = 0;
+        $model->save();
+        return Yii::$app->runAction('survey/view', ['id'=>$id]);
     }
 
     /**

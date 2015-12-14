@@ -12,6 +12,7 @@ use Yii;
  *
  * @property Survey $survey
  * @property Participant $participant
+ * @property string $datetime
  */
 class SurveyHasParticipant extends \yii\db\ActiveRecord
 {
@@ -29,8 +30,9 @@ class SurveyHasParticipant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Survey_id', 'Participant_id'], 'required'],
-            [['Survey_id', 'Participant_id'], 'integer']
+            [['Survey_id', 'Participant_id', 'datetime'], 'required'],
+            [['Survey_id', 'Participant_id'], 'integer'],
+            [['datetime'], 'safe']
         ];
     }
 
@@ -42,6 +44,7 @@ class SurveyHasParticipant extends \yii\db\ActiveRecord
         return [
             'Survey_id' => 'Survey ID',
             'Participant_id' => 'Participant ID',
+            'datetime' => 'Datetime',
         ];
     }
 

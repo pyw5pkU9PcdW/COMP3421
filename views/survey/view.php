@@ -44,6 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]) ?>
+            <?php if($model->is_enable == 0) { ?>
+                <?= Html::a('Enable', ['/survey/enable', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?php } else { ?>
+                <?= Html::a('Disable', ['/survey/disable', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+            <?php } ?>
+
         </p>
     <?php } else { ?>
         <div class="form-group">

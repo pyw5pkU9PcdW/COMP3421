@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $title
  * @property integer $Administrator_id
+ * @property integer $is_enable
  *
  * @property Question[] $questions
  * @property Administrator $administrator
@@ -32,8 +33,8 @@ class Survey extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'title', 'Administrator_id'], 'required'],
-            [['id', 'Administrator_id'], 'integer'],
+            [['id', 'title', 'Administrator_id', 'is_enable'], 'required'],
+            [['id', 'Administrator_id', 'is_enable'], 'integer'],
             [['title'], 'string', 'max' => 45]
         ];
     }
@@ -47,6 +48,7 @@ class Survey extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'Administrator_id' => 'Administrator ID',
+            'is_enable' => 'Is Enable',
         ];
     }
 

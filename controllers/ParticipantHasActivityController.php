@@ -131,6 +131,7 @@ class ParticipantHasActivityController extends Controller
                 $model = new ParticipantHasActivity();
                 $model->Activity_id = $activityId;
                 $model->Participant_id = Yii::$app->user->id;
+                $model->register_datetime = date("Y-m-d H:i:s");
                 if($model->save()) {
                     return Yii::$app->runAction('activity/view', ['id'=>$activityId]);
                 }
