@@ -60,4 +60,11 @@ class SurveyHasParticipant extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Participant::className(), ['id' => 'Participant_id']);
     }
+
+    public function checkParticipantHasDone($id) {
+        if(SurveyHasParticipant::find()->where(['Participant_id'=>Yii::$app->user->id, 'Survey_id'=>$id])->exists() == 1) {
+            return true;
+        }
+        return false;
+    }
 }

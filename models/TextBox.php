@@ -58,4 +58,11 @@ class TextBox extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TextResponse::className(), ['TextBox_id' => 'id']);
     }
+
+    public function checkIsTextBoxByQuestionId($id) {
+        if(TextBox::find()->where(['id'=>$id])->exists() == 1) {
+            return true;
+        }
+        return false;
+    }
 }

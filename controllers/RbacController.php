@@ -8,7 +8,7 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('surveyIndex');
+        /*$index = $auth->createPermission('surveyIndex');
         $index->description = 'Index of the Survey';
         $auth->add($index);
 
@@ -26,7 +26,9 @@ class RbacController extends \yii\web\Controller
 
         $edit = $auth->createPermission('surveyEdit');
         $edit->description = 'Update and Delete a Survey';
-        $auth->add($edit);
+        $auth->add($edit);*/
+
+        $index = $auth->getPermission('surveyDo');
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
@@ -46,13 +48,13 @@ class RbacController extends \yii\web\Controller
         $auth->add($sponsor);*/
 
 
-        $user = $auth->getRole('Admin');
+        /*$user = $auth->getRole('Admin');
         $auth->addChild($user, $edit);
         $auth->addChild($edit, $create);
         $auth->addChild($edit, $update);
-        $auth->addChild($edit, $delete);
+        $auth->addChild($edit, $delete);*/
 
-        $user = $auth->getRole('Participant');
+        $user = $auth->getRole('Admin');
         $auth->addChild($user, $index);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()

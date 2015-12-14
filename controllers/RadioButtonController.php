@@ -60,6 +60,7 @@ class RadioButtonController extends Controller
             $model = new RadioButton();
             $model->Question_id = $data['id'];
             $model->content = $data['content'];
+            $model->count = 0;
             if($model->save()) {
                 return 0;
             }

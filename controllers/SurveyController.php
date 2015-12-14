@@ -2,12 +2,21 @@
 
 namespace app\controllers;
 
+use app\models\Checkbutton;
+use app\models\Question;
+use app\models\Radiobutton;
+use app\models\SurveyHasParticipant;
+use app\models\TempOptionSelection;
+use app\models\TextBox;
+use app\models\TextResponse;
 use Yii;
 use app\models\Survey;
+use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * SurveyController implements the CRUD actions for Survey model.
@@ -49,9 +58,77 @@ class SurveyController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(Yii::$app->user->can('surveyDo') && !SurveyHasParticipant::checkParticipantHasDone($id)) {   //The permission name
+            $model = $this->findModel($id);
+            $questionModels = [];
+            $questions = Question::getAllQuestionBySurveyId($model->id);
+            foreach($questions as $row) {
+                $question = Question::findOne(['id' => $row['id']]);
+                if($question->required == 1) {
+                    $question->temp_input_required = null;
+                }
+                if(TextBox::checkIsTextBoxByQuestionId($row['id'])) {
+                    $question->temp_type = 0;
+                    array_push($questionModels, $question);
+                    continue;
+                }
+                if(Checkbutton::checkIsCheckBoxByQuestionId($row['id'])) {
+                    $question->temp_type = 1;
+                    array_push($questionModels, $question);
+                    continue;
+                }
+                if(Radiobutton::checkIsRadioButtonByQuestionId($row['id'])) {
+                    $question->temp_type = 2;
+                    array_push($questionModels, $question);
+                    continue;
+                }
+            }
+
+            $post = Yii::$app->request->post();
+            if(Model::loadMultiple($questionModels, $post)) {
+                foreach($questionModels as $row) {
+                    if($row['required'] == 1) {
+                        $input = $row['temp_input_required'];
+                    } else {
+                        $input = $row['temp_input'];
+                        if($input == '') {
+                            continue;
+                        }
+                    }
+                    if($row['temp_type'] == 0) {
+                        $respond = new TextResponse();
+                        $respond->content = $input;
+                        $respond->TextBox_id = $row['id'];
+                        $respond->save();
+                    }
+                    if($row['temp_type'] == 1) {
+                        foreach($input as $checked) {
+                            Checkbutton::increaseOptionById($checked);
+                        }
+                    }
+                    if($row['temp_type'] == 2) {
+                        Radiobutton::increaseOptionById($input);
+                    }
+                    echo var_dump($input).'<br><br>';
+                }
+                $participant = new SurveyHasParticipant();
+                $participant->Participant_id = Yii::$app->user->id;
+                $participant->Survey_id = $model->id;
+                $participant->save();
+                die();
+            } else {
+                //die(var_dump($questionModels));
+                return $this->render('view', [
+                    'model' => $model, 'questionModels' => $questionModels,
+                ]);
+            }
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**

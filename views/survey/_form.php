@@ -80,6 +80,8 @@ use yii\helpers\Url;
             '<input type="text" id="survey-question-input-'+id+'" class="form-control" onblur="validateEmpty(this)" name="Survey[title]" maxlength="500" placeholder="Question '+id+'...">' +
             '<div class="help-block"></div>' +
             addInfo +
+            '<span>Required</span>' +
+            '<input type="checkbox" class="form-control" id="survey-question-required-'+id+'">' +
             '<button id="survey-question-remove-btn-'+id+'" class="btn btn-default new-question-remove" onclick="removeQuestion('+id+')">Remove <span class="glyphicon glyphicon-trash"></span></button>' +
             '</div></li>';
         $('#questions-group > ol').append(content);
@@ -204,7 +206,7 @@ use yii\helpers\Url;
         }
     }
 
-    function insertQuestion(content, order) {
+    function insertQuestion(content, order, require) {
         var correctAction = false;
         var id = -1;
         $.ajax({
@@ -216,7 +218,8 @@ use yii\helpers\Url;
                 _csrf: '<?= Yii::$app->request->getCsrfToken() ?>',
                 surveyId: '<?= $model->id ?>',
                 content: content,
-                order: order
+                order: order,
+                require: require
             }
         }).done(function(data) {
             if(data > 0) {
@@ -360,7 +363,12 @@ $js = <<< JS
         for(var i = 1; i <= surveySize; i++) {
             var uid = document.getElementById('questions-group-ol').children[i-1].getAttribute('uid');
             var content = $('#survey-question-input-'+uid).val();
-            var id = insertQuestion(content, i)
+            if($('#survey-question-required-'+uid).prop('checked') == true){
+                var require = 1;
+            } else {
+                var require = 0;
+            }
+            var id = insertQuestion(content, i, require);
             if(id != false) {
                 var questionType = $('#survey-question-'+uid).attr('type');
                 if(questionType == 0) {

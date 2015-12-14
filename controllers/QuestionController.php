@@ -62,6 +62,8 @@ class QuestionController extends Controller
             $model->content = $data['content'];
             $model->order = $data['order'];
             $model->Survey_id = $data['surveyId'];
+            $model->required = $data['require'];
+            $model->temp_input_required = 'temp';
             if($model->save()) {
                 return $model->getPrimaryKey();
             }

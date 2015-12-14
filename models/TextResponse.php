@@ -29,9 +29,9 @@ class TextResponse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'TextBox_id'], 'required'],
+            [['TextBox_id'], 'required'],
             [['TextBox_id'], 'integer'],
-            [['content'], 'string', 'max' => 256]
+            [['content'], 'string', 'max' => 1000]
         ];
     }
 
