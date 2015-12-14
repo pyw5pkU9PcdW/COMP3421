@@ -58,7 +58,7 @@ class CheckButtonController extends Controller
         if(Yii::$app->user->can('surveyCreate')) {
             $data = Yii::$app->request->post();
             $model = new CheckButton();
-            $model->id = $data['id'];
+            $model->Question_id = $data['id'];
             $model->content = $data['content'];
             if($model->save()) {
                 return 0;

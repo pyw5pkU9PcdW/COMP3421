@@ -54,6 +54,21 @@ class RadioButtonController extends Controller
         ]);
     }
 
+    public function actionInsert() {
+        if(Yii::$app->user->can('surveyCreate')) {
+            $data = Yii::$app->request->post();
+            $model = new RadioButton();
+            $model->Question_id = $data['id'];
+            $model->content = $data['content'];
+            if($model->save()) {
+                return 0;
+            }
+            return -1;
+        } else {
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+        }
+    }
+
     /**
      * Creates a new RadioButton model.
      * If creation is successful, the browser will be redirected to the 'view' page.

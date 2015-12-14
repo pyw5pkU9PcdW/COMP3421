@@ -5,23 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "RadioButton".
+ * This is the model class for table "radiobutton".
  *
  * @property integer $id
  * @property string $content
  * @property integer $count
  * @property integer $Question_id
- *
- * @property Question $question
  */
-class RadioButton extends \yii\db\ActiveRecord
+class Radiobutton extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'RadioButton';
+        return 'radiobutton';
     }
 
     /**
@@ -30,7 +28,7 @@ class RadioButton extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'count', 'Question_id'], 'required'],
+            [['content', 'Question_id'], 'required'],
             [['count', 'Question_id'], 'integer'],
             [['content'], 'string', 'max' => 256]
         ];
