@@ -9,6 +9,8 @@ use Yii;
  *
  * @property integer $Participant_id
  * @property integer $coupon_id
+ * @property integer $is_used
+ * @property integer $is_read
  *
  * @property Participant $participant
  * @property Coupon $coupon
@@ -29,8 +31,8 @@ class ParticipantHasCoupon extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Participant_id', 'coupon_id'], 'required'],
-            [['Participant_id', 'coupon_id'], 'integer']
+            [['Participant_id', 'coupon_id', 'is_used', 'is_read'], 'required'],
+            [['Participant_id', 'coupon_id', 'is_used', 'is_read'], 'integer']
         ];
     }
 
@@ -42,6 +44,8 @@ class ParticipantHasCoupon extends \yii\db\ActiveRecord
         return [
             'Participant_id' => 'Participant ID',
             'coupon_id' => 'Coupon ID',
+            'is_used' => 'Is Used',
+            'is_read' => 'Is Read',
         ];
     }
 

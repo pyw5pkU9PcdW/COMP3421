@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 
@@ -41,6 +42,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
     <link href="css/side_nav.css" rel="stylesheet">
     <link href="css/activity_schedule.css" rel="stylesheet">
     <link href="css/custom_nav.css" rel="stylesheet">
+    <link href="css/notification.css" rel="stylesheet">
     <link href="css/custom_nav_toggle_btn.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -140,6 +142,19 @@ $filename = $PNG_TEMP_DIR.'test.png';
             <span></span>
           </div></div>';
 
+
+    if(!Yii::$app->user->isGuest) {
+        echo '<div class="notification-dropdown-container">
+                <button class="btn btn-default dropdown-toggle" type="button" id="notification-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
+                    <span class="badge" id="notification-counter"></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" id="notification-dropdown">
+                </ul>
+            </div>';
+    }
+
     //processing qr code data
     $errorCorrectionLevel = 'L';
     $matrixPointSize = 4;
@@ -202,6 +217,85 @@ $filename = $PNG_TEMP_DIR.'test.png';
             $('.navbar-brand').removeClass( "navbar-custom-btn-base-background");
         }
     });
+
+    <?php if(!Yii::$app->user->isGuest) { ?>
+
+    updateNotification();
+    var notificationChecker = setInterval(function() {
+        if($('#notification-btn').attr('aria-expanded') == 'false') {
+            updateNotification();
+        }
+    }, 5000);
+    var notificationObj;
+
+    $('#notification-btn').click(function() {
+        notificationChecker = null;
+        if(notificationObj != null) {
+            for(var i = 0; i < notificationObj.length; i++) {
+                markNotificationAsRead(notificationObj[i].type, notificationObj[i].modelId);
+            }
+            notificationObj = null;
+        }
+    });
+
+    function updateNotification() {
+        $('#notification-dropdown').empty();
+        $.ajax({
+            url: '<?= Url::to(['notification/get-notifications']) ?>',
+            dataType: 'json',
+            type: 'post',
+            data: {
+                id: <?= Yii::$app->user->id ?>,
+                _csrf: '<?= Yii::$app->request->getCsrfToken() ?>'
+            }
+        }).done(function(data) {
+            notificationObj = data;
+            for(var i = 0; i < data.length; i++) {
+                notificationConstructor(data[i].type, data[i].id, data[i].content, data[i].datetime);
+            }
+            if(data.length > 0) {
+                if(data.length != $('#notification-counter').text()) {
+                    $('#notification-counter').empty();
+                    $('#notification-counter').append(data.length);
+                }
+            } else {
+                $('#notification-counter').empty();
+                $('#notification-dropdown').append('<strong>No new notification</strong>');
+            }
+        });
+    }
+
+    function notificationConstructor(type, id, content, time) {
+        var li =
+            '<li>' +
+            '<a href="/comp3421/web/index.php?r='+type+'/view&id='+id+'">' +
+            //content +
+            '<div class="notification-content">' +
+            '<p>'+content+'</p>' +
+            '<span>'+time+'</span>' +
+            '</div>' +
+            '</a>' +
+            '</li>'
+        $('#notification-dropdown').append(li);
+    }
+
+    function markNotificationAsRead(type, id) {
+        $.ajax({
+            url: '<?= Url::to(['notification/mark-notification-read']) ?>',
+            dataType: 'html',
+            type: 'post',
+            data: {
+                id: id,
+                type: type,
+                _csrf: '<?= Yii::$app->request->getCsrfToken() ?>'
+            }
+        }).done(function(data) {
+
+        });
+    }
+
+    <?php } ?>
+
 </script>
 
 <?php $this->endBody() ?>

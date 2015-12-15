@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $content
- * @property integer $datetime
+ * @property string $datetime
  * @property integer $Administrator_id
  *
  * @property Administrator $administrator
@@ -31,7 +31,8 @@ class Announcement extends \yii\db\ActiveRecord
     {
         return [
             [['content', 'datetime', 'Administrator_id'], 'required'],
-            [['datetime', 'Administrator_id'], 'integer'],
+            [['datetime'], 'safe'],
+            [['Administrator_id'], 'integer'],
             [['content'], 'string', 'max' => 256]
         ];
     }

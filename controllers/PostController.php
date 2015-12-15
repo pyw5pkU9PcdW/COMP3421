@@ -55,6 +55,7 @@ class PostController extends Controller
         if ($newReply->load(Yii::$app->request->post())) {
             $newReply->datetime = date("Y-m-d H:i:s");
             $newReply->Participant_id = Yii::$app->user->id;
+            $newReply->is_read = 0;
             if($newReply->save()) {
                 $replied = true;
                 $newReply = new PostReplay();

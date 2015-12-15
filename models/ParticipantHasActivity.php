@@ -12,6 +12,7 @@ use Yii;
  * @property integer $attendance
  * @property string $register_datetime
  * @property string $attend_datetime
+ * @property integer $is_read
  */
 class ParticipantHasActivity extends \yii\db\ActiveRecord
 {
@@ -29,8 +30,8 @@ class ParticipantHasActivity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Participant_id', 'Activity_id'], 'required'],
-            [['Participant_id', 'Activity_id', 'attendance'], 'integer'],
+            [['Participant_id', 'Activity_id', 'is_read'], 'required'],
+            [['Participant_id', 'Activity_id', 'attendance', 'is_read'], 'integer'],
             [['register_datetime', 'attend_datetime'], 'safe']
         ];
     }
@@ -46,6 +47,7 @@ class ParticipantHasActivity extends \yii\db\ActiveRecord
             'attendance' => 'Attendance',
             'register_datetime' => 'Register Datetime',
             'attend_datetime' => 'Attend Datetime',
+            'is_read' => 'Is Read',
         ];
     }
 
