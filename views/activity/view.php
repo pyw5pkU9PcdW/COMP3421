@@ -24,7 +24,7 @@ $this->title = $model->Activity_name;
                     <p class="text-center"><?= Html::img($imgLink, ['class'=>'activity-detail-img']);?></p>
                 </div>
                 <div class="col-sm-4 activity-detail-technical" style="background-color: <?= \app\models\ActivityType::getActivityTypeThemeColorById($model->ActivityType_id) ?>">
-                    <?php if(!Yii::$app->user->isGuest) { ?>
+                    <?php if(!Yii::$app->user->isGuest && strtotime($model->startDatetime) - time() > 0) { ?>
                         <?php if(!\app\models\ParticipantHasActivity::checkHasJoin($model->id)) { ?>
                             <?= Html::a('Add to your Schedule', ['/participant-has-activity/join', 'activityId' => $model->id], ['class' => 'btn btn-default']) ?>
                         <?php } else { ?>
