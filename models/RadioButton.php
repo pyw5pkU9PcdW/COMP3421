@@ -79,4 +79,8 @@ class Radiobutton extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    public function getOptionsStatisticsByQuestionId($id) {
+        return Radiobutton::find()->where(['Question_id'=>$id])->select(['content', 'count'])->orderBy(['count'=>SORT_DESC])->asArray()->all();
+    }
 }

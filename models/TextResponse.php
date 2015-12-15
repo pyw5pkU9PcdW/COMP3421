@@ -54,4 +54,13 @@ class TextResponse extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TextBox::className(), ['id' => 'TextBox_id']);
     }
+
+    public function getResponseByQuestionId($id) {
+        $raw = TextResponse::find()->where(['TextBox_id'=>$id])->select('content')->asArray()->all();
+        $arr = [];
+        foreach($raw as $row) {
+            array_push($arr, $row['content']);
+        }
+        return $arr;
+    }
 }

@@ -9,6 +9,7 @@ use app\models\SurveyHasParticipant;
 use app\models\TempOptionSelection;
 use app\models\TextBox;
 use app\models\TextResponse;
+use Faker\Provider\fr_FR\Text;
 use Yii;
 use app\models\Survey;
 use yii\base\Model;

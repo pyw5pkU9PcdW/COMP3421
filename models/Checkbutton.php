@@ -81,4 +81,8 @@ class Checkbutton extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    public function getOptionsStatisticsByQuestionId($id) {
+        return Checkbutton::find()->where(['Question_id'=>$id])->select(['content', 'count'])->orderBy(['count'=>SORT_DESC])->asArray()->all();
+    }
 }
