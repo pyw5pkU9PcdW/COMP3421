@@ -251,7 +251,12 @@ $filename = $PNG_TEMP_DIR.'test.png';
         }).done(function(data) {
             notificationObj = data;
             for(var i = 0; i < data.length; i++) {
-                notificationConstructor(data[i].type, data[i].modelId, data[i].content, data[i].datetime);
+                if(data[i].type == 'post') {
+                    var id = data[i].id
+                } else {
+                    var id = data[i].modelId;
+                }
+                notificationConstructor(data[i].type, id, data[i].content, data[i].datetime);
             }
             if(data.length > 0) {
                 if(data.length != $('#notification-counter').text()) {
