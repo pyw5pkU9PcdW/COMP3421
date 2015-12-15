@@ -212,6 +212,43 @@ class SurveyController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionResult($id)
+    {
+        $radioButtonQuestion = [];
+        $checkBoxQuestion = [];
+        $radioButtonResponse = [];
+        $checkBoxResponse = [];
+
+        $model = $this->findModel($id);
+        $questions = Question::getAllQuestionBySurveyId($id);
+
+        foreach($questions as $row) {
+            //$question = Question::find(['id' => $row['id']]);
+
+            if(Checkbutton::checkIsCheckBoxByQuestionId($row['id'])) {
+                //$question->temp_type = 1;
+                array_push($checkBoxQuestion, $row);
+                array_push($checkBoxResponse, Checkbutton::getOptionsStatisticsByQuestionId(($row['id'])));
+                continue;
+            }
+
+            if(Radiobutton::checkIsRadioButtonByQuestionId($row['id'])) {
+                //$question->temp_type = 2;
+                array_push($radioButtonQuestion, $row);
+                array_push($radioButtonResponse, Radiobutton::getOptionsStatisticsByQuestionId(($row['id'])));
+                continue;
+            }
+        }
+
+
+        return $this->render('result', [
+            '$model' => $model,
+            'radioButtonQuestion' => $radioButtonQuestion, 'checkBoxQuestion' => $checkBoxQuestion,
+            'radioButtonResonse' => $radioButtonResponse, 'checkBoxResponse' => $checkBoxResponse,
+        ]);
+
+    }
+
     /**
      * Finds the Survey model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
