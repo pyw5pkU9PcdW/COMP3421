@@ -6,6 +6,7 @@ use Yii;
 use app\models\ActivitySearchGlobal;
 use app\models\OutsideAttractionSearchGlobal;
 use app\models\PostSearchGlobal;
+use app\models\AnnouncementSearchGlobal;
 use app\models\PostReplaySearchGlobal;
 use yii\web\ForbiddenHttpException;
 use yii\helpers\BaseArrayHelper;
@@ -22,20 +23,27 @@ class SearchController extends \yii\web\Controller
             $outdoorAttractionSearchModel = new OutsideAttractionSearchGlobal();
             $outdoorAttractionSearchModel->globalSearch = $search;
             $outdoorAttractionDataProvider = $outdoorAttractionSearchModel->search(Yii::$app->request->queryParams);
-
             $dataProvider = BaseArrayHelper::merge($activitySearchModelDataProvider, $outdoorAttractionDataProvider);
 
-            $postSearchModel = new PostSearchGlobal();
-            $postSearchModel->globalSearch = $search;
-            $postDataProvider = $postSearchModel->search(Yii::$app->request->queryParams);
+            if(Yii::$app->user->can('postIndex')) {
+                $postSearchModel = new PostSearchGlobal();
+                $postSearchModel->globalSearch = $search;
+                $postDataProvider = $postSearchModel->search(Yii::$app->request->queryParams);
+                $dataProvider = BaseArrayHelper::merge($dataProvider, $postDataProvider);
 
-            $dataProvider = BaseArrayHelper::merge($dataProvider, $postDataProvider);
+                $postReplySearchModel = new PostReplaySearchGlobal();
+                $postReplySearchModel->globalSearch = $search;
+                $postReplyDataProvider = $postReplySearchModel->search(Yii::$app->request->queryParams);
 
-            $postReplySearchModel = new PostReplaySearchGlobal();
-            $postReplySearchModel->globalSearch = $search;
-            $postReplyDataProvider = $postReplySearchModel->search(Yii::$app->request->queryParams);
+                $dataProvider = BaseArrayHelper::merge($dataProvider, $postReplyDataProvider);
+            }
 
-            $dataProvider = BaseArrayHelper::merge($dataProvider, $postReplyDataProvider);
+            if(Yii::$app->user->can('announcementIndex')) {
+                $announcementSearchModel = new AnnouncementSearchGlobal();
+                $announcementSearchModel->globalSearch = $search;
+                $announcementDataProvider = $announcementSearchModel->search(Yii::$app->request->queryParams);
+                $dataProvider = BaseArrayHelper::merge($dataProvider, $announcementDataProvider);
+            }
 
             return $this->render('index', [
                 'input' => $search,

@@ -8,27 +8,29 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        /*$index = $auth->createPermission('surveyIndex');
-        $index->description = 'Index of the Survey';
-        $auth->add($index);
+        $index = $auth->getPermission('postIndex');
+        //$index->description = 'Index of the Forum';
+        //$auth->add($index);
 
-        $create = $auth->createPermission('surveyCreate');
-        $create->description = 'Create a Survey';
-        $auth->add($create);
+        $create = $auth->getPermission('postCreate');
+        //$create->description = 'Create a Post';
+        //$auth->add($create);
 
-        $update = $auth->createPermission('surveyUpdate');
-        $update->description = 'Update a Survey';
-        $auth->add($update);
+        $update = $auth->getPermission('postUpdate');
+        //$update->description = 'Update a Post';
+        //$auth->add($update);
 
-        $delete = $auth->createPermission('surveyDelete');
-        $delete->description = 'Remove a Survey';
-        $auth->add($delete);
+        $delete = $auth->getPermission('postDelete');
+        //$delete->description = 'Remove a Post';
+        //$auth->add($delete);
 
-        $edit = $auth->createPermission('surveyEdit');
-        $edit->description = 'Update and Delete a Survey';
-        $auth->add($edit);*/
+        $edit = $auth->getPermission('postEdit');
+        //$edit->description = 'Update and Delete a Post';
+        //$auth->add($edit);
 
-        $index = $auth->getPermission('surveyDo');
+        $view = $auth->getPermission('announcementView');
+        //$view->description = 'View a Post';
+        //$auth->add($view);
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
@@ -48,14 +50,13 @@ class RbacController extends \yii\web\Controller
         $auth->add($sponsor);*/
 
 
-        /*$user = $auth->getRole('Admin');
-        $auth->addChild($user, $edit);
-        $auth->addChild($edit, $create);
-        $auth->addChild($edit, $update);
-        $auth->addChild($edit, $delete);*/
-
         $user = $auth->getRole('Admin');
-        $auth->addChild($user, $index);
+        //$auth->addChild($user, $edit);
+        //$auth->addChild($user, $create);
+        //$auth->addChild($edit, $update);
+        //$auth->addChild($edit, $delete);
+        //$auth->addChild($user, $index);
+        $auth->addChild($user, $view);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.

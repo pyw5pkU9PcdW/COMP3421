@@ -182,4 +182,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $raw = User::findOne($id);
         return $raw['first_name'];
     }
+
+    public function getAllUsersId() {
+        $raw = User::find()->select('id')->asArray()->all();
+        $arr = [];
+        foreach($raw as $row) {
+            array_push($arr, $row['id']);
+        }
+        return $arr;
+    }
 }

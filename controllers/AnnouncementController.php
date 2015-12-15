@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\AnnouncementHasParticipant;
 use Yii;
 use app\models\Announcement;
-use yii\data\ActiveDataProvider;
+use app\models\AnnouncementSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * AnnouncementController implements the CRUD actions for Announcement model.
@@ -32,13 +34,21 @@ class AnnouncementController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Announcement::find(),
-        ]);
+        if(Yii::$app->user->can('announcementIndex')) {
+            $searchModel = new AnnouncementSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -47,11 +57,19 @@ class AnnouncementController extends Controller
      * @param integer $Administrator_id
      * @return mixed
      */
-    public function actionView($id, $Administrator_id)
+    public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id, $Administrator_id),
-        ]);
+        if(Yii::$app->user->can('announcementView')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -61,14 +79,24 @@ class AnnouncementController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Announcement();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id]);
+        if(Yii::$app->user->can('announcementCreate')) {
+            $model = new Announcement();
+            $model->datetime = date("Y-m-d H:i:s");
+            $model->Administrator_id = Yii::$app->user->id;
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                AnnouncementHasParticipant::registerAllUsersToAnnouncement($model->getPrimaryKey());
+                return $this->redirect(['view', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -79,16 +107,24 @@ class AnnouncementController extends Controller
      * @param integer $Administrator_id
      * @return mixed
      */
-    public function actionUpdate($id, $Administrator_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id, $Administrator_id);
+        if(Yii::$app->user->can('announcementUpdate')) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -99,11 +135,19 @@ class AnnouncementController extends Controller
      * @param integer $Administrator_id
      * @return mixed
      */
-    public function actionDelete($id, $Administrator_id)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $Administrator_id)->delete();
+        if(Yii::$app->user->can('announcementDelete')) {
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -114,9 +158,9 @@ class AnnouncementController extends Controller
      * @return Announcement the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $Administrator_id)
+    protected function findModel($id)
     {
-        if (($model = Announcement::findOne(['id' => $id, 'Administrator_id' => $Administrator_id])) !== null) {
+        if (($model = Announcement::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

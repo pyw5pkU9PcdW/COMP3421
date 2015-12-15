@@ -5,9 +5,30 @@
     top:5px;
     right:80px;
 }
-.notification-dropdown-container button {
-    height: 50px;
+.notification-dropdown-container > button {
+    height: 49px;
     border-radius: 0;
     border:0;
     background-color: rgba(247,248,249,0.8);
+}
+.notification-dropdown-container .dropdown-menu{
+    background-color: rgba(247,248,249,0.95);
+}
+.notification-dropdown-container .dropdown-menu > li > a{
+}
+.notification-dropdown-container .dropdown-menu li {
+    border-bottom: 1px solid #CCCCCC;
+}
+.notification-dropdown-container .notification-content{
+    max-width: 500px;
+}
+@media (max-width: 767px) {
+    .notification-dropdown-container > button {
+        margin-top: -5px;
+        margin-right: -20px;
+        background-color: transparent;
+    }
+}
+@media (min-width: 768px) {
+
 }

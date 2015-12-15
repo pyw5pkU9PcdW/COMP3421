@@ -78,7 +78,7 @@ class PostReplay extends \yii\db\ActiveRecord
                 AND 13027272d.Post.Participant_id = '.$id.'
                 AND is_read = 0
                 AND Post.Participant_id <> Post_Replay.Participant_id
-                ORDER BY Post_Replay.datetime DESC;';
+                ORDER BY Post_Replay.datetime ASC;';
         return PostReplay::findBySql($sql)->asArray()->all();
     }
 

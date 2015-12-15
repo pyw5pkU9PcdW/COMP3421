@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "Announcement".
  *
  * @property integer $id
+ * @property string $title
  * @property string $content
  * @property string $datetime
  * @property integer $Administrator_id
@@ -30,10 +31,11 @@ class Announcement extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'datetime', 'Administrator_id'], 'required'],
+            [['title', 'content', 'datetime', 'Administrator_id'], 'required'],
             [['datetime'], 'safe'],
             [['Administrator_id'], 'integer'],
-            [['content'], 'string', 'max' => 256]
+            [['title'], 'string', 'max' => 400],
+            [['content'], 'string', 'max' => 2000]
         ];
     }
 
@@ -44,6 +46,7 @@ class Announcement extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'title' => 'Title',
             'content' => 'Content',
             'datetime' => 'Datetime',
             'Administrator_id' => 'Administrator ID',

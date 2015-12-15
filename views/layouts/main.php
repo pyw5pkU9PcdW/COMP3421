@@ -116,7 +116,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
             //['label' => 'Coupon', 'url' => ['/coupon/index']],
             //['label' => 'Post', 'url' => ['/post/index']],
             //['label' => 'Survey', 'url' => ['/survey/index']],
-            //['label' => 'Announcement', 'url' => ['/announcement/index']],
+            ['label' => 'Announcement', 'url' => ['/announcement/index'], 'visible' => Yii::$app->user->can('announcementIndex')],
             //['label' => 'Question', 'url' => ['/question/index']],
             //['label' => 'Message', 'url' => ['/message/index']],
             //['label' => 'Radio Button', 'url' => ['/radio-button/index']],
@@ -232,7 +232,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
         notificationChecker = null;
         if(notificationObj != null) {
             for(var i = 0; i < notificationObj.length; i++) {
-                markNotificationAsRead(notificationObj[i].type, notificationObj[i].modelId);
+                markNotificationAsRead(notificationObj[i].type, notificationObj[i].modelId, notificationObj[i].id);
             }
             notificationObj = null;
         }
@@ -251,7 +251,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
         }).done(function(data) {
             notificationObj = data;
             for(var i = 0; i < data.length; i++) {
-                notificationConstructor(data[i].type, data[i].id, data[i].content, data[i].datetime);
+                notificationConstructor(data[i].type, data[i].modelId, data[i].content, data[i].datetime);
             }
             if(data.length > 0) {
                 if(data.length != $('#notification-counter').text()) {
@@ -279,13 +279,14 @@ $filename = $PNG_TEMP_DIR.'test.png';
         $('#notification-dropdown').append(li);
     }
 
-    function markNotificationAsRead(type, id) {
+    function markNotificationAsRead(type, modelId, id) {
         $.ajax({
             url: '<?= Url::to(['notification/mark-notification-read']) ?>',
             dataType: 'html',
             type: 'post',
             data: {
                 id: id,
+                modelId: modelId,
                 type: type,
                 _csrf: '<?= Yii::$app->request->getCsrfToken() ?>'
             }
