@@ -7,12 +7,33 @@
  */
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Survey */
 
-$this->title = $model->title;
+//$this->title = $kmodel->title;
 
 //http://localhost/COMP3421/web/index.php?r=survey%2Fresult&id=4
+
+
+    //<title></title>
+    //<link rel="stylesheet" href="chartist/dist/chartist.min.css">
+//</head>
+
+//<body>
+
+//echo "Hello";
 ?>
+<!-- Site content goes here !-->
+
+
+
+<div class="survey-result">
+    <div class="container">
+        <?php
+            foreach($radioButtonQuestion as $index => $row){
+
+            }
+        ?>
+    </div>
+</div>

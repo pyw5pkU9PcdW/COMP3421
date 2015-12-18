@@ -1,0 +1,5 @@
+{
+    "require": {
+        "okeanos/yii2-chartist": "*"
+    }
+}

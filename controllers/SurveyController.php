@@ -225,7 +225,6 @@ class SurveyController extends Controller
         $questions = Question::getAllQuestionBySurveyId($id);
 
         foreach($questions as $row) {
-            //$question = Question::find(['id' => $row['id']]);
 
             if(Checkbutton::checkIsCheckBoxByQuestionId($row['id'])) {
                 //$question->temp_type = 1;
@@ -244,7 +243,7 @@ class SurveyController extends Controller
 
 
         return $this->render('result', [
-            '$model' => $model,
+            'model' => $model,
             'radioButtonQuestion' => $radioButtonQuestion, 'checkBoxQuestion' => $checkBoxQuestion,
             'radioButtonResonse' => $radioButtonResponse, 'checkBoxResponse' => $checkBoxResponse,
         ]);
