@@ -95,4 +95,9 @@ class Question extends \yii\db\ActiveRecord
     public function getAllQuestionBySurveyId($id) {
         return Question::find()->where(['Survey_id'=>$id])->orderBy('order')->asArray()->all();
     }
+
+    public function getQuestionContentByQuestionId($id) {
+        $raw = Question::findOne($id);
+        return $raw['content'];
+    }
 }

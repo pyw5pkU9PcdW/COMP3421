@@ -225,7 +225,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
         if($('#notification-btn').attr('aria-expanded') == 'false') {
             updateNotification();
         }
-    }, 5000);
+    }, 2000);
     var notificationObj;
 
     $('#notification-btn').click(function() {

@@ -8,29 +8,33 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->getPermission('postIndex');
+        //$index = $auth->getPermission('postIndex');
         //$index->description = 'Index of the Forum';
         //$auth->add($index);
 
-        $create = $auth->getPermission('postCreate');
+        //$create = $auth->getPermission('postCreate');
         //$create->description = 'Create a Post';
         //$auth->add($create);
 
-        $update = $auth->getPermission('postUpdate');
+        //$update = $auth->getPermission('postUpdate');
         //$update->description = 'Update a Post';
         //$auth->add($update);
 
-        $delete = $auth->getPermission('postDelete');
+        //$delete = $auth->getPermission('postDelete');
         //$delete->description = 'Remove a Post';
         //$auth->add($delete);
 
-        $edit = $auth->getPermission('postEdit');
+        //$edit = $auth->getPermission('postEdit');
         //$edit->description = 'Update and Delete a Post';
         //$auth->add($edit);
 
-        $view = $auth->getPermission('announcementView');
+        //$view = $auth->getPermission('announcementView');
         //$view->description = 'View a Post';
         //$auth->add($view);
+
+        $view = $auth->createPermission('surveyResult');
+        $view->description = 'Show the result of the survey';
+        $auth->add($view);
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';

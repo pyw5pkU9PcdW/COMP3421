@@ -8,7 +8,6 @@ use app\models\PostReplay;
 use app\models\Question;
 use app\models\Radiobutton;
 use app\models\SurveyHasParticipant;
-use app\models\TempOptionSelection;
 use app\models\TextBox;
 use app\models\TextResponse;
 use Faker\Provider\fr_FR\Text;
@@ -214,7 +213,7 @@ class SurveyController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionResult($id)
+    public function actionResult2($id)
     {
         $radioButtonQuestion = [];
         $checkBoxQuestion = [];
@@ -248,6 +247,52 @@ class SurveyController extends Controller
             'radioButtonResonse' => $radioButtonResponse, 'checkBoxResponse' => $checkBoxResponse,
         ]);
 
+    }
+
+    public function actionResult($id) {
+        if(Yii::$app->user->can('surveyResult')) {
+            $model = $this->findModel($id);
+
+            $dataProvider = [];
+            $questions = Question::getAllQuestionBySurveyId($id);
+
+            foreach($questions as $row) {
+                $result['id'] = $row['id'];
+                $result['question'] = Question::getQuestionContentByQuestionId($row['id']);
+
+                if(TextBox::checkIsTextBoxByQuestionId($row['id'])) {
+                    $result['type'] = 0;
+                    $result['results'] = TextResponse::getResponsesByQuestionId($row['id']);
+                    array_push($dataProvider, $result);
+                    continue;
+                }
+
+                if(Checkbutton::checkIsCheckBoxByQuestionId($row['id'])) {
+                    $result['type'] = 1;
+                    $result['results'] = Checkbutton::getOptionsStatisticsByQuestionId($row['id']);
+                    array_push($dataProvider, $result);
+                    continue;
+                }
+
+                if(Radiobutton::checkIsRadioButtonByQuestionId($row['id'])) {
+                    $result['type'] = 2;
+                    $result['results'] = Radiobutton::getOptionsStatisticsByQuestionId($row['id']);
+                    array_push($dataProvider, $result);
+                    continue;
+                }
+            }
+
+            return $this->render('result', [
+                'model' => $model,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
