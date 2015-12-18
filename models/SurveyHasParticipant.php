@@ -70,4 +70,8 @@ class SurveyHasParticipant extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    public function getDoneCountBySurveyId($id) {
+        return SurveyHasParticipant::find()->where(['Survey_id'=>$id])->count();
+    }
 }

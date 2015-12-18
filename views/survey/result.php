@@ -10,36 +10,40 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Survey */
+
+$this->title = $model->title;
 ?>
 <!-- Site content goes here !-->
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<link href="css/survey_visualization.css" rel="stylesheet">
 
-<div class="survey-result">
-    <div class="container">
+<div class="survey-result container">
+    <h1><?= $model->title ?></h1>
+    <h3><strong><?= $doneCount ?></strong> participants has done</h3>
         <?php
-            foreach ($dataProvider as $row) {
+            foreach ($dataProvider as $key=>$row) {
                 echo '<div class="panel-group">';
                 echo '<div class="panel panel-default">';
-                echo '<a data-toggle="collapse" href="#collapse'.$row['id'].'">';
+                echo '<a data-toggle="collapse" href="#collapse'.$row['id'].'" id="panel-group-'.$row['id'].'">';
                 echo '<div class="panel-heading">';
-                echo $row['question'];
+                echo ($key+1).'. '.$row['question'];
                 echo '</div>';
                 echo '<div id="collapse'.$row['id'].'" class="panel-collapse collapse">';
                 echo '<div class="panel-body">';
                 if($row['type'] == 0) {
-                    echo '<table class="table">';
+                    echo '<table class="table"><tr><th>#</th><th>Response</th></tr>';
                     for($i = 0; $i < count($row['results']); $i++) {
                         echo '<tr>';
-                        echo '<td>'.$i.'</td>';
+                        echo '<td>'.($i+1).'</td>';
                         echo '<td>'.$row['results'][$i].'</td>';
                         echo '</tr>';
                     }
                     echo '</table>';
                 }
                 if($row['type'] == 1) {
-                    echo '<div id="ct-chart-'.$row['id'].'" class="ct-chart ct-perfect-fourth"></div>';
+                    echo '<div id="ct-chart-'.$row['id'].'" class="ct-chart ct-perfect-fourth ct-frame"></div>';
                     $content = [];
                     $count = [];
                     for($i = 0; $i < count($row['results']); $i++){
@@ -48,22 +52,120 @@ use yii\widgets\DetailView;
                     }
                     ?>
                     <script type='text/javascript'>
+                        $('#panel-group-'+<?= $row['id'] ?>).click(function() {
+                            if($('#ct-chart-'+<?= $row['id'] ?>).is(':empty')) {
+                                var options = {
+                                    distributeSeries: true,
+                                    sscaleMinSpace: 40,
+                                    axisX: {
+                                        showGrid: false
+                                    }
+                                };
+                                var data = {
+                                    labels: <?= json_encode($content) ?>,
+                                    series: <?= json_encode($count) ?>
+                                };
+                                var barChart<?= $row['id'] ?> = new Chartist.Bar('#ct-chart-'+<?= $row['id'] ?>, data, options);
 
-                        var options = {
-                            width: 300,
-                            height: 200,
-                            distributeSeries: true
-                        };
-                        var data = {
-                            labels: <?= json_encode($content) ?>,
-                            series: <?= json_encode($count) ?>
-                        };
-                        new Chartist.Bar('#ct-chart-'+<?= $row['id'] ?>, data, options);
+                                var bottom = null;
+                                barChart<?= $row['id'] ?>.on('draw', function (data) {
+                                    if(data.type == 'grid' && bottom == null) {
+                                        bottom = data.y2;
+                                    }
+                                    if(data.type == 'grid') {
+                                        data.element.animate({
+                                            opacity: {
+                                                dur: 500,
+                                                from: 0,
+                                                to: 1
+                                            }
+                                        });
+                                    }
+                                    if(data.type == 'bar') {
+                                        var top = data.y2;
+                                        data.element.animate({
+                                            opacity: {
+                                                dur: 500,
+                                                from: 0,
+                                                to: 1
+                                            },
+                                            y2: {
+                                                dur: 1000,
+                                                from: bottom,
+                                                to: top,
+                                                easing: 'easeOutQuart'
+                                            },
+                                        });
+                                    }
+                                });
+                            }
+                        });
                     </script>
         <?php
                 }
                 if($row['type'] == 2) {
-                    echo '<div id="ct-chart-'.$row['id'].'" class="ct-chart ct-perfect-fourth"></div>';
+                    echo '<div id="ct-chart-'.$row['id'].'" class="ct-chart ct-perfect-fourth ct-frame"></div>';
+                    $content = [];
+                    $count = [];
+                    for($i = 0; $i < count($row['results']); $i++){
+                        array_push($content, $row['results'][$i]['content']);
+                        array_push($count, $row['results'][$i]['count']);
+                    }
+        ?>
+                <script type='text/javascript'>
+                    $('#panel-group-'+<?= $row['id'] ?>).click(function() {
+                        if($('#ct-chart-'+<?= $row['id'] ?>).is(':empty')) {
+                            var options = {
+                                donut: true,
+                            };
+                            var data = {
+                                labels: <?= json_encode($content) ?>,
+                                series: <?= json_encode($count) ?>
+                            };
+                            var pieChart<?= $row['id'] ?> = new Chartist.Pie('#ct-chart-' +<?= $row['id'] ?>, data, options);
+
+                            pieChart<?= $row['id'] ?>.on('draw', function (data) {
+                                if(data.type === 'slice') {
+                                    // Get the total path length in order to use for dash array animation
+                                    var pathLength = data.element._node.getTotalLength();
+
+                                    // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+                                    data.element.attr({
+                                        'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+                                    });
+
+                                    // Create animation definition while also assigning an ID to the animation for later sync usage
+                                    var animationDefinition = {
+                                        'stroke-dashoffset': {
+                                            id: 'anim' + data.index,
+                                            dur: 500,
+                                            from: -pathLength + 'px',
+                                            to:  '0px',
+                                            easing: Chartist.Svg.Easing.easeOutQuint,
+                                            // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+                                            fill: 'freeze'
+                                        }
+                                    };
+
+                                    // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+                                    if(data.index !== 0) {
+                                        animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+                                    }
+
+                                    // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+                                    data.element.attr({
+                                        'stroke-dashoffset': -pathLength + 'px'
+                                    });
+
+                                    // We can't use guided mode as the animations need to rely on setting begin manually
+                                    // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+                                    data.element.animate(animationDefinition, false);
+                                }
+                            });
+                        }
+                    });
+                </script>
+        <?php
                 }
                 echo '</div>';
                 echo '<hr>';
@@ -72,45 +174,4 @@ use yii\widgets\DetailView;
                 echo '</div>';
             }
         ?>
-    </div>
 </div>
-<div id="ct-chart-demo" class="ct-chart ct-perfect-fourth"></div>
-<script>
-    function barChart(id, result, count) {
-        new Chartist.Bar('#ct-chart-'+id, {
-            labels: result,
-            series: count
-        }, {
-            distributeSeries: true
-        });
-    }
-
-
-    /*
-    function barChart(id, result) {
-        new Chartist.Bar('#ct-chart-demo', {
-            labels: result[0],
-            series: result[1]
-        }, {
-            distributeSeries: true
-        });
-    }
-
-        var chart = new Chartist.Line('#ct-chart-demo', {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-            series: [
-                [5, 5, 10, 8, 7, 5, 4, null, null, null, 10, 10, 7, 8, 6, 9],
-                [10, 15, null, 12, null, 10, 12, 15, null, null, 12, null, 14, null, null, null],
-                [null, null, null, null, 3, 4, 1, 3, 4,  6,  7,  9, 5, null, null, null]
-            ]
-        }, {
-            fullWidth: true,
-            chartPadding: {
-                right: 10
-            },
-            lineSmooth: Chartist.Interpolation.cardinal({
-                fillHoles: true,
-            }),
-            low: 0
-        });*/
-</script>

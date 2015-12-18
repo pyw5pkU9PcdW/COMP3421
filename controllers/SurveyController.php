@@ -285,6 +285,7 @@ class SurveyController extends Controller
             return $this->render('result', [
                 'model' => $model,
                 'dataProvider' => $dataProvider,
+                'doneCount' => SurveyHasParticipant::getDoneCountBySurveyId($id),
             ]);
         } else {
             if(Yii::$app->user->isGuest) {
