@@ -40,6 +40,27 @@ use yii\widgets\DetailView;
                 }
                 if($row['type'] == 1) {
                     echo '<div id="ct-chart-'.$row['id'].'" class="ct-chart ct-perfect-fourth"></div>';
+                    $content = [];
+                    $count = [];
+                    for($i = 0; $i < count($row['results']); $i++){
+                        array_push($content, $row['results'][$i]['content']);
+                        array_push($count, $row['results'][$i]['count']);
+                    }
+                    ?>
+                    <script type='text/javascript'>
+
+                        var options = {
+                            width: 300,
+                            height: 200,
+                            distributeSeries: true
+                        };
+                        var data = {
+                            labels: <?= json_encode($content) ?>,
+                            series: <?= json_encode($count) ?>
+                        };
+                        new Chartist.Bar('#ct-chart-'+<?= $row['id'] ?>, data, options);
+                    </script>
+        <?php
                 }
                 if($row['type'] == 2) {
                     echo '<div id="ct-chart-'.$row['id'].'" class="ct-chart ct-perfect-fourth"></div>';
@@ -55,21 +76,41 @@ use yii\widgets\DetailView;
 </div>
 <div id="ct-chart-demo" class="ct-chart ct-perfect-fourth"></div>
 <script>
-    var chart = new Chartist.Line('#ct-chart-demo', {
-        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-        series: [
-            [5, 5, 10, 8, 7, 5, 4, null, null, null, 10, 10, 7, 8, 6, 9],
-            [10, 15, null, 12, null, 10, 12, 15, null, null, 12, null, 14, null, null, null],
-            [null, null, null, null, 3, 4, 1, 3, 4,  6,  7,  9, 5, null, null, null]
-        ]
-    }, {
-        fullWidth: true,
-        chartPadding: {
-            right: 10
-        },
-        lineSmooth: Chartist.Interpolation.cardinal({
-            fillHoles: true,
-        }),
-        low: 0
-    });
+    function barChart(id, result, count) {
+        new Chartist.Bar('#ct-chart-'+id, {
+            labels: result,
+            series: count
+        }, {
+            distributeSeries: true
+        });
+    }
+
+
+    /*
+    function barChart(id, result) {
+        new Chartist.Bar('#ct-chart-demo', {
+            labels: result[0],
+            series: result[1]
+        }, {
+            distributeSeries: true
+        });
+    }
+
+        var chart = new Chartist.Line('#ct-chart-demo', {
+            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+            series: [
+                [5, 5, 10, 8, 7, 5, 4, null, null, null, 10, 10, 7, 8, 6, 9],
+                [10, 15, null, 12, null, 10, 12, 15, null, null, 12, null, 14, null, null, null],
+                [null, null, null, null, 3, 4, 1, 3, 4,  6,  7,  9, 5, null, null, null]
+            ]
+        }, {
+            fullWidth: true,
+            chartPadding: {
+                right: 10
+            },
+            lineSmooth: Chartist.Interpolation.cardinal({
+                fillHoles: true,
+            }),
+            low: 0
+        });*/
 </script>
