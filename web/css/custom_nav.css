@@ -63,6 +63,7 @@
     background-color: rgba(252,253,253,0.9);
     display: table;
     position: fixed;
+    overflow: scroll !important;
     right: 0;
     width: 25%;
     height: 100% !important;

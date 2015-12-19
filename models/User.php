@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $username
  * @property string $password
+ * @property integer $title
  * @property string $first_name
  * @property string $last_name
  * @property string $email
@@ -25,6 +26,7 @@ use Yii;
  * @property string $remark
  * @property string $authKey
  * @property string $accessToken
+ * @property integer $score
  *
  * @property Administrator $administrator
  * @property Message[] $messages
@@ -85,6 +87,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'remark' => 'Remark',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
+            'score' => 'Score',
         ];
     }
 
