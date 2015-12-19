@@ -126,7 +126,7 @@ $this->title = $model->title;
                             var responsiveOptions = [
                                 ['screen and (min-width: 768px)', {
                                     chartPadding: 30,
-                                    labelOffset: -50,
+                                    labelOffset: 40,
                                     donutWidth: 30,
                                     labelDirection: 'explode',
                                     labelInterpolationFnc: function(value) {
@@ -134,7 +134,7 @@ $this->title = $model->title;
                                     }
                                 }],
                                 ['screen and (max-width: 767px)', {
-                                    labelOffset: -40,
+                                    labelOffset: 40,
                                     chartPadding: 20,
                                     donutWidth: 25
                                 }]

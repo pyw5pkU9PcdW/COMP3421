@@ -15,19 +15,22 @@ $this->title = $model->title;
 <div class="post-view container">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <strong><?= User::getUserFullNameById($model->Participant_id) ?> | </strong>
     <strong><?= $model->datetime ?></strong>
     <p><?= $model->content ?></p>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?php if(false) { ?>
+        <p>
+            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+    <?php } ?>
 
     <?php /*DetailView::widget([
         'model' => $model,
@@ -64,10 +67,12 @@ $this->title = $model->title;
 </div>
 <div class="reply-container">
     <div class="container">
-        <?php $form = ActiveForm::begin(['layout'=>'inline']); ?>
-        <?= $form->field($newReply, 'content')->textInput(['maxlength' => true, 'class'=>'form-control reply-field']) ?>
-        <div class="form-group">
-            <?= Html::submitButton('Reply', ['class' => 'btn btn-primary']) ?>
+        <?php $form = ActiveForm::begin(); ?>
+        <div class="input-group">
+            <?= $form->field($newReply, 'content')->textInput(['maxlength' => true, 'class'=>'form-control reply-field', 'placeholder'=>'Reply...'])->label(false) ?>
+            <span class="input-group-btn">
+                <?= Html::submitButton('Reply', ['class' => 'btn']) ?>
+            </span>
         </div>
         <?php ActiveForm::end(); ?>
     </div>

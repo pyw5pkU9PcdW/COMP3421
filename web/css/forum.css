@@ -8,7 +8,41 @@
     padding-bottom: 15px;
 }
 .reply-container .reply-field{
-    width: 90%;
+    background-color: transparent;
+    color: rgb(247,248,249);
+    border: 0;
+    border-bottom: 2px solid rgb(247,248,249);
+    border-radius: 0;
+}
+.reply-container .reply-field::-webkit-input-placeholder {
+    color: rgb(247,248,249);
+    font-size: 20px;
+    padding-bottom: 60px;
+    line-height: 22px;
+}
+
+.reply-container .reply-field:-moz-placeholder { /* Firefox 18- */
+    color: rgb(247,248,249);
+    font-size: 20px;
+    padding-bottom: 60px;
+    line-height: 22px;
+}
+
+.reply-container .reply-field::-moz-placeholder {  /* Firefox 19+ */
+    color: rgb(247,248,249);
+    font-size: 20px;
+    padding-bottom: 60px;
+    line-height: 22px;
+}
+
+.reply-container .reply-field:-ms-input-placeholder {
+    color: rgb(247,248,249);
+    font-size: 20px;
+    padding-bottom: 60px;
+    line-height: 22px;
+}
+.reply-container .btn{
+    margin-bottom: -10px;
 }
 .footer{
     padding-bottom: 100px;
