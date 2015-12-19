@@ -38,8 +38,8 @@ $this->title = 'Home';
     <div class="row">
         <h2>Star Speakers</h2>
         <?php foreach($userBibi as $row) { ?>
-            <div class="col-sm-3 user-bibi">
-
+            <div class="col-sm-3 user-bibi" style="background-image: url()">
+                <div class="user-bibi-cover"><?= \app\models\User::getUserFullNameById($row['User_id']) ?></div>
             </div>
         <?php } ?>
     </div>

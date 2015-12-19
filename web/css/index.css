@@ -24,6 +24,23 @@
 .user-bibi{
     height: 300px;
 }
+.user-bibi-cover{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 24px;
+    padding-top: 100px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: transparent;
+    color: transparent;
+}
+.user-bibi-cover:hover, .user-bibi-cover:focus{
+    background-color: rgba(67,67,69,0.6);
+    color: rgb(247,248,249);
+}
 @media (max-width: 767px) {
     .intro{
         font-size: 18px;
