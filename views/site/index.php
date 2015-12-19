@@ -38,7 +38,7 @@ $this->title = 'Home';
     <div class="row">
         <h2>Star Speakers</h2>
         <?php foreach($userBibi as $row) { ?>
-            <div class="col-sm-3 user-bibi" style="background-image: url()">
+            <div class="col-sm-3 col-xs-6 user-bibi" style="background-image: url()">
                 <div class="user-bibi-cover"><?= \app\models\User::getUserFullNameById($row['User_id']) ?></div>
             </div>
         <?php } ?>
@@ -46,7 +46,7 @@ $this->title = 'Home';
 </div>
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>
-    var myCenter=new google.maps.LatLng(22.3004309, 114.1776475);
+    var myCenter=new google.maps.LatLng(22.3008311, 114.1775517);
 
     function initialize() {
         var mapProp = {
