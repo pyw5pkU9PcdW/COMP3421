@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-
+use yii\helpers\Url;
 $this->title = 'Home';
 ?>
 <link href="css/index.css" rel="stylesheet">
@@ -37,11 +37,15 @@ $this->title = 'Home';
     </div>
     <div class="row">
         <h2>Star Speakers</h2>
-        <?php foreach($userBibi as $row) { ?>
-            <div class="col-sm-3 col-xs-6 user-bibi" style="background-image: url()">
-                <div class="user-bibi-cover"><?= \app\models\User::getUserFullNameById($row['User_id']) ?></div>
-            </div>
-        <?php } ?>
+        <div class="speakers">
+            <?php foreach($userBibi as $row) { ?>
+                <a href="<?= Url::to(['user-bibi/view', 'id' => $row['id']])  ?>">
+                    <div class="col-sm-3 col-xs-6 user-bibi" style="background-image: url(../resources/userbibi_pic/<?= $row['id'] ?>.jpg)">
+                        <div class="user-bibi-cover"><?= \app\models\User::getUserFullNameById($row['User_id']) ?></div>
+                    </div>
+                </a>
+            <?php } ?>
+        </div>
     </div>
 </div>
 <script src="http://maps.googleapis.com/maps/api/js"></script>

@@ -31,7 +31,7 @@ class UserBibi extends \yii\db\ActiveRecord
             [['User_id', 'description'], 'required'],
             [['User_id'], 'integer'],
             [['description'], 'string', 'max' => 1000],
-            [['paper'], 'string', 'max' => 45]
+            [['paper'], 'string', 'max' => 300]
         ];
     }
 

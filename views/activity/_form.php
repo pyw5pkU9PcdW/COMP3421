@@ -19,7 +19,7 @@ use dosamigos\datetimepicker\DateTimePicker;
 
     <?= $form->field($model, 'documentLink')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'personInCharge')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'personInCharge')->dropDownList(\app\models\User::getAllUsersOptions(), array('prompt'=>'-- Select a User --')) ?>
 
     <?= $form->field($model, 'startDatetime')->widget(DateTimePicker::className(), [
         'language' => 'en',

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Activity;
 use Yii;
 use app\models\UserBibi;
 use app\models\UserBibiSearch;
@@ -50,6 +51,7 @@ class UserBibiController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'schedule' => Activity::getActivitiesByPicUserId($id),
         ]);
     }
 

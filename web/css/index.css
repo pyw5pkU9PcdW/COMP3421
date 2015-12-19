@@ -23,9 +23,12 @@
 }
 .user-bibi{
     height: 300px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 .user-bibi-cover{
-    width: 100%;
+    width: calc(100% + 30px);
     height: 100%;
     text-align: center;
     font-size: 24px;
@@ -36,10 +39,15 @@
     transition: all 0.5s ease;
     background-color: transparent;
     color: transparent;
+    margin-left: -15px;
 }
 .user-bibi-cover:hover, .user-bibi-cover:focus{
     background-color: rgba(67,67,69,0.6);
     color: rgb(247,248,249);
+}
+.speakers{
+    margin-left: -15px;
+    margin-right: -15px;
 }
 @media (max-width: 767px) {
     .intro{

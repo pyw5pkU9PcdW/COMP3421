@@ -8,7 +8,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Outside Attractions';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="outside-attraction-index">
 

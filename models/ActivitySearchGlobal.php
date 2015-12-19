@@ -61,9 +61,9 @@ class ActivitySearchGlobal extends Activity
         $query->orFilterWhere(['like', 'Activity_name', $this->globalSearch])
             ->orFilterWhere(['like', 'startDatetime', $this->globalSearch])
             ->orFilterWhere(['like', 'endDatetime', $this->globalSearch])
-            ->orFilterWhere(['like', 'venue.name', $this->globalSearch])
-            ->orFilterWhere(['like', 'topic.name', $this->globalSearch])
-            ->orFilterWhere(['like', 'activityType.ActivityType_name', $this->globalSearch]);
+            ->orFilterWhere(['like', 'Venue.name', $this->globalSearch])
+            ->orFilterWhere(['like', 'Topic.name', $this->globalSearch])
+            ->orFilterWhere(['like', 'ActivityType.ActivityType_name', $this->globalSearch]);
 
         $raw = $query->asArray()->all();
 

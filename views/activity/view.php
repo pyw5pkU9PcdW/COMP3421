@@ -12,8 +12,8 @@ $this->title = $model->Activity_name;
 <div class="activity-view">
     <?php if(!Yii::$app->user->can('activityEdit')) { ?>
         <script>
-            $("#navbar-custom-toggle-btn span").addClass("light");
-            $("#navbar-custom-toggle-btn").addClass("light-btn");
+            //$("#navbar-custom-toggle-btn span").addClass("light");
+            //$("#navbar-custom-toggle-btn").addClass("light-btn");
         </script>
         <div class="container">
             <div class="row">

@@ -93,4 +93,8 @@ class Activity extends \yii\db\ActiveRecord
         $raw = Activity::findBySql($sql)->asArray()->all();
         return $raw;
     }
+
+    public function getActivitiesByPicUserId($id) {
+        return Activity::find()->where(['personInCharge'=>$id])->asArray()->all();
+    }
 }
