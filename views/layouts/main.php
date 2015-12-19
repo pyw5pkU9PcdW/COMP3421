@@ -109,6 +109,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
             //['label' => 'Coupon', 'url' => ['/coupon/index']],
             //['label' => 'Post', 'url' => ['/post/index']],
             //['label' => 'Survey', 'url' => ['/survey/index']],
+            ['label' => 'Attendance', 'url' => ['/activity/record'], 'visible' => Yii::$app->user->can('activityRecord')],
             ['label' => 'Announcement', 'url' => ['/announcement/index'], 'visible' => Yii::$app->user->can('announcementIndex')],
             [
                 'label' => 'Venue Management',
@@ -164,20 +165,22 @@ $filename = $PNG_TEMP_DIR.'test.png';
             </div>';
     }
 
-    //processing qr code data
-    $errorCorrectionLevel = 'L';
-    $matrixPointSize = 4;
+    if(Yii::$app->user->can('qrCodeGenerate')) {
+        //processing qr code data
+        $errorCorrectionLevel = 'L';
+        $matrixPointSize = 4;
 
-    if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
-        $errorCorrectionLevel = $_REQUEST['level'];
+        if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
+            $errorCorrectionLevel = $_REQUEST['level'];
 
-    if (isset($_REQUEST['size']))
-        $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
+        if (isset($_REQUEST['size']))
+            $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
 
-    if (!(Yii::$app->user->isGuest)) {
-        // user data
-        QRcode::png( Yii::$app->user->identity->getId(), $filename, $errorCorrectionLevel, $matrixPointSize, 2);
-        echo '<img src="'.$PNG_WEB_DIR.basename($filename).'">';
+        if (!(Yii::$app->user->isGuest)) {
+            // user data
+            QRcode::png( Yii::$app->user->identity->getId(), $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+            echo '<div class="qrCode"><img src="'.$PNG_WEB_DIR.basename($filename).'"></div>';
+        }
     }
 
     NavBar::end();

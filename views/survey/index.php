@@ -13,9 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Survey', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if(Yii::$app->user->can('surveyCreate')) { ?>
+        <p>
+            <?= Html::a('Create Survey', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php } ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -30,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete} {result}',
                 'buttons' => [
-                    'result' => function ($url, $model, $key) {return Yii::$app->user->can('surveyResult') ? Html::a('<span class="glyphicon glyphicon-import"></span>', ['result', 'id'=>$model->id]) : '';}
+                    'result' => function ($url, $model, $key) {return Yii::$app->user->can('surveyResult') ? Html::a('<span class="glyphicon glyphicon-import"></span>', ['result', 'id'=>$model->id]) : '';},
                 ],
             ],
         ],

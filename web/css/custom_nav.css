@@ -87,6 +87,14 @@
     background-color: #e7e7e7;
     color: #555;
 }
+.qrCode{
+    width: 100%;
+    text-align: center;
+}
+.qrCode img{
+    margin-left: auto;
+    margin-right: auto;
+}
 @media (max-width: 767px) {
     .navbar_custom .navbar-collapse.collapse{
         width: 100%;
