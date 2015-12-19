@@ -39,7 +39,6 @@ $filename = $PNG_TEMP_DIR.'test.png';
     <?php $this->head(); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link href="css/custom_global.css" rel="stylesheet">
     <link href="css/custom_form.css" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
@@ -89,7 +88,6 @@ $filename = $PNG_TEMP_DIR.'test.png';
     if(Yii::$app->user->isGuest) {
         $navItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Outside Attraction', 'url' => ['/outside-attraction/index']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
             ['label' => 'Login', 'url' => ['/site/login']]
@@ -319,10 +317,6 @@ $filename = $PNG_TEMP_DIR.'test.png';
 
     <?php } ?>
 
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-<script>
-    $('.parallax').parallax();
 </script>
 <?php $this->endBody() ?>
 </body>

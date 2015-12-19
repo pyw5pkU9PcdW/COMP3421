@@ -13,11 +13,28 @@
 .top-bar .title h3{
     margin-top: 0;
 }
+#googleMap{
+    height: 300px;
+}
+.tech-info{
+    background-color: rgb(67,67,69);
+    color: rgb(247,248,249);
+    padding: 30px;
+}
 @media (max-width: 767px) {
+    .intro{
+        font-size: 18px;
+    }
     .top-bar .title h1{
         font-size: 40px;
     }
-
+    .tech-container > div{
+        margin-right: -30px;
+        margin-left: -30px;
+    }
+    #googleMap {
+        width: calc(100% + 30px);
+    }
 }
 @media (min-width: 768px) {
     .top-bar .title{
@@ -25,5 +42,19 @@
     }
     .top-bar .title h1{
         font-size: 60px;
+    }
+    .googleMap{
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    #googleMap {
+        width: calc(100% + 60px);
+    }
+    .tech-info{
+        margin-left: -15px;
+        height: 300px;
+    }
+    .intro{
+        font-size: 20px;
     }
 }

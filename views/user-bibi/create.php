@@ -1,0 +1,21 @@
+<?php
+
+use yii\helpers\Html;
+
+
+/* @var $this yii\web\View */
+/* @var $model app\models\UserBibi */
+
+$this->title = 'Create User Bibi';
+$this->params['breadcrumbs'][] = ['label' => 'User Bibis', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="user-bibi-create">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+
+</div>

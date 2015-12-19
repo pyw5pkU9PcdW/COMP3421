@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Announcement;
+use app\models\UserBibi;
 
 /**
- * AnnouncementSearch represents the model behind the search form about `app\models\Announcement`.
+ * UserBibiSearch represents the model behind the search form about `app\models\UserBibi`.
  */
-class AnnouncementSearch extends Announcement
+class UserBibiSearch extends UserBibi
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class AnnouncementSearch extends Announcement
     public function rules()
     {
         return [
-            [['id', 'Administrator_id'], 'integer'],
-            [['title', 'content', 'datetime'], 'safe'],
+            [['id', 'User_id'], 'integer'],
+            [['description', 'paper'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class AnnouncementSearch extends Announcement
      */
     public function search($params)
     {
-        $query = Announcement::find();
+        $query = UserBibi::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,12 +57,11 @@ class AnnouncementSearch extends Announcement
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'datetime' => $this->datetime,
-            'Administrator_id' => $this->Administrator_id,
+            'User_id' => $this->User_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'paper', $this->paper]);
 
         return $dataProvider;
     }
