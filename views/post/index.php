@@ -20,7 +20,7 @@ $this->title = 'Forum';
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute'=>'title',
