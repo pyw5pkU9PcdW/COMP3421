@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
-
     <?= $form->field($model, 'User_id')->dropDownList(\app\models\User::getAllUsersOptions(), array('prompt'=>'-- Select a User --')) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
