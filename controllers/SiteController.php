@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Activity;
 use app\models\Post;
 use app\models\User;
+use app\models\UserBibi;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -55,7 +56,11 @@ class SiteController extends Controller
 
     public function actionIndex() {
         if(Yii::$app->user->isGuest) {
-            return $this->render('index');
+            $userBibi = UserBibi::getAllDisplayUser();
+
+            return $this->render('index',[
+                'userBibi' => $userBibi,
+            ]);
         } else {
             $mySchedule = Activity::getJoinActivity();
             $newPost = new Post();

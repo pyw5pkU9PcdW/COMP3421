@@ -35,6 +35,14 @@ $this->title = 'Home';
             <div id="googleMap"></div>
         </div>
     </div>
+    <div class="row">
+        <h2>Star Speakers</h2>
+        <?php foreach($userBibi as $row) { ?>
+            <div class="col-sm-3 user-bibi">
+
+            </div>
+        <?php } ?>
+    </div>
 </div>
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>

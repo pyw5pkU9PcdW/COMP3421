@@ -126,6 +126,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
                 ],
                 'visible' => Yii::$app->user->can('topicIndex')
             ],
+            ['label' => 'Speaker Display', 'url' => ['/user-bibi/index'], 'visible' => Yii::$app->user->can('userBibiIndex')],
             //['label' => 'Question', 'url' => ['/question/index']],
             //['label' => 'Message', 'url' => ['/message/index']],
             //['label' => 'Radio Button', 'url' => ['/radio-button/index']],

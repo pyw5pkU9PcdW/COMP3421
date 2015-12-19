@@ -8,11 +8,11 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('categoryIndex');
-        $index->description = 'Index of the Category';
+        $index = $auth->createPermission('userBibiIndex');
+        $index->description = 'Index of the User Bibi';
         $auth->add($index);
 
-        $create = $auth->createPermission('categoryCreate');
+        /*$create = $auth->createPermission('categoryCreate');
         $create->description = 'Create a Category';
         $auth->add($create);
 
@@ -30,7 +30,7 @@ class RbacController extends \yii\web\Controller
 
         $view = $auth->createPermission('categoryView');
         $view->description = 'View a Category';
-        $auth->add($view);
+        $auth->add($view);*/
 
 
         /*$view = $auth->createPermission('activityView');
@@ -52,12 +52,12 @@ class RbacController extends \yii\web\Controller
 
 
         $user = $auth->getRole('Admin');
-        $auth->addChild($user, $edit);
-        $auth->addChild($user, $create);
-        $auth->addChild($edit, $update);
-        $auth->addChild($edit, $delete);
+        //$auth->addChild($user, $edit);
+        //$auth->addChild($user, $create);
+        //$auth->addChild($edit, $update);
+        //$auth->addChild($edit, $delete);
         $auth->addChild($user, $index);
-        $auth->addChild($user, $view);
+        //$auth->addChild($user, $view);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.

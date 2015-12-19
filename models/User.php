@@ -191,4 +191,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
         return $arr;
     }
+
+    public function getAllUsersOptions() {
+        $raw = User::find()->asArray()->all();
+        $arr = [];
+        foreach($raw as $row) {
+            $arr[$row['id']] = Title::getTitleById($row['title']).' '.$row['first_name'].' '.$row['last_name'];
+        }
+        return $arr;
+    }
 }

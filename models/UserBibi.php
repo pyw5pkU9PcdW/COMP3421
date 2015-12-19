@@ -28,8 +28,8 @@ class UserBibi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'User_id', 'description'], 'required'],
-            [['id', 'User_id'], 'integer'],
+            [['User_id', 'description'], 'required'],
+            [['User_id'], 'integer'],
             [['description'], 'string', 'max' => 1000],
             [['paper'], 'string', 'max' => 45]
         ];

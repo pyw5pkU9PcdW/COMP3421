@@ -21,6 +21,9 @@
     color: rgb(247,248,249);
     padding: 30px;
 }
+.user-bibi{
+    height: 300px;
+}
 @media (max-width: 767px) {
     .intro{
         font-size: 18px;
