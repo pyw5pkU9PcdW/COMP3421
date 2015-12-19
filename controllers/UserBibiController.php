@@ -33,13 +33,21 @@ class UserBibiController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UserBibiSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(Yii::$app->user->can('userBibiIndex')) {
+            $searchModel = new UserBibiSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -62,14 +70,22 @@ class UserBibiController extends Controller
      */
     public function actionCreate()
     {
-        $model = new UserBibi();
+        if(Yii::$app->user->can('userBibiCreate')) {
+            $model = new UserBibi();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -81,14 +97,22 @@ class UserBibiController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(Yii::$app->user->can('userBibiUpdate')) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -100,9 +124,17 @@ class UserBibiController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(Yii::$app->user->can('userBibiDelete')) {
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**

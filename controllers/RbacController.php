@@ -8,27 +8,27 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('userBibiIndex');
-        $index->description = 'Index of the User Bibi';
-        $auth->add($index);
+        //$index = $auth->createPermission('userBibiIndex');
+        //$index->description = 'Index of the User Bibi';
+        //$auth->add($index);
 
-        /*$create = $auth->createPermission('categoryCreate');
-        $create->description = 'Create a Category';
+        $create = $auth->createPermission('userBibiCreate');
+        $create->description = 'Create a User Bibi';
         $auth->add($create);
 
-        $update = $auth->createPermission('categoryUpdate');
-        $update->description = 'Update a Category';
+        $update = $auth->createPermission('userBibiUpdate');
+        $update->description = 'Update a User Bibi';
         $auth->add($update);
 
-        $delete = $auth->createPermission('categoryDelete');
-        $delete->description = 'Remove a Category';
+        $delete = $auth->createPermission('userBibiDelete');
+        $delete->description = 'Remove a User Bibi';
         $auth->add($delete);
 
-        $edit = $auth->createPermission('categoryEdit');
-        $edit->description = 'Update and Delete a Category';
+        $edit = $auth->createPermission('userBibiEdit');
+        $edit->description = 'Update and Delete a User Bibi';
         $auth->add($edit);
 
-        $view = $auth->createPermission('categoryView');
+        /*$view = $auth->createPermission('categoryView');
         $view->description = 'View a Category';
         $auth->add($view);*/
 
@@ -52,11 +52,11 @@ class RbacController extends \yii\web\Controller
 
 
         $user = $auth->getRole('Admin');
-        //$auth->addChild($user, $edit);
-        //$auth->addChild($user, $create);
-        //$auth->addChild($edit, $update);
-        //$auth->addChild($edit, $delete);
-        $auth->addChild($user, $index);
+        $auth->addChild($user, $edit);
+        $auth->addChild($user, $create);
+        $auth->addChild($edit, $update);
+        $auth->addChild($edit, $delete);
+        //$auth->addChild($user, $index);
         //$auth->addChild($user, $view);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()

@@ -12,6 +12,8 @@ $this->title = \app\models\User::getUserFullNameById($model->User_id);
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if(Yii::$app->user->can('userBibiEdit')) { ?>
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -22,6 +24,8 @@ $this->title = \app\models\User::getUserFullNameById($model->User_id);
             ],
         ]) ?>
     </p>
+
+    <?php } ?>
 
     <div class="col-sm-8">
         <p><?= $model->description ?></p>
@@ -43,12 +47,27 @@ $this->title = \app\models\User::getUserFullNameById($model->User_id);
                 </table>
             </a>
         <?php } ?>
-        <h2>Paper</h2>
-        <a href="../resources/userbibi/<?= $row['id'] ?>.pdf" target="_blank" class="btn btn-primary"><?= $row['paper'] ?></a>
+        <a href="../resources/userbibi/<?= $model->id ?>.pdf" target="_blank" class="btn btn-default paper"><span class="glyphicon glyphicon-download-alt"></span> The Paper</a>
     </div>
 
-    <div class="col-sm-4">
-
+    <div class="col-sm-4 user-pic">
+        <img src="../resources/userbibi_pic/<?= $model->id ?>.jpg">
     </div>
 
 </div>
+
+<style>
+    .paper{
+        margin-top:20px;
+        margin-bottom: 20px;
+    }
+    .user-pic img{
+        width: 100%;
+        text-align: center;
+    }
+    @media (max-width: 767px) {
+        .user-pic img{
+            width: 50%;
+        }
+    }
+</style>
