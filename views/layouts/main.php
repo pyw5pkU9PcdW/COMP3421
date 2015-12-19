@@ -54,7 +54,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Vincent Smart Conference 2016',
+        'brandLabel' => 'VM Smart Conference 2016',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top navbar_custom',
@@ -218,7 +218,11 @@ $filename = $PNG_TEMP_DIR.'test.png';
         }
     });
 
-    $(window).on('scroll', function() {
+    $('#navbar-custom-btn-base').addClass( "navbar-custom-btn-base-background");
+    $('#w0').addClass( "navbar-background-light");
+    $('.navbar-brand').addClass( "navbar-custom-btn-base-background");
+
+    /*$(window).on('scroll', function() {
         if($(window).scrollTop() > 0) {
             $('#navbar-custom-btn-base').addClass( "navbar-custom-btn-base-background");
             $('#w0').addClass( "navbar-background-light");
@@ -228,7 +232,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
             $('#w0').removeClass( "navbar-background-light");
             $('.navbar-brand').removeClass( "navbar-custom-btn-base-background");
         }
-    });
+    });*/
 
     <?php if(!Yii::$app->user->isGuest) { ?>
 

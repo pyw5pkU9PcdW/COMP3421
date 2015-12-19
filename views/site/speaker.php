@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="row">
                     <div class="col-md-4" align="center">
                         <div class="member add-animation animation-1">
-                            <img class="img-circle" src="/comp3421/web/../resources/speaker/ng-vincent.jpg"/>
+                            <img class="img-circle" src="/comp3421/web/../resources/speaker/ng-VM.jpg"/>
                             <div class="description">
-                                <h3 class="big-text">Dr NG To Yee Vincent</h3>
+                                <h3 class="big-text">Dr NG To Yee VM</h3>
                                 <h5>Topic: Emotion Discovery with your FB photos</h5>
                                 <h5>Research Interest: MOOC for school students</h5>
                                 <p class="small-text">Elena takes care of growth, product development and partnerships. She is analytical, driven and adapts easily to new conditions, while trying to keep everyone on track.

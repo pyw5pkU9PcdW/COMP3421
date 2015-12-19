@@ -35,7 +35,7 @@ class Survey extends \yii\db\ActiveRecord
         return [
             [['id', 'title', 'Administrator_id', 'is_enable'], 'required'],
             [['id', 'Administrator_id', 'is_enable'], 'integer'],
-            [['title'], 'string', 'max' => 45]
+            [['title'], 'string', 'max' => 300]
         ];
     }
 
