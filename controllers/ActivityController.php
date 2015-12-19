@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ParticipantHasActivity;
 use Yii;
 use app\models\Activity;
 use app\models\ActivitySearch;
@@ -172,6 +173,22 @@ class ActivityController extends Controller
                 throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
             }
         }
+    }
+
+    public function actionRecord() {
+        $dataProvider = [];
+        $activities = Activity::getAllActivities();
+        foreach($activities as $activity) {
+            $row['id'] = $activity['id'];
+            $row['Activity_name'] = $activity['Activity_name'];
+            $row['datetime'] = $activity['startDatetime'];
+            $row['total'] = ParticipantHasActivity::getTotalJoinCountByActivityId($activity['id']);
+            $row['attend'] = ParticipantHasActivity::getTotalAttendCountByActivityId($activity['id']);
+            array_push($dataProvider, $row);
+        }
+        return $this->render('record', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

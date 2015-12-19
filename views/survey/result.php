@@ -56,9 +56,10 @@ $this->title = $model->title;
                             if($('#ct-chart-'+<?= $row['id'] ?>).is(':empty')) {
                                 var options = {
                                     distributeSeries: true,
-                                    sscaleMinSpace: 40,
+                                    divisor: 4,
                                     axisX: {
-                                        showGrid: false
+                                        showGrid: false,
+                                        scaleMinSpace: 40,
                                     }
                                 };
                                 var data = {
@@ -122,7 +123,23 @@ $this->title = $model->title;
                                 labels: <?= json_encode($content) ?>,
                                 series: <?= json_encode($count) ?>
                             };
-                            var pieChart<?= $row['id'] ?> = new Chartist.Pie('#ct-chart-' +<?= $row['id'] ?>, data, options);
+                            var responsiveOptions = [
+                                ['screen and (min-width: 768px)', {
+                                    chartPadding: 30,
+                                    labelOffset: -50,
+                                    donutWidth: 30,
+                                    labelDirection: 'explode',
+                                    labelInterpolationFnc: function(value) {
+                                        return value
+                                    }
+                                }],
+                                ['screen and (max-width: 767px)', {
+                                    labelOffset: -40,
+                                    chartPadding: 20,
+                                    donutWidth: 25
+                                }]
+                            ];
+                            var pieChart<?= $row['id'] ?> = new Chartist.Pie('#ct-chart-' +<?= $row['id'] ?>, data, options, responsiveOptions);
 
                             pieChart<?= $row['id'] ?>.on('draw', function (data) {
                                 if(data.type === 'slice') {

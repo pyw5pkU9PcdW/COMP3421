@@ -95,4 +95,12 @@ class ParticipantHasActivity extends \yii\db\ActiveRecord
         }
         return $arr;
     }
+
+    public function getTotalJoinCountByActivityId($id) {
+        return ParticipantHasActivity::find()->where(['Activity_id'=>$id])->count();
+    }
+
+    public function getTotalAttendCountByActivityId($id) {
+        return ParticipantHasActivity::find()->where(['Activity_id'=>$id, 'attendance' => 1])->count();
+    }
 }

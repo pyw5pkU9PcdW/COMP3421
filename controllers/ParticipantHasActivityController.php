@@ -166,4 +166,14 @@ class ParticipantHasActivityController extends Controller
             }
         }
     }
+
+    public function actionAttend($id, $token = null, $activity) {
+        if(($model = ParticipantHasActivity::findOne(['Participant_id'=>$id, 'Activity_id'=>$activity])) !== null) {
+            $model->attendance = 1;
+            $model->attend_datetime = date("Y-m-d H:i:s");
+            $model->save();
+            return true;
+        }
+        return false;
+    }
 }
