@@ -178,7 +178,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
 
         if (!(Yii::$app->user->isGuest)) {
             // user data
-            QRcode::png( Yii::$app->user->identity->getId(), $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+            QRcode::png(Yii::$app->user->identity->getId().'&activity=' , $filename, $errorCorrectionLevel, $matrixPointSize, 2);
             echo '<div class="qrCode"><img src="'.$PNG_WEB_DIR.basename($filename).'"></div>';
         }
     }
