@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * TopicController implements the CRUD actions for Topic model.
@@ -32,13 +33,21 @@ class TopicController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Topic::find(),
-        ]);
+        if(Yii::$app->user->can('topicIndex')) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Topic::find(),
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -49,9 +58,17 @@ class TopicController extends Controller
      */
     public function actionView($id, $Category_id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id, $Category_id),
-        ]);
+        if(Yii::$app->user->can('topicView')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id, $Category_id),
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -61,14 +78,22 @@ class TopicController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Topic();
+        if(Yii::$app->user->can('topicCreate')) {
+            $model = new Topic();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Category_id' => $model->Category_id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'Category_id' => $model->Category_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -81,14 +106,22 @@ class TopicController extends Controller
      */
     public function actionUpdate($id, $Category_id)
     {
-        $model = $this->findModel($id, $Category_id);
+        if(Yii::$app->user->can('topicUpdate')) {
+            $model = $this->findModel($id, $Category_id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'Category_id' => $model->Category_id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'Category_id' => $model->Category_id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -101,9 +134,17 @@ class TopicController extends Controller
      */
     public function actionDelete($id, $Category_id)
     {
-        $this->findModel($id, $Category_id)->delete();
+        if(Yii::$app->user->can('topicDelete')) {
+            $this->findModel($id, $Category_id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**

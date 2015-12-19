@@ -8,6 +8,7 @@ use app\models\VenueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * VenueController implements the CRUD actions for Venue model.
@@ -32,13 +33,21 @@ class VenueController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new VenueSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(Yii::$app->user->can('venueIndex')) {
+            $searchModel = new VenueSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -49,9 +58,17 @@ class VenueController extends Controller
      */
     public function actionView($id, $VenueType_id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id, $VenueType_id),
-        ]);
+        if(Yii::$app->user->can('venueView')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id, $VenueType_id),
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**
@@ -61,14 +78,22 @@ class VenueController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Venue();
+        if(Yii::$app->user->can('venueCreate')) {
+            $model = new Venue();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'VenueType_id' => $model->VenueType_id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'VenueType_id' => $model->VenueType_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -81,14 +106,22 @@ class VenueController extends Controller
      */
     public function actionUpdate($id, $VenueType_id)
     {
-        $model = $this->findModel($id, $VenueType_id);
+        if(Yii::$app->user->can('venueUpdate')) {
+            $model = $this->findModel($id, $VenueType_id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'VenueType_id' => $model->VenueType_id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'VenueType_id' => $model->VenueType_id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
     }
 
@@ -101,9 +134,17 @@ class VenueController extends Controller
      */
     public function actionDelete($id, $VenueType_id)
     {
-        $this->findModel($id, $VenueType_id)->delete();
+        if(Yii::$app->user->can('venueDelete')) {
+            $this->findModel($id, $VenueType_id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
+        }
     }
 
     /**

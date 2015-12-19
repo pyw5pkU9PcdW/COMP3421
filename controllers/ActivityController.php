@@ -176,19 +176,27 @@ class ActivityController extends Controller
     }
 
     public function actionRecord() {
-        $dataProvider = [];
-        $activities = Activity::getAllActivities();
-        foreach($activities as $activity) {
-            $row['id'] = $activity['id'];
-            $row['Activity_name'] = $activity['Activity_name'];
-            $row['datetime'] = $activity['startDatetime'];
-            $row['total'] = ParticipantHasActivity::getTotalJoinCountByActivityId($activity['id']);
-            $row['attend'] = ParticipantHasActivity::getTotalAttendCountByActivityId($activity['id']);
-            array_push($dataProvider, $row);
+        if(Yii::$app->user->can('activityRecord')) {
+            $dataProvider = [];
+            $activities = Activity::getAllActivities();
+            foreach($activities as $activity) {
+                $row['id'] = $activity['id'];
+                $row['Activity_name'] = $activity['Activity_name'];
+                $row['datetime'] = $activity['startDatetime'];
+                $row['total'] = ParticipantHasActivity::getTotalJoinCountByActivityId($activity['id']);
+                $row['attend'] = ParticipantHasActivity::getTotalAttendCountByActivityId($activity['id']);
+                array_push($dataProvider, $row);
+            }
+            return $this->render('record', [
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            if(Yii::$app->user->isGuest) {
+                Yii::$app->user->loginRequired();
+            } else {
+                throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            }
         }
-        return $this->render('record', [
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
     /**

@@ -8,33 +8,30 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        //$index = $auth->getPermission('postIndex');
-        //$index->description = 'Index of the Forum';
-        //$auth->add($index);
+        $index = $auth->createPermission('categoryIndex');
+        $index->description = 'Index of the Category';
+        $auth->add($index);
 
-        //$create = $auth->getPermission('postCreate');
-        //$create->description = 'Create a Post';
-        //$auth->add($create);
+        $create = $auth->createPermission('categoryCreate');
+        $create->description = 'Create a Category';
+        $auth->add($create);
 
-        //$update = $auth->getPermission('postUpdate');
-        //$update->description = 'Update a Post';
-        //$auth->add($update);
+        $update = $auth->createPermission('categoryUpdate');
+        $update->description = 'Update a Category';
+        $auth->add($update);
 
-        //$delete = $auth->getPermission('postDelete');
-        //$delete->description = 'Remove a Post';
-        //$auth->add($delete);
+        $delete = $auth->createPermission('categoryDelete');
+        $delete->description = 'Remove a Category';
+        $auth->add($delete);
 
-        //$edit = $auth->getPermission('postEdit');
-        //$edit->description = 'Update and Delete a Post';
-        //$auth->add($edit);
+        $edit = $auth->createPermission('categoryEdit');
+        $edit->description = 'Update and Delete a Category';
+        $auth->add($edit);
 
-        //$view = $auth->getPermission('announcementView');
-        //$view->description = 'View a Post';
-        //$auth->add($view);
-
-        $view = $auth->createPermission('surveyResult');
-        $view->description = 'Show the result of the survey';
+        $view = $auth->createPermission('categoryView');
+        $view->description = 'View a Category';
         $auth->add($view);
+
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
@@ -55,11 +52,11 @@ class RbacController extends \yii\web\Controller
 
 
         $user = $auth->getRole('Admin');
-        //$auth->addChild($user, $edit);
-        //$auth->addChild($user, $create);
-        //$auth->addChild($edit, $update);
-        //$auth->addChild($edit, $delete);
-        //$auth->addChild($user, $index);
+        $auth->addChild($user, $edit);
+        $auth->addChild($user, $create);
+        $auth->addChild($edit, $update);
+        $auth->addChild($edit, $delete);
+        $auth->addChild($user, $index);
         $auth->addChild($user, $view);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()

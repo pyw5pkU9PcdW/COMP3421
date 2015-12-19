@@ -97,13 +97,6 @@ $filename = $PNG_TEMP_DIR.'test.png';
     } else {
         $navItems = [
             ['label' => 'User', 'url' => ['/user/index'], 'visible' => Yii::$app->user->can('userIndex')],
-            [
-                'label' => 'Venue',
-                'items' => [
-                    ['label' => 'Venue', 'url' => ['/venue/index']],
-                    ['label' => 'Venue Type', 'url' => ['/venue-type/index']],
-                ],
-            ],
             //['label' => 'VenueType', 'url' => ['/venue-type/index']],
             ['label' => 'Schedule', 'url' => ['/activity/index']],
             ['label' => 'Outside Attraction', 'url' => ['/outside-attraction/index']],
@@ -117,6 +110,22 @@ $filename = $PNG_TEMP_DIR.'test.png';
             //['label' => 'Post', 'url' => ['/post/index']],
             //['label' => 'Survey', 'url' => ['/survey/index']],
             ['label' => 'Announcement', 'url' => ['/announcement/index'], 'visible' => Yii::$app->user->can('announcementIndex')],
+            [
+                'label' => 'Venue Management',
+                'items' => [
+                    ['label' => 'Venue', 'url' => ['/venue/index'], 'visible' => Yii::$app->user->can('venueIndex')],
+                    ['label' => 'Venue Type', 'url' => ['/venue-type/index'], 'visible' => Yii::$app->user->can('venueTypeIndex')],
+                ],
+                'visible' => Yii::$app->user->can('venueIndex')
+            ],
+            [
+                'label' => 'Topic/Category Management',
+                'items' => [
+                    ['label' => 'Topic', 'url' => ['/topic/index'], 'visible' => Yii::$app->user->can('topicIndex')],
+                    ['label' => 'Category', 'url' => ['/category/index'], 'visible' => Yii::$app->user->can('categoryIndex')],
+                ],
+                'visible' => Yii::$app->user->can('topicIndex')
+            ],
             //['label' => 'Question', 'url' => ['/question/index']],
             //['label' => 'Message', 'url' => ['/message/index']],
             //['label' => 'Radio Button', 'url' => ['/radio-button/index']],
