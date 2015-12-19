@@ -8,28 +8,28 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('categoryIndex');
-        $index->description = 'Index of the Category';
-        $auth->add($index);
+        //$index = $auth->createPermission('categoryIndex');
+        //$index->description = 'Index of the Category';
+        //$auth->add($index);
 
-        $create = $auth->createPermission('categoryCreate');
-        $create->description = 'Create a Category';
-        $auth->add($create);
+        //$create = $auth->createPermission('categoryCreate');
+        //$create->description = 'Create a Category';
+        //$auth->add($create);
 
-        $update = $auth->createPermission('categoryUpdate');
-        $update->description = 'Update a Category';
-        $auth->add($update);
+        //$update = $auth->createPermission('categoryUpdate');
+        //$update->description = 'Update a Category';
+        //$auth->add($update);
 
-        $delete = $auth->createPermission('categoryDelete');
-        $delete->description = 'Remove a Category';
-        $auth->add($delete);
+        //$delete = $auth->createPermission('categoryDelete');
+        //$delete->description = 'Remove a Category';
+        //$auth->add($delete);
 
-        $edit = $auth->createPermission('categoryEdit');
-        $edit->description = 'Update and Delete a Category';
-        $auth->add($edit);
+        //$edit = $auth->createPermission('categoryEdit');
+        //$edit->description = 'Update and Delete a Category';
+        //$auth->add($edit);
 
-        $view = $auth->createPermission('categoryView');
-        $view->description = 'View a Category';
+        $view = $auth->createPermission('qrCodeGenerate');
+        $view->description = 'Generate the QR Code on Nav Menu';
         $auth->add($view);
 
 
@@ -51,12 +51,12 @@ class RbacController extends \yii\web\Controller
         $auth->add($sponsor);*/
 
 
-        $user = $auth->getRole('Admin');
-        $auth->addChild($user, $edit);
-        $auth->addChild($user, $create);
-        $auth->addChild($edit, $update);
-        $auth->addChild($edit, $delete);
-        $auth->addChild($user, $index);
+        $user = $auth->getRole('Participant');
+        //$auth->addChild($user, $edit);
+        //$auth->addChild($user, $create);
+        //$auth->addChild($edit, $update);
+        //$auth->addChild($edit, $delete);
+        //$auth->addChild($user, $index);
         $auth->addChild($user, $view);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()

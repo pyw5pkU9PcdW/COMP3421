@@ -1,0 +1,50 @@
+.record-link{
+    color: rgb(67,67,69);
+}
+.record-link:hover, .record-link:focus{
+    color: rgb(67,67,69);
+    text-decoration: none;
+}
+.record-row:hover, .record-row:focus{
+    background-color: rgba(230,230,231,0.9);
+    box-shadow: 0px 0px 6px #cdcdcd;
+    -webkit-box-shadow: 0px 0px 6px #cdcdcd;
+}
+.ct-chart{
+    text-align: center;
+}
+.attend-percentage{
+    font-size: 60px;
+    line-height: 300px;
+}
+.ct-series-b .ct-slice-donut{
+    stroke: rgb(170,170,171);
+}
+@media (max-width: 767px) {
+    .record-row{
+        margin-bottom: -30px;
+        text-align: center;
+    }
+    .people-attend-num{
+        font-size: 24px;
+        font-weight: 400;
+    }
+    .people-attend{
+        font-size: 24px;
+    }
+    .ct-chart{
+        margin-top: 30px;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media (min-width: 768px) {
+    .people-attend-num{
+        font-size: 60px;
+        font-weight: 400;
+    }
+    .people-attend{
+        font-size: 30px;
+    }
+}
