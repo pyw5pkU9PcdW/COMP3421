@@ -1,0 +1,1 @@
+2015-12-19 14:25:55: imagepng(/Applications/XAMPP/xamppfiles/htdocs/COMP3421/views/layouts/temp/test.png): failed to open stream: Permission denied
