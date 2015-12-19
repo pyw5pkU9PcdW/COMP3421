@@ -49,12 +49,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', 'title', 'first_name', 'last_name', 'email', 'address', 'city', 'country', 'department', 'organization', 'mobile_number', 'rewardPoint', 'payment_status'], 'required'],
-            [['mobile_number', 'fax_number', 'rewardPoint', 'payment_status'], 'integer'],
+            [['title', 'mobile_number', 'fax_number', 'rewardPoint', 'payment_status', 'score'], 'integer'],
             [['username', 'first_name', 'last_name', 'email', 'authKey', 'accessToken'], 'string', 'max' => 45],
             [['password'], 'string', 'max' => 255],
             [['password'], 'required', 'on' => 'create'],
             ['email', 'email'],
-            [['title'], 'string', 'max' => 10],
             [['address'], 'string', 'max' => 100],
             [['city', 'country', 'department'], 'string', 'max' => 50],
             [['organization', 'remark'], 'string', 'max' => 200],
@@ -202,5 +201,28 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $arr[$row['id']] = Title::getTitleById($row['title']).' '.$row['first_name'].' '.$row['last_name'];
         }
         return $arr;
+    }
+
+    public function addScore($score) {
+        $model = User::findOne(Yii::$app->user->id);
+        $model->score = $model->score + $score;
+        if($model->save()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function reduceScore($score) {
+        $model = User::findOne(Yii::$app->user->id);
+        $model->score = $model->score - $score;
+        if($model->save()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getScore() {
+        $model = User::findOne(Yii::$app->user->id);
+        return $model->score;
     }
 }

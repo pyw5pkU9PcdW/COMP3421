@@ -97,6 +97,7 @@ class UserController extends Controller
             if ($model->load(Yii::$app->request->post())) {
                 $role->load(Yii::$app->request->post());
                 $model->accessToken = md5(rand(0, 1000));
+                $model->score = 0;
                 if($model->save()) {
                     $auth = Yii::$app->authManager;
                     $newRole = $auth->getRole($role->name);

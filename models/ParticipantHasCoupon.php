@@ -64,4 +64,11 @@ class ParticipantHasCoupon extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Coupon::className(), ['id' => 'coupon_id']);
     }
+
+    public function checkUserHasCoupon($id) {
+        if(ParticipantHasCoupon::findOne(['Participant_id' => Yii::$app->user->id, 'coupon_id' => $id]) !== null) {
+            return true;
+        }
+        return false;
+    }
 }

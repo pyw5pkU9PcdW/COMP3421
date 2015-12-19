@@ -173,10 +173,15 @@ class ParticipantHasActivityController extends Controller
             $auth = \Yii::$app->authManager;
             if(password_verify($token, $admin->password) && $auth->checkAccess($admin->id, 'participantHasActivity')) {
                 if(($model = ParticipantHasActivity::findOne(['Participant_id'=>$id, 'Activity_id'=>$activity])) !== null) {
-                    $model->attendance = 1;
-                    $model->attend_datetime = date("Y-m-d H:i:s");
-                    if($model->save()) {
-                        die('success');
+                    if($model->attendance != 1) {
+                        $model->attendance = 1;
+                        $model->attend_datetime = date("Y-m-d H:i:s");
+                        \app\models\User::addScore(10);
+                        if($model->save()) {
+                            die('success');
+                        }
+                    } else {
+                        die('Attended');
                     }
                 }
             }

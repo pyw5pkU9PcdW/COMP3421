@@ -2,14 +2,23 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\bootstrap\Alert;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Surveys';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Feedback';
+if($done) {
+    echo Alert::widget([
+        'options' => [
+            'class' => 'alert-success fade in',
+        ],
+        'body' => '<strong>Thank You!</strong> We got your feedback and you have earned <strong>5</strong> marks.<br>See what can get as <strong><a href="'.Url::to('coupon/index').'">Coupons</a></strong>',
+    ]);
+}
 ?>
-<div class="survey-index">
+<div class="survey-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

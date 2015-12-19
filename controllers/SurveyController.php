@@ -10,6 +10,7 @@ use app\models\Radiobutton;
 use app\models\SurveyHasParticipant;
 use app\models\TextBox;
 use app\models\TextResponse;
+use app\models\User;
 use Faker\Provider\fr_FR\Text;
 use Yii;
 use app\models\Survey;
@@ -41,7 +42,7 @@ class SurveyController extends Controller
      * Lists all Survey models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($done = false)
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Survey::find(),
@@ -49,6 +50,8 @@ class SurveyController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'done' => $done
+            ,
         ]);
     }
 
@@ -121,14 +124,14 @@ class SurveyController extends Controller
                     if($row['temp_type'] == 2) {
                         Radiobutton::increaseOptionById($input);
                     }
-                    echo var_dump($input).'<br><br>';
                 }
                 $participant = new SurveyHasParticipant();
                 $participant->Participant_id = Yii::$app->user->id;
                 $participant->Survey_id = $model->id;
                 $participant->datetime = date("Y-m-d H:i:s");
                 $participant->save();
-                die();
+                \app\models\User::addScore(5);
+                return $this->redirect(['index', 'done' => true]);
             } else {
                 //die(var_dump($questionModels));
                 return $this->render('view', [

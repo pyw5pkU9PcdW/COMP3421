@@ -8,30 +8,33 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('participantHasActivity');
-        $index->description = 'Mark Attend of Activity';
+        $index = $auth->createPermission('couponIndex');
+        $index->description = 'Index of the coupon';
         $auth->add($index);
 
-        /*$create = $auth->createPermission('userBibiCreate');
-        $create->description = 'Create a User Bibi';
+        $create = $auth->createPermission('couponCreate');
+        $create->description = 'Create a coupon';
         $auth->add($create);
 
-        $update = $auth->createPermission('userBibiUpdate');
-        $update->description = 'Update a User Bibi';
+        $update = $auth->createPermission('couponUpdate');
+        $update->description = 'Update a coupon';
         $auth->add($update);
 
-        $delete = $auth->createPermission('userBibiDelete');
-        $delete->description = 'Remove a User Bibi';
+        $delete = $auth->createPermission('couponDelete');
+        $delete->description = 'Remove a coupon';
         $auth->add($delete);
 
-        $edit = $auth->createPermission('userBibiEdit');
-        $edit->description = 'Update and Delete a User Bibi';
-        $auth->add($edit);*/
+        $edit = $auth->createPermission('couponEdit');
+        $edit->description = 'Update and Delete a coupon';
+        $auth->add($edit);
 
-        /*$view = $auth->createPermission('categoryView');
-        $view->description = 'View a Category';
-        $auth->add($view);*/
+        $view = $auth->createPermission('couponView');
+        $view->description = 'View a coupon';
+        $auth->add($view);
 
+        $use = $auth->createPermission('couponGet');
+        $use->description = 'Get a coupon';
+        $auth->add($use);
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
@@ -52,12 +55,18 @@ class RbacController extends \yii\web\Controller
 
 
         $user = $auth->getRole('Admin');
-        //$auth->addChild($user, $edit);
-        //$auth->addChild($user, $create);
-        //$auth->addChild($edit, $update);
-        //$auth->addChild($edit, $delete);
+        $auth->addChild($user, $edit);
+        $auth->addChild($user, $create);
+        $auth->addChild($edit, $update);
+        $auth->addChild($edit, $delete);
         $auth->addChild($user, $index);
-        //$auth->addChild($user, $view);
+        $auth->addChild($user, $view);
+        $auth->addChild($user, $use);
+
+        $user = $auth->getRole('Participant');
+        $auth->addChild($user, $index);
+        $auth->addChild($user, $view);
+        $auth->addChild($user, $use);
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.
