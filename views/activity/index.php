@@ -42,7 +42,6 @@ $this->title = 'Conference Schedule';
     <?php } else { ?>
 
 
-        <?php echo $this->render('_search',['model' => $searchModel]); ?>
         <?php Pjax::begin(); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,

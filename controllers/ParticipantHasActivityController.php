@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Activity;
+use app\models\User;
 use Yii;
 use app\models\ParticipantHasActivity;
 use yii\data\ActiveDataProvider;
@@ -167,13 +168,19 @@ class ParticipantHasActivityController extends Controller
         }
     }
 
-    public function actionAttend($id, $token = null, $activity) {
-        if(($model = ParticipantHasActivity::findOne(['Participant_id'=>$id, 'Activity_id'=>$activity])) !== null) {
-            $model->attendance = 1;
-            $model->attend_datetime = date("Y-m-d H:i:s");
-            $model->save();
-            return true;
+    public function actionAttend($id, $activity, $user, $token) {
+        if(($admin = User::findByUsername($user)) !== null) {
+            $auth = \Yii::$app->authManager;
+            if(password_verify($token, $admin->password) && $auth->checkAccess($admin->id, 'participantHasActivity')) {
+                if(($model = ParticipantHasActivity::findOne(['Participant_id'=>$id, 'Activity_id'=>$activity])) !== null) {
+                    $model->attendance = 1;
+                    $model->attend_datetime = date("Y-m-d H:i:s");
+                    if($model->save()) {
+                        die('success');
+                    }
+                }
+            }
         }
-        return false;
+        die('fail');
     }
 }
