@@ -37,6 +37,9 @@ $filename = $PNG_TEMP_DIR.'test.png';
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?> | VSC 2016</title>
     <?php $this->head(); ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link href="css/custom_global.css" rel="stylesheet">
     <link href="css/custom_form.css" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
@@ -44,8 +47,6 @@ $filename = $PNG_TEMP_DIR.'test.png';
     <link href="css/custom_nav.css" rel="stylesheet">
     <link href="css/notification.css" rel="stylesheet">
     <link href="css/custom_nav_toggle_btn.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
 <?php //echo '<img src="'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';?>
@@ -319,7 +320,10 @@ $filename = $PNG_TEMP_DIR.'test.png';
     <?php } ?>
 
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+<script>
+    $('.parallax').parallax();
+</script>
 <?php $this->endBody() ?>
 </body>
 </html>
