@@ -176,15 +176,30 @@ $filename = $PNG_TEMP_DIR.'test.png';
         if (isset($_REQUEST['size']))
             $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
 
-        if (!(Yii::$app->user->isGuest)) {
+        $activity = \app\models\Activity::getNextActivity();
+        if (!(Yii::$app->user->isGuest) && $activity != false) {
             // user data
-            QRcode::png(Yii::$app->user->identity->getId().'&activity=' , $filename, $errorCorrectionLevel, $matrixPointSize, 2);
-            echo '<div class="qrCode"><img src="'.$PNG_WEB_DIR.basename($filename).'"></div>';
+            QRcode::png('https://comp3421-3-ansonmouse1-1.c9users.io/web/index.php?r=participant-has-activity/attend&id='.Yii::$app->user->identity->getId().'&activity='.$activity['id'].'&user=admin&token=admin' , $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+            echo '<div class="qrCode">
+                    <img src="'.$PNG_WEB_DIR.basename($filename).'"><br>
+                    Token for activity at<br> '.$activity['startDatetime'].'
+                  </div>';
         }
     }
 
     NavBar::end();
     ?>
+    <style>
+        .qrCode{
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .qrCode img{
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
     <div class="container-fluid" style="margin-top: 70px">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

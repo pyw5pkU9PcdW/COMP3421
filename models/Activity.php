@@ -99,4 +99,19 @@ class Activity extends \yii\db\ActiveRecord
     public function getActivitiesByPicUserId($id) {
         return Activity::find()->where(['personInCharge'=>$id])->asArray()->all();
     }
+
+    public function getNextActivity() {
+        $sql = 'SELECT * FROM 13027272d.Participant_has_Activity, 13027272d.Activity
+                WHERE Participant_id = '.Yii::$app->user->id.'
+                AND 13027272d.Participant_has_Activity.Activity_id = 13027272d.Activity.id
+                 ORDER BY startDatetime ASC';
+        $raw = Activity::findBySql($sql)->asArray()->all();
+        foreach($raw as $row) {
+            $eventTimestamp = strtotime($row['startDatetime']);
+            if($eventTimestamp - time() + 1800 > 0) {
+                return $row;
+            }
+        }
+        return false;
+    }
 }
