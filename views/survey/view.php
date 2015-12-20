@@ -36,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if(Yii::$app->user->can('surveyEdit')){ ?>
         <p>
-            <?= Html::a('Update', ['update', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a('Delete', ['delete', 'id' => $model->id, 'Administrator_id' => $model->Administrator_id], [
                 'class' => 'btn btn-danger',
                 'data' => [
