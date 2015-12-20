@@ -73,11 +73,8 @@ if($apply == 2) {
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
                 'Coupon_name',
-                'Coupon_description',
                 'expireDatetime',
-                'lastModifyDatetime',
                 // 'requireScore',
                 // 'image',
 

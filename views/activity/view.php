@@ -58,6 +58,13 @@ $this->title = $model->Activity_name;
                         'method' => 'post',
                     ],
                 ]) ?>
+                <?php if(!Yii::$app->user->isGuest && strtotime($model->startDatetime) - time() > 0) { ?>
+                    <?php if(!\app\models\ParticipantHasActivity::checkHasJoin($model->id)) { ?>
+                        <?= Html::a('Add to your Schedule', ['/participant-has-activity/join', 'activityId' => $model->id], ['class' => 'btn btn-default']) ?>
+                    <?php } else { ?>
+                        <?= Html::a('Remove from your Schedule', ['/participant-has-activity/quit', 'activityId' => $model->id], ['class' => 'btn btn-default']) ?>
+                    <?php } ?>
+                <?php } ?>
             </p>
 
             <?= DetailView::widget([

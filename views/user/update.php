@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = 'Update User: ' . ' ' . $model->id;
+$this->title = 'Update User: ' . ' ' . \app\models\User::getUserFullNameById($model->id);
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => \app\models\User::getUserFullNameById($model->id), 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="user-update">
+<div class="user-update container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

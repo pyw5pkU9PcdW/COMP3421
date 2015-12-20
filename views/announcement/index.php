@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 $this->title = 'Announcements';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="announcement-index">
+<div class="announcement-index container">
 
     <?php Pjax::begin() ?>
     <h1><?= Html::encode($this->title) ?></h1>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'title',
                 'format'=>'raw',
-                'value'=>function($data) {return Html::a($data->title, ['attribute/view', 'id'=>$data->id]);}
+                'value'=>function($data) {return Html::a($data->title, ['announcement/view', 'id'=>$data->id]);}
             ],
             'datetime',
 

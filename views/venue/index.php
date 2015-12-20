@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Venues';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="venue-index">
+<div class="venue-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,8 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'name',
             'location',
-            'map',
-            'floorPlan',
             [
                 'attribute' => 'VenueType_id',
                 'value' => 'venueType.name'

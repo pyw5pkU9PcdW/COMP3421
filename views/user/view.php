@@ -6,11 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = $model->id;
+$this->title = \app\models\User::getUserFullNameById($model->id);
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-view">
+<div class="user-view container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,6 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'first_name',
             'last_name',
             'email:email',
+            'address',
+            'city',
+            'country',
+            'department',
+            'organization',
+            'mobile_number',
+            'fax_number',
         ],
     ]) ?>
     <?= DetailView::widget([

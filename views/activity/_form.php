@@ -11,7 +11,7 @@ use dosamigos\datetimepicker\DateTimePicker;
 
 <div class="activity-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'Activity_name')->textInput(['maxlength' => true]) ?>
 

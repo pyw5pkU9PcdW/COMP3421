@@ -8,7 +8,7 @@ class RbacController extends \yii\web\Controller
         $auth = \Yii::$app->authManager;
         //die(var_dump($auth->getRoles()));
 
-        $index = $auth->createPermission('couponIndex');
+        /*$index = $auth->createPermission('couponIndex');
         $index->description = 'Index of the coupon';
         $auth->add($index);
 
@@ -34,7 +34,10 @@ class RbacController extends \yii\web\Controller
 
         $use = $auth->createPermission('couponGet');
         $use->description = 'Get a coupon';
-        $auth->add($use);
+        $auth->add($use);*/
+
+        $create = $auth->getPermission('qrCodeGenerate');
+        //$quit = $auth->getPermission('participantHasActivityDelete');
 
         /*$view = $auth->createPermission('activityView');
         $view->description = 'Index of the User Controller';
@@ -55,18 +58,18 @@ class RbacController extends \yii\web\Controller
 
 
         $user = $auth->getRole('Admin');
-        $auth->addChild($user, $edit);
+        //$auth->addChild($user, $edit);
         $auth->addChild($user, $create);
-        $auth->addChild($edit, $update);
-        $auth->addChild($edit, $delete);
-        $auth->addChild($user, $index);
-        $auth->addChild($user, $view);
-        $auth->addChild($user, $use);
+        //$auth->addChild($edit, $update);
+        //$auth->addChild($edit, $delete);
+        //$auth->addChild($user, $index);
+        //$auth->addChild($user, $view);
+        //$auth->addChild($user, $quit);
 
-        $user = $auth->getRole('Participant');
+        /*$user = $auth->getRole('Participant');
         $auth->addChild($user, $index);
         $auth->addChild($user, $view);
-        $auth->addChild($user, $use);
+        $auth->addChild($user, $use);*/
 
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.

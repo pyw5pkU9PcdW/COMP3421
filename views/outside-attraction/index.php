@@ -45,7 +45,6 @@ $this->title = 'Outside Attractions';
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
                 'Outside_Attraction_name',
                 'Outside_Attraction_description',
                 'Outside_Attraction_let',

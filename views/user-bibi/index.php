@@ -7,10 +7,10 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UserBibiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'User Bibis';
+$this->title = 'User Biography';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-bibi-index">
+<div class="user-bibi-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,10 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'User_id',
             'description',
-            'paper',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

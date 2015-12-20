@@ -10,7 +10,7 @@ $this->title = 'Create Activity';
 $this->params['breadcrumbs'][] = ['label' => 'Activities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activity-create">
+<div class="activity-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

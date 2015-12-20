@@ -34,8 +34,4 @@ $this->title = 'Login';
         </div>
 
     <?php ActiveForm::end(); ?>
-
-    <div style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>test/test</strong>.<br>
-    </div>
 </div>

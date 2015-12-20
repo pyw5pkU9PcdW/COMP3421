@@ -9,7 +9,7 @@ use yii\grid\GridView;
 $this->title = 'Venue Types';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="venue-type-index">
+<div class="venue-type-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
             'description',
 

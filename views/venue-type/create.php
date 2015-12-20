@@ -10,7 +10,7 @@ $this->title = 'Create Venue Type';
 $this->params['breadcrumbs'][] = ['label' => 'Venue Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="venue-type-create">
+<div class="venue-type-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

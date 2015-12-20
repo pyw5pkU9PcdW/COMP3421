@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Outside_Attraction_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Outside_Attraction_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Outside_Attraction_description')->textarea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Outside_Attraction_let')->textInput(['maxlength' => true]) ?>
 

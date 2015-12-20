@@ -10,7 +10,7 @@ $this->title = 'Create Topic';
 $this->params['breadcrumbs'][] = ['label' => 'Topics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="topic-create">
+<div class="topic-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

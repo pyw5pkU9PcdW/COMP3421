@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 $this->title = 'Conference Schedule';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activity-index">
+<div class="activity-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -54,17 +54,20 @@ $this->title = 'Conference Schedule';
                 //'Venue_id',
                 [
                     'attribute' => 'Venue_id',
-                    'value' => 'venue.name'
+                    'value' => 'venue.name',
+                    'label' => 'Venue'
                 ],
                 // 'Topic_id',
                 [
                     'attribute' => 'Topic_id',
-                    'value' => 'topic.name'
+                    'value' => 'topic.name',
+                    'label' =>'Label'
                 ],
                 //'ActivityType_id',
                 [
                     'attribute' => 'ActivityType_id',
-                    'value' => 'activityType.ActivityType_name'
+                    'value' => 'activityType.ActivityType_name',
+                    'label' => 'Activity Type'
                 ],
                 // 'Administrator_id',
                 // 'Administrator_User_id',

@@ -151,7 +151,7 @@ class ParticipantHasActivityController extends Controller
     }
 
     public function actionQuit($activityId) {
-        if(Yii::$app->user->can('participantHasActivityCreate')) {
+        if(Yii::$app->user->can('participantHasActivityDelete')) {
             if(ParticipantHasActivity::checkHasJoin($activityId)) {
                 $this->findModel(Yii::$app->user->id, $activityId)->delete();
                 return Yii::$app->runAction('activity/view', ['id'=>$activityId]);

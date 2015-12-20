@@ -52,13 +52,11 @@ if($done) {
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
                 'title',
-                'Administrator_id',
 
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update} {delete} {result}',
+                    'template' => '{view} {result} {delete}',
                     'buttons' => [
                         'result' => function ($url, $model, $key) {return Yii::$app->user->can('surveyResult') ? Html::a('<span class="glyphicon glyphicon-import"></span>', ['result', 'id'=>$model->id]) : '';},
                     ],

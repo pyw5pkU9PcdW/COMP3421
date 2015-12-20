@@ -9,7 +9,7 @@ use yii\grid\GridView;
 $this->title = 'Topics';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="topic-index">
+<div class="topic-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -22,10 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
-            'decription',
-            'Category_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
