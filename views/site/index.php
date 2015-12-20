@@ -30,6 +30,7 @@ $this->title = 'Home';
         <div class="col-sm-6 tech-info">
             <h3>Date: Dec 20 - Dec 23 2016</h3>
             <h3>Venue: Hotel ICON, Hong Kong</h3>
+            <h3>Application: To be Announced</h3>
         </div>
         <div class="col-sm-6 googleMap">
             <div id="googleMap"></div>

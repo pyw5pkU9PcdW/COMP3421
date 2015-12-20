@@ -176,7 +176,7 @@ class ParticipantHasActivityController extends Controller
                     if($model->attendance != 1) {
                         $model->attendance = 1;
                         $model->attend_datetime = date("Y-m-d H:i:s");
-                        \app\models\User::addScore(10);
+                        \app\models\User::addScore(10, $id);
                         if($model->save()) {
                             die('success');
                         }

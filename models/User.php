@@ -203,8 +203,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $arr;
     }
 
-    public function addScore($score) {
-        $model = User::findOne(Yii::$app->user->id);
+    public function addScore($score, $id) {
+        $model = User::findOne($id);
         $model->score = $model->score + $score;
         if($model->save()) {
             return true;

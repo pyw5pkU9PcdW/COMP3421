@@ -130,7 +130,7 @@ class SurveyController extends Controller
                 $participant->Survey_id = $model->id;
                 $participant->datetime = date("Y-m-d H:i:s");
                 $participant->save();
-                \app\models\User::addScore(5);
+                \app\models\User::addScore(5, Yii::$app->user->id);
                 return $this->redirect(['index', 'done' => true]);
             } else {
                 //die(var_dump($questionModels));

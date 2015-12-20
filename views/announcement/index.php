@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AnnouncementSearch */
@@ -12,12 +13,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="announcement-index">
 
+    <?php Pjax::begin() ?>
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Announcement', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if(Yii::$app->user->can('announcementCreate')){ ?>
+        <p>
+            <?= Html::a('Create Announcement', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php } ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,12 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'title',
-            'content',
+            [
+                'attribute'=>'title',
+                'format'=>'raw',
+                'value'=>function($data) {return Html::a($data->title, ['attribute/view', 'id'=>$data->id]);}
+            ],
             'datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'visible' => Yii::$app->user->can('announcementEdit'),
+            ],
         ],
     ]); ?>
+    <?php Pjax::end() ?>
 
 </div>
