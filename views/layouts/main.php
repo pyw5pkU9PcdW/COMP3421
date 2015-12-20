@@ -301,7 +301,7 @@ $filename = $PNG_TEMP_DIR.'test.png';
     function notificationConstructor(type, id, content, time) {
         var li =
             '<li>' +
-            '<a href="/comp3421/web/index.php?r='+type+'/view&id='+id+'">' +
+            '<a href="<?= Url::base() ?>/index.php?r='+type+'/view&id='+id+'">' +
             //content +
             '<div class="notification-content">' +
             '<p>'+content+'</p>' +

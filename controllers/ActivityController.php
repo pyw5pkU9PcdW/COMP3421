@@ -6,6 +6,7 @@ use app\models\ParticipantHasActivity;
 use Yii;
 use app\models\Activity;
 use app\models\ActivitySearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
