@@ -48,10 +48,12 @@ class SurveyController extends Controller
             'query' => Survey::find(),
         ]);
 
+        $surveys = Survey::getEnableSurvey();
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'done' => $done
-            ,
+            'done' => $done,
+            'surveys' =>$surveys,
         ]);
     }
 

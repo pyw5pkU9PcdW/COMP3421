@@ -28,23 +28,43 @@ if($done) {
         </p>
     <?php } ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?php if(!Yii::$app->user->can('surveyEdit')) {
+        foreach($surveys as $row) {
+            if(!\app\models\SurveyHasParticipant::checkParticipantHasDone($row['id'])) {
+                ?>
+                <a href="<?= Url::to(['view', 'id'=>$row['id']]) ?>">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <h3><?= $row['title'] ?></h3>
+                            </td>
+                        </tr>
+                    </table>
+                </a>
+                <?php
+            }
+        }
+        ?>
 
-            'id',
-            'title',
-            'Administrator_id',
+    <?php } else { ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {result}',
-                'buttons' => [
-                    'result' => function ($url, $model, $key) {return Yii::$app->user->can('surveyResult') ? Html::a('<span class="glyphicon glyphicon-import"></span>', ['result', 'id'=>$model->id]) : '';},
+                'id',
+                'title',
+                'Administrator_id',
+
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view} {update} {delete} {result}',
+                    'buttons' => [
+                        'result' => function ($url, $model, $key) {return Yii::$app->user->can('surveyResult') ? Html::a('<span class="glyphicon glyphicon-import"></span>', ['result', 'id'=>$model->id]) : '';},
+                    ],
                 ],
             ],
-        ],
-    ]); ?>
+        ]); ?>
+    <?php } ?>
 
 </div>

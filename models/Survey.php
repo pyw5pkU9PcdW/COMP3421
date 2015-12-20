@@ -92,4 +92,8 @@ class Survey extends \yii\db\ActiveRecord
             return 1;
         }
     }
+
+    public function getEnableSurvey() {
+        return Survey::find()->where(['is_enable'=>1])->asArray()->all();
+    }
 }
