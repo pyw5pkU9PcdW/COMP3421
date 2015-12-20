@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2015 at 05:10 AM
+-- Generation Time: Dec 20, 2015 at 01:18 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -244,18 +244,18 @@ CREATE TABLE `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('Admin', '2', 1450524002),
-('Regular', '1', 1450523116),
+('Regular', '1', 1450613432),
 ('Regular', '16', 1450523683),
 ('Regular', '7', 1450524186),
 ('Speaker', '10', 1450523665),
-('Speaker', '17', 1450523739),
+('Speaker', '17', 1450613447),
 ('Speaker', '18', 1450523805),
 ('Speaker', '21', 1450523895),
 ('Speaker', '3', 1450523910),
 ('Speaker', '4', 1450523937),
 ('Speaker', '9', 1450524174),
 ('Sponsor', '8', 1450524181),
-('Student', '19', 1450523828),
+('Student', '19', 1450613472),
 ('Student', '5', 1450523965),
 ('VIP', '20', 1450523853),
 ('VIP', '6', 1450523981);
@@ -400,10 +400,13 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Admin', 'couponView'),
 ('Admin', 'outsideAttractionEdit'),
 ('Admin', 'participantHasActivity'),
+('Admin', 'participantHasActivityCreate'),
+('Admin', 'participantHasActivityDelete'),
 ('Admin', 'postCreate'),
 ('Admin', 'postEdit'),
 ('Admin', 'postIndex'),
 ('Admin', 'postView'),
+('Admin', 'qrCodeGenerate'),
 ('Admin', 'siteContact'),
 ('Admin', 'surveyDo'),
 ('Admin', 'surveyEdit'),
@@ -793,6 +796,7 @@ CREATE TABLE `Participant_has_Activity` (
 
 INSERT INTO `Participant_has_Activity` (`Participant_id`, `Activity_id`, `attendance`, `register_datetime`, `attend_datetime`, `is_read`) VALUES
 (1, 1, 1, '2015-12-15 23:33:32', NULL, 1),
+(1, 2, NULL, '2015-12-20 20:12:01', NULL, 0),
 (1, 3, NULL, '2015-12-15 04:38:53', NULL, 0),
 (1, 4, NULL, NULL, NULL, 0),
 (1, 5, 1, NULL, NULL, 0),
@@ -1445,7 +1449,7 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`id`, `username`, `password`, `title`, `first_name`, `last_name`, `email`, `address`, `city`, `country`, `department`, `organization`, `mobile_number`, `fax_number`, `rewardPoint`, `payment_status`, `remark`, `authKey`, `accessToken`, `score`) VALUES
-(1, 'test', '$2y$10$pgTylDe166XGPMvRfn.XS.7bj.n6nwU5/Yix7NFDGuaqeFo123o9y', 1, 'Test', 'User', 'test@test.com', 'Lib G/F, HK POLYU', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', 'test', 'test', 5),
+(1, 'test', '$2y$10$GrRNH1QCbdNMyUrEUKcEteDXMsxGFLMCaiAxLMEXB92XFGuFxl/Uy', 1, 'Test', 'User', 'test@test.com', 'Lib G/F, HK POLYU', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', 'test', 'test', 5),
 (2, 'admin', '$2y$10$fM2fPHwGRZDv6q2Wok/PcOva/OYwGVwWYGFHubnLLQCqBWo6pWqH2', 1, 'admin', 'admin', 'admin@admin.com', 'Lib G/F, HK POLYU', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', 'admin', 'admin', 0),
 (3, 'eric@test.com', '$2y$10$q43zlmNk9XkeN3O0aOazqOc4ddW8HzFIekcMEkiG9mGULvuJw2Zlq', 1, 'Eric', 'KO', 'eric@test.com', 'PQ820, HK POLYU', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', '', '', 10),
 (4, 'victor', '$2y$10$KD5x5Hrz9Pm7IamzAaOfwu49P2IvkcUtgABvaos9VjISDESg3XvOi', 4, 'Victor', 'NG', 'aaa@bbb.com', 'PQ819, HK POLYU', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 1, '', '', '', 0),
@@ -1456,9 +1460,9 @@ INSERT INTO `User` (`id`, `username`, `password`, `title`, `first_name`, `last_n
 (9, 'jiang@uu.ac.kr', '$2y$10$NIBBaOeUSilDgjvSfU6xOOjbLwB/YXjOwtc0NK1Ze1bc879FoGC..', 5, 'Jiang', 'Chang', 'jiang@uu.ac.kr', '77 Gyungan-ro, Gwangju-si', 'Gyunggi-do', '12', 'Social Science', 'Seoul  University', 0, NULL, 0, 2, '', '', '', 0),
 (10, 'anson', '$2y$10$syqBZ9XzIGh0OijjCERQw.5FW2/3BJtiErP2nuFZVWI2L7bSo079m', 1, 'Anson', 'KWAN', 'anson@anson.com', 'Lib G/F, HK POLYU', 'Hong Kong', '2', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', '', '320722549d1751cf3f247855f937b982', 10),
 (16, 'coco@ivc.com', '$2y$10$83T9AM8wNWPrMRhscg94jO2b1CZ1a/q0LKpoGmN/S8ucs5T8T84L.', 3, 'Coco', 'Cream', 'coco@ivc.com', 'Room 611, Block A, HKCU', 'Hong Kong', '1', 'Biomedical Engineering', 'The Hong Kong Chinese University', 0, NULL, 0, 2, '', NULL, '18d8042386b79e2c279fd162df0205c8', 0),
-(17, 'fiona@girl.com', '$2y$10$EAkhBwfLIb5/rE4qo79M3e7LtjLJobYpqkQfrr7NpAs9ZtrFXVySi', 6, 'Fiona', 'CHENG', 'fiona@girl.com', 'Disney Resort, Hong Kong Island', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 0),
+(17, 'fiona@girl.com', '$2y$10$.4zPM8CVG9n7OvVNtW5CAes4sLTB3DkEzzcpszt0En3u/HVe897ny', 6, 'Fiona', 'CHENG', 'fiona@girl.com', 'Disney Resort, Hong Kong Island', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 0),
 (18, 'pat@girl.com', '$2y$10$addaKBVYfC/fbb921XWgw.5ZGX7uCNcYl35mc5ivxm/nrULX2ACey', 6, 'Pat', 'LU', 'pat@girl.com', 'Room 808, Ocean Hotel', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 0),
-(19, 'cre@girl.com', '$2y$10$3X0B6e18MSykSztJew0WQe/HvUZpogat6BmBacddeH.RjKAuqQ7TW', 6, 'Cre', 'KONG', 'cre@girl.com', 'Disney Resort, Hong Kong Island', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 10),
+(19, 'cre@girl.com', '$2y$10$TFnSrMIIGYc9oVIoVbtaFuRK5cFMxcV4AzJ75j9rT4ka360tJjgg.', 6, 'Cre', 'KONG', 'cre@girl.com', 'Disney Resort, Hong Kong Island', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 10),
 (20, 'eunice@girl.com', '$2y$10$/3mMBzeEnxHWCW4HGQ7d3epkwcdngHUV2uCNGGKvqMhPO/8KQ/hHS', 6, 'Eunice', 'YIP', 'eunice@girl.com', 'Disney Resort, Hong Kong Island', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 0),
 (21, 'din@girl.com', '$2y$10$xW60JHBrpY/7VINFq5UQHeDi70wp19yyJZ7yG8lugxCJ/Tw432msS', 5, 'Din', 'CHEUNG', 'din@girl.com', 'Room A, Cyber Court', 'Hong Kong', '1', 'Computing', 'The Hong Kong Polytechnic University', 0, NULL, 0, 0, '', NULL, NULL, 0);
 
