@@ -6,7 +6,7 @@ use app\models\Checkbutton;
 use app\models\Notification;
 use app\models\PostReplay;
 use app\models\Question;
-use app\models\Radiobutton;
+use app\models\RadioButton;
 use app\models\SurveyHasParticipant;
 use app\models\TextBox;
 use app\models\TextResponse;
@@ -94,7 +94,7 @@ class SurveyController extends Controller
                     array_push($questionModels, $question);
                     continue;
                 }
-                if(Radiobutton::checkIsRadioButtonByQuestionId($row['id'])) {
+                if(RadioButton::checkIsRadioButtonByQuestionId($row['id'])) {
                     $question->temp_type = 2;
                     array_push($questionModels, $question);
                     continue;
