@@ -1,5 +1,5 @@
 #navbar-custom-btn-base{
-  z-index: 2000;
+  z-index: 4000 !important;
   cursor: pointer;
 }
 #navbar-custom-toggle-btn {

@@ -31,6 +31,7 @@ $this->title = 'Home';
             <h3>Date: Dec 20 - Dec 23 2016</h3>
             <h3>Venue: Hotel ICON, Hong Kong</h3>
             <h3>Application: To be Announced</h3>
+            <a href="../resources/static/floorplan.pdf" target="_blank" class="btn btn-default"><span class="glyphicon glyphicon-record"></span> Floor Plan</a>
         </div>
         <div class="col-sm-6 googleMap">
             <div id="googleMap"></div>

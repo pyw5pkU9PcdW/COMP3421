@@ -143,24 +143,6 @@ $filename = $PNG_TEMP_DIR.'test.png';
         'options' => ['class' => 'navbar-nav'],
         'items' => $navItems,
     ]);
-    echo '<div id="navbar-custom-btn-base"><div id="navbar-custom-toggle-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div></div>';
-
-
-    if(!Yii::$app->user->isGuest) {
-        echo '<div class="notification-dropdown-container">
-                <button class="btn btn-default dropdown-toggle" type="button" id="notification-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
-                    <span class="badge" id="notification-counter"></span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right" id="notification-dropdown">
-                </ul>
-            </div>';
-    }
 
     if(Yii::$app->user->can('qrCodeGenerate')) {
         //processing qr code data
@@ -185,6 +167,24 @@ $filename = $PNG_TEMP_DIR.'test.png';
     }
 
     NavBar::end();
+
+    if(!Yii::$app->user->isGuest) {
+        echo '<div class="notification-dropdown-container">
+                <button class="btn btn-default dropdown-toggle" type="button" id="notification-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
+                    <span class="badge" id="notification-counter"></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" id="notification-dropdown">
+                </ul>
+            </div>';
+    }
+
+    echo '<div id="navbar-custom-btn-base"><div id="navbar-custom-toggle-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div></div>';
     ?>
     <style>
         .qrCode{
